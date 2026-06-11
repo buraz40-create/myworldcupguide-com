@@ -54,7 +54,7 @@ function FinishedCard({ m, r }: { m: Match; r: MatchResult }) {
         <span className="text-[10px] text-white/80 tabular-nums">{formatDate(m.date)}</span>
       </div>
       <div className="text-sm font-bold truncate">{m.homeTeam}</div>
-      <div className="text-[11px] font-extrabold tabular-nums my-0.5 text-white">{middle}</div>
+      <div className="text-lg font-extrabold tabular-nums my-0.5 text-white leading-none">{middle}</div>
       <div className="text-sm font-bold truncate">{m.awayTeam}</div>
     </Link>
   )
@@ -76,7 +76,7 @@ function LiveCard({ m, live }: { m: Match; live: LiveData }) {
         <span className="text-[10px] text-white/80 tabular-nums">{formatDate(m.date)}</span>
       </div>
       <div className="text-sm font-bold truncate">{m.homeTeam}</div>
-      <div className="text-[11px] font-extrabold tabular-nums my-0.5 text-white">{live.homeScore}-{live.awayScore}</div>
+      <div className="text-lg font-extrabold tabular-nums my-0.5 text-white leading-none">{live.homeScore}-{live.awayScore}</div>
       <div className="text-sm font-bold truncate">{m.awayTeam}</div>
     </Link>
   )
@@ -199,14 +199,14 @@ export default function LiveStrip() {
         <button
           aria-label="Scroll left"
           onClick={() => scrollBy(-1)}
-          className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 z-10 w-8 h-8 rounded-full bg-white shadow-[0_2px_8px_rgba(35,22,69,0.18)] border border-black/[0.06] items-center justify-center text-[#231645] hover:text-[#7E43FF] hover:scale-105 transition"
+          className="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 -translate-x-full z-20 w-9 h-9 rounded-full bg-white shadow-[0_4px_14px_rgba(35,22,69,0.28)] border border-black/[0.06] items-center justify-center text-[#231645] hover:text-[#7E43FF] hover:scale-105 transition"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
         <button
           aria-label="Scroll right"
           onClick={() => scrollBy(1)}
-          className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10 w-8 h-8 rounded-full bg-white shadow-[0_2px_8px_rgba(35,22,69,0.18)] border border-black/[0.06] items-center justify-center text-[#231645] hover:text-[#7E43FF] hover:scale-105 transition"
+          className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 translate-x-full z-20 w-9 h-9 rounded-full bg-white shadow-[0_4px_14px_rgba(35,22,69,0.28)] border border-black/[0.06] items-center justify-center text-[#231645] hover:text-[#7E43FF] hover:scale-105 transition"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
