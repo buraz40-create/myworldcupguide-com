@@ -795,8 +795,9 @@ function QualifierColumn({ title, accent, qualifiers }: { title: string; accent:
               className="text-[10px] text-[#615E6E] tabular-nums whitespace-nowrap"
               title={`${q.pts} pts, ${q.gd >= 0 ? "+" : ""}${q.gd} GD, ${q.gf} GF`}
             >
-              <span className="font-bold text-[#231645]">{q.pts}</span>p
-              <span className="ml-1">{q.gd >= 0 ? "+" : ""}{q.gd}</span>
+              <span className="font-bold text-[#231645]">{q.pts}</span> pts
+              <span className="opacity-40 mx-1">·</span>
+              GD <span className="font-semibold text-[#231645]">{q.gd >= 0 ? "+" : ""}{q.gd}</span>
               <span className="opacity-40 mx-1">·</span>
               #{q.rank}
             </span>
