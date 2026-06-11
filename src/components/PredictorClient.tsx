@@ -791,7 +791,15 @@ function QualifierColumn({ title, accent, qualifiers }: { title: string; accent:
             <Link href={`/teams/${slug(q.team)}/`} className="font-semibold text-[#231645] hover:underline truncate flex-1 text-xs">
               {q.team}
             </Link>
-            <span className="text-[10px] text-[#615E6E] tabular-nums whitespace-nowrap">FIFA #{q.rank}</span>
+            <span
+              className="text-[10px] text-[#615E6E] tabular-nums whitespace-nowrap"
+              title={`${q.pts} pts, ${q.gd >= 0 ? "+" : ""}${q.gd} GD, ${q.gf} GF`}
+            >
+              <span className="font-bold text-[#231645]">{q.pts}</span>p
+              <span className="ml-1">{q.gd >= 0 ? "+" : ""}{q.gd}</span>
+              <span className="opacity-40 mx-1">·</span>
+              #{q.rank}
+            </span>
           </li>
         ))}
       </ul>

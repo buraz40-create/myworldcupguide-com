@@ -33,6 +33,9 @@ export type Qualifier = {
   position: 1 | 2 | 3
   rank: number               // FIFA rank for tiebreaks
   seed: number               // bracket seed 1..32
+  pts: number                // group-stage points
+  gd: number                 // group-stage goal differential
+  gf: number                 // group-stage goals for
 }
 
 export type BracketMatch = {
@@ -337,29 +340,29 @@ export function getQualifiers(scores: ScoreMap): Qualifier[] | null {
   if (!areAllGroupsComplete(scores)) return null
   const winners: Qualifier[] = []
   const runnersUp: Qualifier[] = []
-  // Carry the third-placed team's actual group-stage stats so we can rank the
-  // 12 third-placed teams against each other per FIFA regs §12.5:
-  //   1. points  2. goal difference  3. goals scored  4. (fallback) FIFA rank
-  const thirdsWithStats: (Qualifier & { pts: number; gd: number; gf: number })[] = []
+  // FIFA regs §12.5 best-thirds tiebreak: points, then GD, then GF, then rank.
+  const thirds: Qualifier[] = []
   for (const g of GROUP_LETTERS) {
     const rows = computeStandings(g, scores)
-    winners.push({ team: rows[0].team, source: `${g}1`, position: 1, rank: rank(rows[0].team), seed: 0 })
-    runnersUp.push({ team: rows[1].team, source: `${g}2`, position: 2, rank: rank(rows[1].team), seed: 0 })
-    thirdsWithStats.push({
+    winners.push({
+      team: rows[0].team, source: `${g}1`, position: 1, rank: rank(rows[0].team), seed: 0,
+      pts: rows[0].pts, gd: rows[0].gd, gf: rows[0].gf,
+    })
+    runnersUp.push({
+      team: rows[1].team, source: `${g}2`, position: 2, rank: rank(rows[1].team), seed: 0,
+      pts: rows[1].pts, gd: rows[1].gd, gf: rows[1].gf,
+    })
+    thirds.push({
       team: rows[2].team, source: `${g}3`, position: 3, rank: rank(rows[2].team), seed: 0,
       pts: rows[2].pts, gd: rows[2].gd, gf: rows[2].gf,
     })
   }
-  // FIFA §12.5: best 8 third-placed teams by pts, then GD, then GF.
-  const bestThirdsRanked = [...thirdsWithStats].sort((a, b) =>
+  const bestThirds = [...thirds].sort((a, b) =>
     b.pts - a.pts ||
     b.gd  - a.gd  ||
     b.gf  - a.gf  ||
     a.rank - b.rank
   ).slice(0, 8)
-  const bestThirds: Qualifier[] = bestThirdsRanked.map((q) => ({
-    team: q.team, source: q.source, position: q.position, rank: q.rank, seed: 0,
-  }))
 
   // Seed: winners 1-12 (by FIFA rank), runners-up 13-24, thirds 25-32
   winners.sort((a, b) => a.rank - b.rank)
