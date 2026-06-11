@@ -5,9 +5,12 @@ import Link from "next/link"
 import { matches, slugForMatch, type Match } from "@/data/matches"
 import { getResult, type MatchResult } from "@/lib/matchResults"
 
-// Build-time NOW for the initial finished/upcoming split. Real wall-clock on
-// the client only affects the live poller, not which cards appear.
-const BUILD_NOW = new Date(process.env.BUILD_TIME ?? Date.now()).getTime()
+// Today's ISO date for filtering. We compare on the calendar date (not kickoff
+// epoch) so a match that's currently in progress still appears in the strip
+// even before the bot stamps a Final score on it.
+function todayIsoUtc(): string {
+  return new Date().toISOString().slice(0, 10)
+}
 
 const NAME_ALIASES: Record<string, string> = {
   "USA": "United States", "USMNT": "United States",
@@ -111,16 +114,20 @@ type Item =
   | { kind: "next"; m: Match }
 
 export default function LiveStrip() {
-  // Compute the static set of cards once, from build-time data.
+  // Compute the static set of cards once. Includes any match whose date is
+  // today or later AND has no final result yet . that way in-progress matches
+  // (Mexico vs SAF at 1pm ET) still show up before the bot stamps an FT score.
   const items = useMemo<Item[]>(() => {
+    const today = todayIsoUtc()
     const finished: Item[] = []
     const upcoming: Item[] = []
     for (const m of matches) {
       if (m.homeTeam === "TBD" || m.awayTeam === "TBD") continue
       const r = getResult(m.id)
-      if (r && (r.status === "FT" || r.status === "AET" || r.status === "PEN")) {
+      const isFinal = r && (r.status === "FT" || r.status === "AET" || r.status === "PEN")
+      if (isFinal) {
         finished.push({ kind: "done", m, r })
-      } else if (matchEpoch(m) >= BUILD_NOW) {
+      } else if (m.date >= today) {
         upcoming.push({ kind: "next", m })
       }
     }
