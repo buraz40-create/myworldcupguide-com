@@ -40,9 +40,9 @@ type LiveData = {
 }
 
 function FinishedCard({ m, r }: { m: Match; r: MatchResult }) {
-  const score = r.status === "PEN" && r.penaltyHome != null
-    ? `${r.homeScore}-${r.awayScore} (${r.penaltyHome}-${r.penaltyAway} p)`
-    : `${r.homeScore}-${r.awayScore}${r.status === "AET" ? " (AET)" : ""}`
+  const middle = r.status === "PEN" && r.penaltyHome != null
+    ? `${r.homeScore}-${r.awayScore} · ${r.penaltyHome}-${r.penaltyAway}p`
+    : `${r.homeScore}-${r.awayScore}${r.status === "AET" ? " AET" : ""}`
   return (
     <Link
       href={`/matches/${slugForMatch(m)}/`}
@@ -50,14 +50,12 @@ function FinishedCard({ m, r }: { m: Match; r: MatchResult }) {
       style={{ background: "linear-gradient(135deg, #231645 0%, #4f1ea1 60%, #7E43FF 100%)" }}
     >
       <div className="flex items-center justify-between gap-2 mb-1">
-        <span className="text-[9px] font-extrabold uppercase tracking-widest text-white/70">Final</span>
-        <span className="text-[10px] text-white/70 tabular-nums">{formatDate(m.date)}</span>
+        <span className="text-[9px] font-extrabold uppercase tracking-widest text-white/80 px-2 py-0.5 rounded-full bg-white/15">Final</span>
+        <span className="text-[10px] text-white/80 tabular-nums">{formatDate(m.date)}</span>
       </div>
-      <div className="flex items-center justify-between gap-2">
-        <span className="text-sm font-semibold truncate">{m.homeTeam}</span>
-        <span className="text-sm font-extrabold tabular-nums whitespace-nowrap">{score}</span>
-      </div>
-      <div className="text-sm font-semibold truncate">{m.awayTeam}</div>
+      <div className="text-sm font-bold truncate">{m.homeTeam}</div>
+      <div className="text-[11px] font-extrabold tabular-nums my-0.5 text-white">{middle}</div>
+      <div className="text-sm font-bold truncate">{m.awayTeam}</div>
     </Link>
   )
 }
@@ -71,17 +69,15 @@ function LiveCard({ m, live }: { m: Match; live: LiveData }) {
       style={{ background: "linear-gradient(135deg, #b91c1c 0%, #dc2626 60%, #ef4444 100%)" }}
     >
       <div className="flex items-center justify-between gap-2 mb-1">
-        <span className="text-[9px] font-extrabold uppercase tracking-widest text-white flex items-center gap-1">
+        <span className="text-[9px] font-extrabold uppercase tracking-widest text-white flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/20">
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
           {label}
         </span>
         <span className="text-[10px] text-white/80 tabular-nums">{formatDate(m.date)}</span>
       </div>
-      <div className="flex items-center justify-between gap-2">
-        <span className="text-sm font-semibold truncate">{m.homeTeam}</span>
-        <span className="text-sm font-extrabold tabular-nums whitespace-nowrap">{live.homeScore}-{live.awayScore}</span>
-      </div>
-      <div className="text-sm font-semibold truncate">{m.awayTeam}</div>
+      <div className="text-sm font-bold truncate">{m.homeTeam}</div>
+      <div className="text-[11px] font-extrabold tabular-nums my-0.5 text-white">{live.homeScore}-{live.awayScore}</div>
+      <div className="text-sm font-bold truncate">{m.awayTeam}</div>
     </Link>
   )
 }
