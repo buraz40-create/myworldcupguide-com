@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import ScheduleClient from "@/components/ScheduleClient"
-import LiveStrip from "@/components/LiveStrip"
 import { matches, slugForMatch } from "@/data/matches"
 import { quickAnswersJsonLd, type QA } from "@/components/QuickAnswers"
 import { alternatesFor } from "@/lib/hreflang"
@@ -63,7 +62,6 @@ export default function SchedulePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(scheduleJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
-      <LiveStrip />
       <ScheduleClient quickAnswers={SCHEDULE_QA} />
       {/* Server-rendered match-day links so Google's crawler discovers every day page. */}
       <nav aria-label="Match-day pages" className="max-w-5xl mx-auto px-4 pb-12">

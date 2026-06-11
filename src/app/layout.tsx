@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import "./globals.css"
 import NavBar from "@/components/NavBar"
+import LiveStrip from "@/components/LiveStrip"
 import { alternatesFor } from "@/lib/hreflang"
 
 const GA_ID = "G-8GGFHL22FG"
@@ -132,6 +133,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }}
         />
         <NavBar />
+        <LiveStrip />
         <main className="flex-1">{children}</main>
         <footer className="relative z-10 border-t border-black/[0.06] pt-14 pb-8" style={{ background: "#f8f8fb" }}>
           <div className="max-w-6xl mx-auto px-6">

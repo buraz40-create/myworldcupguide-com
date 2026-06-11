@@ -9,8 +9,6 @@ import { getResult, type MatchResult } from "@/lib/matchResults"
 const NOW = new Date(process.env.BUILD_TIME ?? Date.now())
 
 function matchEpoch(m: Match): number {
-  // Approximate kickoff as <date>T<time>:00Z. Off by a few hours from real
-  // local kickoff but consistent across matches, which is all sorting needs.
   return new Date(`${m.date}T${m.time}:00Z`).getTime()
 }
 
@@ -20,98 +18,87 @@ function formatDate(d: string) {
   })
 }
 
-function FinishedRow({ m, r }: { m: Match; r: MatchResult }) {
+function FinishedCard({ m, r }: { m: Match; r: MatchResult }) {
   const score = r.status === "PEN" && r.penaltyHome != null
     ? `${r.homeScore}-${r.awayScore} (${r.penaltyHome}-${r.penaltyAway} p)`
     : `${r.homeScore}-${r.awayScore}${r.status === "AET" ? " (AET)" : ""}`
   return (
     <Link
       href={`/matches/${slugForMatch(m)}/`}
-      className="block rounded-xl border border-black/[0.06] bg-white hover:bg-[#faf9fe] transition-colors p-3 min-w-[200px] flex-shrink-0"
+      className="block rounded-xl p-3 min-w-[210px] flex-shrink-0 text-white hover:-translate-y-0.5 transition-transform shadow-[0_2px_10px_-4px_rgba(35,22,69,0.35)]"
+      style={{ background: "linear-gradient(135deg, #231645 0%, #4f1ea1 60%, #7E43FF 100%)" }}
     >
       <div className="flex items-center justify-between gap-2 mb-1">
-        <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#7E43FF]">FT</span>
-        <span className="text-[10px] text-[#615E6E] tabular-nums">{formatDate(m.date)}</span>
+        <span className="text-[9px] font-extrabold uppercase tracking-widest text-white/70">Final</span>
+        <span className="text-[10px] text-white/70 tabular-nums">{formatDate(m.date)}</span>
       </div>
       <div className="flex items-center justify-between gap-2">
-        <span className="text-sm font-semibold text-[#231645] truncate">{m.homeTeam}</span>
-        <span className="text-sm font-extrabold text-[#231645] tabular-nums whitespace-nowrap">{score}</span>
+        <span className="text-sm font-semibold truncate">{m.homeTeam}</span>
+        <span className="text-sm font-extrabold tabular-nums whitespace-nowrap">{score}</span>
       </div>
-      <div className="text-sm font-semibold text-[#231645] truncate">{m.awayTeam}</div>
+      <div className="text-sm font-semibold truncate">{m.awayTeam}</div>
     </Link>
   )
 }
 
-function UpcomingRow({ m }: { m: Match }) {
+function UpcomingCard({ m }: { m: Match }) {
   return (
     <Link
       href={`/matches/${slugForMatch(m)}/`}
-      className="block rounded-xl border border-black/[0.06] bg-white hover:bg-[#faf9fe] transition-colors p-3 min-w-[200px] flex-shrink-0"
+      className="block rounded-xl p-3 min-w-[210px] flex-shrink-0 text-[#231645] hover:-translate-y-0.5 transition-transform border border-[#7E43FF]/15 shadow-[0_2px_10px_-4px_rgba(126,67,255,0.25)]"
+      style={{ background: "linear-gradient(135deg, #f4ecff 0%, #e8dcff 50%, #d6c2ff 100%)" }}
     >
       <div className="flex items-center justify-between gap-2 mb-1">
-        <span className="text-[9px] font-extrabold uppercase tracking-widest text-[#615E6E]">{m.group ? `Group ${m.group}` : m.round}</span>
-        <span className="text-[10px] text-[#615E6E] tabular-nums">{formatDate(m.date)} · {m.time}</span>
+        <span
+          className="text-[9px] font-extrabold uppercase tracking-widest text-white px-2 py-0.5 rounded-full"
+          style={{ background: "#7E43FF" }}
+        >
+          {m.group ? `Group ${m.group}` : m.round}
+        </span>
+        <span className="text-[10px] text-[#4f1ea1] font-semibold tabular-nums">{formatDate(m.date)} · {m.time}</span>
       </div>
-      <div className="text-sm font-semibold text-[#231645] truncate">{m.homeTeam}</div>
-      <div className="text-[11px] text-[#615E6E] my-0.5">vs</div>
-      <div className="text-sm font-semibold text-[#231645] truncate">{m.awayTeam}</div>
+      <div className="text-sm font-bold truncate">{m.homeTeam}</div>
+      <div className="text-[10px] text-[#615E6E] my-0.5 font-bold">vs</div>
+      <div className="text-sm font-bold truncate">{m.awayTeam}</div>
     </Link>
   )
 }
 
 export default function LiveStrip() {
   const now = NOW.getTime()
-  type Pair = { m: Match; r: MatchResult }
+  type Pair = { kind: "done"; m: Match; r: MatchResult } | { kind: "next"; m: Match }
   const finished: Pair[] = []
-  const upcoming: Match[] = []
+  const upcoming: Pair[] = []
   for (const m of matches) {
     if (m.homeTeam === "TBD" || m.awayTeam === "TBD") continue
     const r = getResult(m.id)
     if (r && (r.status === "FT" || r.status === "AET" || r.status === "PEN")) {
-      finished.push({ m, r })
+      finished.push({ kind: "done", m, r })
     } else if (matchEpoch(m) >= now) {
-      upcoming.push(m)
+      upcoming.push({ kind: "next", m })
     }
   }
   finished.sort((a, b) => matchEpoch(b.m) - matchEpoch(a.m))
-  upcoming.sort((a, b) => matchEpoch(a) - matchEpoch(b))
-  const recent = finished.slice(0, 6)
-  const next = upcoming.slice(0, 6)
-
-  if (recent.length === 0 && next.length === 0) return null
+  upcoming.sort((a, b) => matchEpoch(a.m) - matchEpoch(b.m))
+  // Interleave: most recent results first, then the next upcoming fixtures.
+  const items: Pair[] = [...finished.slice(0, 4), ...upcoming.slice(0, 8)]
+  if (items.length === 0) return null
 
   return (
-    <section className="max-w-6xl mx-auto px-4 mt-6 mb-8">
-      {recent.length > 0 && (
-        <div className="mb-5">
-          <div className="flex items-baseline justify-between mb-2">
-            <h2 className="text-base md:text-lg font-extrabold text-[#231645]">Latest results</h2>
-            <Link href="/blog/" className="text-xs font-semibold text-[#7E43FF] hover:underline">All recaps -&gt;</Link>
-          </div>
-          <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 snap-x">
-            {recent.map(({ m, r }) => (
-              <div key={m.id} className="snap-start">
-                <FinishedRow m={m} r={r} />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-      {next.length > 0 && (
-        <div>
-          <div className="flex items-baseline justify-between mb-2">
-            <h2 className="text-base md:text-lg font-extrabold text-[#231645]">Up next</h2>
-            <Link href="/schedule/" className="text-xs font-semibold text-[#7E43FF] hover:underline">Full schedule -&gt;</Link>
-          </div>
-          <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 snap-x">
-            {next.map((m) => (
-              <div key={m.id} className="snap-start">
-                <UpcomingRow m={m} />
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </section>
+    <div className="max-w-6xl mx-auto px-4 pt-4">
+      <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1 snap-x">
+        {items.map((it) =>
+          it.kind === "done" ? (
+            <div key={`d-${it.m.id}`} className="snap-start">
+              <FinishedCard m={it.m} r={it.r} />
+            </div>
+          ) : (
+            <div key={`n-${it.m.id}`} className="snap-start">
+              <UpcomingCard m={it.m} />
+            </div>
+          )
+        )}
+      </div>
+    </div>
   )
 }
