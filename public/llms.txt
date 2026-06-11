@@ -1,0 +1,55 @@
+# myworldcupguide.com
+
+> Independent, fan-built guide to the 2026 FIFA World Cup co-hosted by the United States, Canada, and Mexico (June 11 to July 19, 2026). Covers all 48 qualified teams, 16 host cities and stadiums, 104 matches, tickets, fan logistics, and live prediction-market odds.
+
+## Tournament essentials
+
+- Dates: June 11 to July 19, 2026 (39 days)
+- Format: 48 teams, 12 groups of 4, top 2 + 8 best third-placed teams advance to a new Round of 32
+- Total matches: 104 (group stage + R32 + R16 + QF + SF + 3rd-place + Final)
+- Opening match: Mexico vs South Africa at Estadio Azteca, Mexico City
+- Final: July 19, 2026 at MetLife Stadium, East Rutherford, New Jersey
+- Hosts: USA (78 matches), Mexico (13), Canada (13)
+
+## Schedule and matches
+
+- [Full schedule of all 104 matches](https://myworldcupguide.com/schedule/): dates, kickoffs, venues
+- [Daily match-day pages](https://myworldcupguide.com/schedule/2026-06-11/): one indexed page per match day, June 11 to July 19
+- [Pre-tournament friendlies](https://myworldcupguide.com/schedule/friendlies/): results and fixtures through the FIFA window
+- [Individual match preview pages](https://myworldcupguide.com/matches/brazil-vs-morocco-13/): 104 unique URLs, each with kickoff, venue, broadcasters, recent form, Kalshi market odds
+
+## Teams
+
+- [All 48 qualified teams](https://myworldcupguide.com/teams/): squads, FIFA rankings, recent form
+- [Team fan guides](https://myworldcupguide.com/teams/argentina/fan-guide/): 48 unique pages with schedule, host cities visited, team base camp, market odds
+- Defending champion: Argentina (winners of Qatar 2022)
+- Kalshi market champion favourites (live): France 17.1%, Spain 16.9%, England 11.3%
+
+## Host cities and stadiums
+
+- [16 host cities and stadiums](https://myworldcupguide.com/cities/): travel guides, hotels, airports
+- [Stadium comparison](https://myworldcupguide.com/stadiums/compare/): capacity, surface, climate side-by-side
+- Final venue: MetLife Stadium, East Rutherford, NJ (capacity 82,500)
+- Opening venue: Estadio Azteca, Mexico City (capacity 87,523, highest-altitude WC venue at 7,200 ft)
+
+## Tools
+
+- [Predictor / bracket builder](https://myworldcupguide.com/predictor/): pick every match, auto-pick by FIFA rank, or "Kalshi pick" by current market odds
+- [Kits ranking](https://myworldcupguide.com/kits/): thumbs-up / thumbs-down voting on all 96 home and away jerseys
+- [Fan Affordability Index](https://myworldcupguide.com/tickets/affordability/): months-of-salary it costs a fan from each of the 48 nations to follow their team
+
+## Tickets and logistics
+
+- [Tickets guide](https://myworldcupguide.com/tickets/): sale phases, FIFA ID, hospitality, scam warnings
+- Only buy through FIFA.com/tickets. Tickets are mobile-only via the FIFA app.
+- [Ticket resale timeline](https://myworldcupguide.com/blog/world-cup-2026-ticket-resale-when-prices-drop/): when prices actually drop
+- [ESTA vs eTA vs FMM entry-permit comparison](https://myworldcupguide.com/blog/esta-eta-fmm-world-cup-2026/)
+
+## Editorial / analysis
+
+- [Why the Round of 32 will be the most chaotic ever](https://myworldcupguide.com/blog/world-cup-2026-round-of-32-third-place-chaos/): the 8-best-thirds rule analysed
+- [All blog posts](https://myworldcupguide.com/blog/)
+
+## About this site
+
+myworldcupguide.com is not affiliated with FIFA. We are an independent editorial / data project covering the 2026 World Cup. We do not sell tickets and never link to unofficial ticket resellers. Prediction-market data is sourced from public Kalshi prices and refreshed regularly.

@@ -1,0 +1,75 @@
+name: Daily World Cup Bot
+
+# Runs every day at 09:00 UTC (~5am ET / 2am PT) . by then the previous day's
+# late North American matches are all finished and FIFA/broadcasters have
+# uploaded highlights. Also runnable manually via the Actions tab.
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Fetch match scores (yesterday + today)
+        run: node scripts/fetch-match-scores.mjs
+
+      - name: Fetch YouTube highlights
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: node scripts/fetch-highlights.mjs
+
+      - name: Generate matchday recap blog post (yesterday)
+        run: node scripts/generate-matchday-recap.mjs || true
+
+      - name: Commit data updates
+        run: |
+          git config user.name "wc-bot"
+          git config user.email "bot@myworldcupguide.com"
+          git add src/data/matchResults.json src/data/blogPosts.ts
+          if git diff --cached --quiet; then
+            echo "no data changes"
+          else
+            git commit -m "bot: daily match scores + highlights + recap"
+            git push
+          fi
+
+      - name: Build site
+        run: npm run build
+
+      - name: Package out/ directory
+        run: |
+          rm -f out/api/votes.json
+          cd out && zip -r ../site.zip . -x ".*"
+
+      - name: Upload to HostGator via FTPS
+        env:
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+        run: |
+          curl --ssl-reqd -k --user "$FTP_USER:$FTP_PASS" -T site.zip "ftp://$FTP_HOST/public_html/"
+          curl --ssl-reqd -k --user "$FTP_USER:$FTP_PASS" -T extract.php "ftp://$FTP_HOST/public_html/"
+
+      - name: Trigger server-side extract
+        env:
+          EXTRACT_TOKEN: ${{ secrets.EXTRACT_TOKEN }}
+        run: |
+          curl -sk "https://myworldcupguide.com/extract.php?t=$EXTRACT_TOKEN" | tail -5
+
+      - name: Ping IndexNow
+        run: node scripts/submit-indexnow.mjs || true
