@@ -191,7 +191,7 @@ export default function LiveStrip() {
   if (items.length === 0) return null
 
   return (
-    <div className="max-w-6xl mx-auto px-4 pt-4">
+    <div className="relative z-20 max-w-6xl mx-auto px-4 pt-4">
       <div className="relative">
         <button
           aria-label="Scroll left"
