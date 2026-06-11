@@ -799,7 +799,7 @@ function QualifierColumn({ title, accent, qualifiers }: { title: string; accent:
               <span className="opacity-40 mx-1">·</span>
               GD <span className="font-semibold text-[#231645]">{q.gd >= 0 ? "+" : ""}{q.gd}</span>
               <span className="opacity-40 mx-1">·</span>
-              #{q.rank}
+              FIFA #{q.rank}
             </span>
           </li>
         ))}
