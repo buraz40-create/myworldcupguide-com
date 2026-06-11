@@ -1,11 +1,11 @@
 name: Daily World Cup Bot
 
-# Runs every day at 09:00 UTC (~5am ET / 2am PT) . by then the previous day's
-# late North American matches are all finished and FIFA/broadcasters have
-# uploaded highlights. Also runnable manually via the Actions tab.
+# Runs every 6 hours (00, 06, 12, 18 UTC). Catches new highlights within a
+# few hours of full-time across all timezones. Also runnable manually via
+# the Actions tab.
 on:
   schedule:
-    - cron: "0 9 * * *"
+    - cron: "0 */6 * * *"
   workflow_dispatch:
 
 permissions:
