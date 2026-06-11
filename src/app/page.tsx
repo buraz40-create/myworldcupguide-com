@@ -5,7 +5,6 @@ import HeroParticles from "@/components/HeroParticles"
 import BlocksGrid from "@/components/BlocksGrid"
 import AnimatedCounter from "@/components/AnimatedCounter"
 import GlobeWrapper from "@/components/GlobeWrapper"
-import Countdown from "@/components/Countdown"
 import CityMarquee from "@/components/CityMarquee"
 
 const HOMEPAGE_FAQS = [
@@ -75,10 +74,6 @@ export default function HomePage() {
         <HeroParticles />
 
         <div className="relative z-10 max-w-3xl mx-auto">
-          <div className="mb-8 flex justify-center">
-            <Countdown />
-          </div>
-
           <h1 className="text-5xl md:text-[4.5rem] font-extrabold leading-[1.08] tracking-tight text-white mb-5 drop-shadow-[0_2px_20px_rgba(0,0,0,0.4)]">
             Your complete guide<br />to the{" "}
             <span className="text-gradient-purple">2026 World Cup</span>
