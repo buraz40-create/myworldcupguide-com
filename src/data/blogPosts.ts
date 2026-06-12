@@ -27,6 +27,32 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-11",
+    title: "World Cup 2026 Recap: Thursday, June 11, 2026",
+    description: "Results and highlights from every World Cup 2026 match on Thursday, June 11, 2026. 1 match, 2 goals, full scoreline table and links to video highlights.",
+    date: "2026-06-11",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-11"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Thursday, June 11, 2026, with 2 total goals scored. Full scorelines and links to highlights below." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Thursday, June 11, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Mexico vs South Africa](/matches/mexico-vs-south-africa-match-m01/)","2-0","Group A"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Mexico 2-0 South Africa was the day's biggest margin, a 2-goal win for Mexico over South Africa. Watch the [match highlights and full match report](/matches/mexico-vs-south-africa-match-m01/)." },
+      { type: "h2", text: "Tomorrow" },
+      { type: "p", text: "See the [full World Cup 2026 schedule](/schedule/) for tomorrow's fixtures, or the [predictor bracket](/predictor/) to lock in your knockout picks based on what you saw today." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-01",
     title: "World Cup 2026 Recap: Monday, June 1, 2026",
     description: "Pre-tournament friendly results from Monday, June 1, 2026. 7 matches played, 2 between WC qualifiers. Full scoreline table and what it means for the tournament.",
