@@ -196,6 +196,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </h3>
                 <ul className="space-y-2.5 text-sm">
                   <li><Link href="/tickets" className="text-[#615E6E] hover:text-[#231645] transition-colors">Tickets Guide</Link></li>
+                  <li><Link href="/how-to-watch" className="text-[#615E6E] hover:text-[#231645] transition-colors">Where to Watch</Link></li>
                   <li><Link href="/blog/world-cup-2026-visa-guide" className="text-[#615E6E] hover:text-[#231645] transition-colors">Visa Guide</Link></li>
                   <li><Link href="/blog/best-airports-for-world-cup-2026" className="text-[#615E6E] hover:text-[#231645] transition-colors">Best Airports</Link></li>
                   <li><Link href="/blog/world-cup-2026-weather-guide" className="text-[#615E6E] hover:text-[#231645] transition-colors">Weather Guide</Link></li>

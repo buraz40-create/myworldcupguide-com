@@ -13,6 +13,7 @@ import MatchDayPanel from "@/components/MatchDayPanel"
 import StadiumMap from "@/components/StadiumMap"
 import MatchTicketCTA from "@/components/MatchTicketCTA"
 import MatchHighlightEmbed from "@/components/MatchHighlightEmbed"
+import WhereToWatch from "@/components/WhereToWatch"
 import { alternatesFor } from "@/lib/hreflang"
 import { friendlies } from "@/data/friendlies"
 import { groupWinnerOdds, championOdds } from "@/data/marketOdds"
@@ -413,6 +414,9 @@ export default async function MatchPage({ params }: Props) {
           }
           return null
         })()}
+
+        {/* Where to watch . renders for every match (pre + post). */}
+        <WhereToWatch matchId={m.id} fixture={isTBD ? `Match ${m.matchNumber}` : `${m.homeTeam} vs ${m.awayTeam}`} />
 
         {/* Tickets - multi-vendor search row */}
         {!hasResult(m.id) && <MatchTicketCTA match={m} />}

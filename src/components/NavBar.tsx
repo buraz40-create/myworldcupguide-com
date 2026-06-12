@@ -17,6 +17,7 @@ export default function NavBar() {
     { href: "/predictor", label: "Predictor" },
     { href: "/kits", label: "Kits" },
     { href: "/tickets", label: "Tickets" },
+    { href: "/how-to-watch", label: "Watch" },
     { href: "/blog", label: "Blog" },
   ]
 

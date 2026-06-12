@@ -1,0 +1,4 @@
+{
+  "_doc": "Per-match overrides keyed by match id (m01-m104). Each entry is a partial map { US: 'FS1', US_es: 'Universo', ... } that augments src/data/broadcasters.ts. Only fill when the specific channel is published; the country-level fallback handles unmapped matches.",
+  "overrides": {}
+}
