@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { matches, slugForMatch } from "@/data/matches"
+import { getKickoff } from "@/lib/matchTime"
 import { getStadiumBySlug } from "@/data/stadiums"
 import { getCityBySlug } from "@/data/cities"
 import { teams } from "@/data/teams"
@@ -179,7 +180,15 @@ export default async function MatchDayPage({ params }: Props) {
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-[10px] font-extrabold text-[#7E43FF] bg-[#f1ecff] rounded px-2 py-1 tabular-nums">M{m.matchNumber}</span>
                     <span className="text-xs font-bold text-[#615E6E]">{roundLabel(m.round)}{m.group ? ` · Group ${m.group}` : ""}</span>
-                    <span className="ml-auto text-sm font-extrabold text-[#231645] tabular-nums">{m.time} local</span>
+                    {(() => {
+                      const k = getKickoff(m)
+                      return (
+                        <span className="ml-auto text-sm font-extrabold text-[#231645] tabular-nums whitespace-nowrap">
+                          {k.etTime} <span className="text-[#7E43FF]">ET</span>
+                          {!k.isSameAsEt && <span className="text-[10px] font-semibold text-[#615E6E] ml-1.5">({k.localTime} {k.localLabel})</span>}
+                        </span>
+                      )
+                    })()}
                   </div>
                   <div className="grid grid-cols-[1fr_80px_1fr] items-center gap-3 mb-3">
                     <div className="flex items-center gap-2 justify-end text-right min-w-0">

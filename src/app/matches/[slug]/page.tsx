@@ -16,6 +16,7 @@ import MatchHighlightEmbed from "@/components/MatchHighlightEmbed"
 import { alternatesFor } from "@/lib/hreflang"
 import { friendlies } from "@/data/friendlies"
 import { groupWinnerOdds, championOdds } from "@/data/marketOdds"
+import { getKickoff } from "@/lib/matchTime"
 import { getResult, hasResult } from "@/lib/matchResults"
 
 type Props = { params: Promise<{ slug: string }> }
@@ -367,13 +368,19 @@ export default async function MatchPage({ params }: Props) {
             </div>
           </div>
 
-          <div className="mt-8 text-center">
-            <p className="text-base md:text-lg font-bold text-[#231645]">{dateLong}</p>
-            <p className="text-sm text-[#615E6E]">
-              Kickoff <span className="font-semibold text-[#231645]">{m.time}</span> local
-              {stadium && city ? <> at {stadium.name}, {city.name}</> : null}
-            </p>
-          </div>
+          {(() => {
+            const k = getKickoff(m)
+            return (
+              <div className="mt-8 text-center">
+                <p className="text-base md:text-lg font-bold text-[#231645]">{dateLong}</p>
+                <p className="text-sm text-[#615E6E]">
+                  Kickoff <span className="font-semibold text-[#231645]">{k.etTime} ET</span>
+                  {!k.isSameAsEt && <> ({k.localTime} {k.localLabel})</>}
+                  {stadium && city ? <> at {stadium.name}, {city.name}</> : null}
+                </p>
+              </div>
+            )
+          })()}
         </header>
 
         {/* H1 for SEO (visible) */}
@@ -383,7 +390,7 @@ export default async function MatchPage({ params }: Props) {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
           {[
             { label: "Date", value: formatDateShort(m.date) },
-            { label: "Kickoff", value: `${m.time} local` },
+            { label: "Kickoff (ET)", value: getKickoff(m).etTime },
             { label: "Round", value: m.round },
             { label: m.group ? "Group" : "Match", value: m.group ? m.group : `#${m.matchNumber}` },
           ].map(({ label, value }) => (

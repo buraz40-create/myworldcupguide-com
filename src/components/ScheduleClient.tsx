@@ -4,6 +4,7 @@ import { useState, useMemo } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { matches, slugForMatch, type Match } from "@/data/matches"
+import { getKickoff } from "@/lib/matchTime"
 import { stadiums } from "@/data/stadiums"
 import { cities } from "@/data/cities"
 import { groups } from "@/data/groups"
@@ -287,15 +288,25 @@ export default function ScheduleClient({ quickAnswers }: ScheduleClientProps = {
                     <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_auto] items-center gap-4 px-5 py-4">
 
                       {/* LEFT - time + round */}
-                      <div className="flex lg:flex-col items-center lg:items-start gap-3 lg:gap-1.5 flex-shrink-0 lg:w-28">
-                        <span className="text-2xl font-black text-[#231645] tabular-nums leading-none">{m.time}</span>
-                        <span
-                          className="text-[0.6rem] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider whitespace-nowrap"
-                          style={{ background: rc.bg, color: rc.text }}
-                        >
-                          {m.group ? `Group ${m.group}` : m.round}
-                        </span>
-                      </div>
+                      {(() => {
+                        const k = getKickoff(m)
+                        return (
+                          <div className="flex lg:flex-col items-center lg:items-start gap-3 lg:gap-1.5 flex-shrink-0 lg:w-32">
+                            <div className="flex flex-col items-start">
+                              <span className="text-xl font-black text-[#231645] tabular-nums leading-none">{k.etTime} <span className="text-xs font-bold text-[#7E43FF]">ET</span></span>
+                              {!k.isSameAsEt && (
+                                <span className="text-[10px] text-[#615E6E] font-semibold tabular-nums mt-0.5">{k.localTime} {k.localLabel}</span>
+                              )}
+                            </div>
+                            <span
+                              className="text-[0.6rem] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider whitespace-nowrap"
+                              style={{ background: rc.bg, color: rc.text }}
+                            >
+                              {m.group ? `Group ${m.group}` : m.round}
+                            </span>
+                          </div>
+                        )
+                      })()}
 
                       {/* MIDDLE - teams */}
                       <div className="min-w-0">
