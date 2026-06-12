@@ -122,12 +122,16 @@ async function main() {
       const x = extractFromEvent(ev)
       if (!x) continue
       if (x.status === "scheduled") continue
-      // Find our match by date + team pair (canonical)
-      const ours = matches.find((m) =>
-        m.date === x.date &&
-        canon(m.homeTeam) === x.homeName &&
-        canon(m.awayTeam) === x.awayName
-      )
+      // Find our match by team pair, allowing ±1 day tolerance on the date
+      // (ESPN dates are UTC, our matches.ts dates are local stadium time).
+      // Each team pair plays once per tournament so this is unambiguous.
+      const ours = matches.find((m) => {
+        if (canon(m.homeTeam) !== x.homeName || canon(m.awayTeam) !== x.awayName) return false
+        if (!x.date) return false
+        const ours = new Date(m.date + "T12:00:00Z").getTime()
+        const theirs = new Date(x.date + "T12:00:00Z").getTime()
+        return Math.abs(ours - theirs) <= 36 * 3600 * 1000
+      })
       if (!ours) {
         console.warn(`  unmatched ESPN event: ${x.date} ${x.homeName} ${x.homeScore}-${x.awayScore} ${x.awayName}`)
         continue

@@ -6,11 +6,14 @@ import { matches, slugForMatch, type Match } from "@/data/matches"
 import { getResult, type MatchResult } from "@/lib/matchResults"
 import { getKickoff } from "@/lib/matchTime"
 
-// Today's ISO date for filtering. We compare on the calendar date (not kickoff
-// epoch) so a match that's currently in progress still appears in the strip
-// even before the bot stamps a Final score on it.
-function todayIsoUtc(): string {
-  return new Date().toISOString().slice(0, 10)
+// Show matches from yesterday onward (until the bot stamps an FT score). The
+// "yesterday" floor handles late-night kickoffs whose local stadium date is
+// the day before the next UTC day . e.g. a Guadalajara 8pm match has local
+// date June 11 but kicks off at 02:00 UTC on June 12.
+function floorDateIso(): string {
+  const d = new Date()
+  d.setUTCDate(d.getUTCDate() - 1)
+  return d.toISOString().slice(0, 10)
 }
 
 const NAME_ALIASES: Record<string, string> = {
@@ -123,7 +126,7 @@ export default function LiveStrip() {
   // today or later AND has no final result yet . that way in-progress matches
   // (Mexico vs SAF at 1pm ET) still show up before the bot stamps an FT score.
   const items = useMemo<Item[]>(() => {
-    const today = todayIsoUtc()
+    const today = floorDateIso()
     const finished: Item[] = []
     const upcoming: Item[] = []
     for (const m of matches) {
