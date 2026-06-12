@@ -68,7 +68,7 @@ export default function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
               {b.items.map((item, j) => (
                 <li key={j} className="text-[#231645] text-base leading-relaxed flex gap-3">
                   <span className="text-[#7E43FF] flex-shrink-0 mt-1">•</span>
-                  <span>{item}</span>
+                  <span>{renderInline(item)}</span>
                 </li>
               ))}
             </ul>
@@ -80,7 +80,7 @@ export default function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
               {b.items.map((item, j) => (
                 <li key={j} className="text-[#231645] text-base leading-relaxed flex gap-3">
                   <span className="text-[#7E43FF] font-bold flex-shrink-0 mt-0.5 w-6">{j + 1}.</span>
-                  <span>{item}</span>
+                  <span>{renderInline(item)}</span>
                 </li>
               ))}
             </ol>
