@@ -24,7 +24,7 @@ export default function NavBar() {
   return (
     <div className="relative z-20 flex justify-center px-4 pt-4">
       <nav
-        className="w-full max-w-5xl rounded-2xl"
+        className="w-full max-w-6xl rounded-2xl"
         style={{
           background: "rgba(255,255,255,0.92)",
           backdropFilter: "blur(16px)",
@@ -46,7 +46,7 @@ export default function NavBar() {
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-5 lg:gap-7">
+          <div className="hidden md:flex items-center gap-4 lg:gap-5">
             {links.map((l) => (
               <Link
                 key={l.href}
