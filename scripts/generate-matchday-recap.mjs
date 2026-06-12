@@ -11,7 +11,9 @@
 
 import fs from "node:fs"
 
-const TODAY = process.argv[2] ?? yesterdayISO()
+const ARGS = process.argv.slice(2)
+const FORCE = ARGS.includes("--force")
+const TODAY = ARGS.find((a) => /^\d{4}-\d{2}-\d{2}$/.test(a)) ?? yesterdayISO()
 const RESULTS_PATH = "src/data/matchResults.json"
 const MATCHES_PATH = "src/data/matches.ts"
 
@@ -33,32 +35,40 @@ function slugify(s) {
 
 function loadMatches() {
   const src = fs.readFileSync(MATCHES_PATH, "utf8")
-  const re = /\{\s*id:\s*"([^"]+)",[^}]*?round:\s*"([^"]+)",[^}]*?(?:group:\s*"([^"]+)",[^}]*?)?date:\s*"([^"]+)",[^}]*?homeTeam:\s*"([^"]+)",\s*awayTeam:\s*"([^"]+)"/g
+  const re = /\{\s*id:\s*"([^"]+)",\s*matchNumber:\s*(\d+),\s*round:\s*"([^"]+)",[^}]*?(?:group:\s*"([^"]+)",[^}]*?)?date:\s*"([^"]+)",\s*time:\s*"([^"]+)",[^}]*?homeTeam:\s*"([^"]+)",\s*awayTeam:\s*"([^"]+)"/g
   const out = []
   let m
   while ((m = re.exec(src)) !== null) {
     out.push({
-      id: m[1], round: m[2], group: m[3] ?? undefined,
-      date: m[4], homeTeam: m[5], awayTeam: m[6],
+      id: m[1], matchNumber: parseInt(m[2], 10), round: m[3],
+      group: m[4] ?? undefined, date: m[5], time: m[6],
+      homeTeam: m[7], awayTeam: m[8],
     })
   }
   return out
 }
 
+// Matches the slugForMatch() function in src/data/matches.ts:
+//   "{home}-vs-{away}-{matchNumber}"
 function matchSlug(m) {
-  return `${slugify(m.homeTeam)}-vs-${slugify(m.awayTeam)}-match-${m.id}`
+  return `${slugify(m.homeTeam)}-vs-${slugify(m.awayTeam)}-${m.matchNumber}`
 }
 
-function buildPost(date, played) {
+function nextDayIso(date) {
+  const d = new Date(date + "T12:00:00Z")
+  d.setUTCDate(d.getUTCDate() + 1)
+  return d.toISOString().slice(0, 10)
+}
+
+function buildPost(date, played, nextDayMatches) {
   const long = formatLong(date)
   const slug = `world-cup-2026-recap-${date}`
   const totalGoals = played.reduce((s, p) => s + p.r.homeScore + p.r.awayScore, 0)
-  const body = [
-    {
-      type: "p",
-      text: `${played.length} match${played.length === 1 ? "" : "es"} from the 2026 FIFA World Cup ${played.length === 1 ? "was" : "were"} played on ${long}, with ${totalGoals} total goal${totalGoals === 1 ? "" : "s"} scored. Full scorelines and links to highlights below.`,
-    },
-  ]
+  const videosCount = played.filter(({ r }) => r.videoId).length
+  const intro =
+    `${played.length} match${played.length === 1 ? "" : "es"} from the 2026 FIFA World Cup ${played.length === 1 ? "was" : "were"} played on ${long}, with ${totalGoals} total goal${totalGoals === 1 ? "" : "s"} scored.` +
+    (videosCount > 0 ? ` ${videosCount === played.length ? "Highlights" : `${videosCount} highlight video${videosCount === 1 ? "" : "s"}`} embedded below.` : "")
+  const body = [{ type: "p", text: intro }]
   if (played.length) {
     body.push({
       type: "table",
@@ -79,27 +89,52 @@ function buildPost(date, played) {
   const biggest = [...played].sort(
     (a, b) => Math.abs(b.r.homeScore - b.r.awayScore) - Math.abs(a.r.homeScore - a.r.awayScore)
   )[0]
-  if (biggest) {
+  if (biggest && biggest.r.homeScore !== biggest.r.awayScore) {
     const margin = Math.abs(biggest.r.homeScore - biggest.r.awayScore)
     const winner = biggest.r.homeScore > biggest.r.awayScore ? biggest.m.homeTeam : biggest.m.awayTeam
     const loser = biggest.r.homeScore > biggest.r.awayScore ? biggest.m.awayTeam : biggest.m.homeTeam
-    if (margin > 0) {
-      body.push({ type: "h2", text: "Standout result" })
+    body.push({ type: "h2", text: "Standout result" })
+    body.push({
+      type: "p",
+      text: `${biggest.m.homeTeam} ${biggest.r.homeScore}-${biggest.r.awayScore} ${biggest.m.awayTeam} was the day's biggest margin, a ${margin}-goal win for ${winner} over ${loser}. See the [full match report](/matches/${matchSlug(biggest.m)}/).`,
+    })
+  }
+  // Highlight videos . one block per finished match with a stored videoId.
+  const withVideo = played.filter(({ r }) => r.videoId)
+  if (withVideo.length) {
+    body.push({ type: "h2", text: "Highlights" })
+    for (const { m, r } of withVideo) {
       body.push({
         type: "p",
-        text: `${biggest.m.homeTeam} ${biggest.r.homeScore}-${biggest.r.awayScore} ${biggest.m.awayTeam} was the day's biggest margin, a ${margin}-goal win for ${winner} over ${loser}. Watch the [match highlights and full match report](/matches/${matchSlug(biggest.m)}/).`,
+        text: `${m.homeTeam} ${r.homeScore}-${r.awayScore} ${m.awayTeam} . [match page](/matches/${matchSlug(m)}/).`,
+      })
+      body.push({
+        type: "video",
+        videoId: r.videoId,
+        title: r.videoTitle ?? `${m.homeTeam} vs ${m.awayTeam} highlights`,
+        channel: r.videoChannel,
       })
     }
   }
-  body.push({ type: "h2", text: "Tomorrow" })
+  // Tomorrow . list the actual fixtures if any are scheduled for the next day.
+  if (nextDayMatches.length) {
+    const nextLong = formatLong(nextDayMatches[0].date)
+    body.push({ type: "h2", text: `Next up . ${nextLong}` })
+    body.push({
+      type: "ul",
+      items: nextDayMatches.map((m) =>
+        `[${m.homeTeam} vs ${m.awayTeam}](/matches/${matchSlug(m)}/) . ${m.group ? `Group ${m.group}` : m.round} . ${m.time} local`
+      ),
+    })
+  }
   body.push({
     type: "p",
-    text: `See the [full World Cup 2026 schedule](/schedule/) for tomorrow's fixtures, or the [predictor bracket](/predictor/) to lock in your knockout picks based on what you saw today.`,
+    text: `Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks.`,
   })
   return {
     slug,
     title: `World Cup 2026 Recap: ${long}`,
-    description: `Results and highlights from every World Cup 2026 match on ${long}. ${played.length} match${played.length === 1 ? "" : "es"}, ${totalGoals} goals, full scoreline table and links to video highlights.`,
+    description: `Results from every World Cup 2026 match on ${long}: ${played.length} match${played.length === 1 ? "" : "es"}, ${totalGoals} goals${videosCount ? `, ${videosCount} highlight video${videosCount === 1 ? "" : "s"} embedded` : ""}.`,
     date,
     author: "My World Cup Guide editorial",
     authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
@@ -114,6 +149,17 @@ function serializeBlock(b) {
   if (b.type === "p" || b.type === "h2" || b.type === "h3") {
     return `      { type: "${b.type}", text: ${JSON.stringify(b.text)} },`
   }
+  if (b.type === "ul" || b.type === "ol") {
+    const items = b.items.map((it) => `        ${JSON.stringify(it)},`).join("\n")
+    return [
+      `      {`,
+      `        type: "${b.type}",`,
+      `        items: [`,
+      items,
+      `        ],`,
+      `      },`,
+    ].join("\n")
+  }
   if (b.type === "table") {
     const headers = JSON.stringify(b.headers)
     const rows = b.rows.map((r) => `          ${JSON.stringify(r)},`).join("\n")
@@ -125,6 +171,16 @@ function serializeBlock(b) {
       `        rows: [`,
       rows,
       `        ],`,
+      `      },`,
+    ].join("\n")
+  }
+  if (b.type === "video") {
+    return [
+      `      {`,
+      `        type: "video",`,
+      `        videoId: ${JSON.stringify(b.videoId)},`,
+      `        title: ${JSON.stringify(b.title ?? "")},`,
+      `        channel: ${JSON.stringify(b.channel ?? "")},`,
       `      },`,
     ].join("\n")
   }
@@ -150,12 +206,32 @@ function serializePost(post) {
   ].join("\n")
 }
 
-function insertIntoBlogPosts(post) {
+function removeExistingPost(slug) {
+  const path = "src/data/blogPosts.ts"
+  const src = fs.readFileSync(path, "utf8")
+  // Find the exact "{ slug: "X" ... }," entry and excise it. Each post entry
+  // is delimited at 2-space indent and ends with "  }," . match minimally.
+  const startMarker = `    slug: "${slug}",`
+  const start = src.indexOf(startMarker)
+  if (start === -1) return false
+  const objStart = src.lastIndexOf("  {", start)
+  const objEnd = src.indexOf("\n  },", start)
+  if (objStart === -1 || objEnd === -1) return false
+  const out = src.slice(0, objStart) + src.slice(objEnd + 6) // "\n  },\n" = 6 chars
+  fs.writeFileSync(path, out)
+  return true
+}
+
+function insertIntoBlogPosts(post, { force = false } = {}) {
   const path = "src/data/blogPosts.ts"
   let src = fs.readFileSync(path, "utf8")
   if (src.includes(`slug: "${post.slug}"`)) {
-    console.log(`SKIP: post ${post.slug} already exists`)
-    return false
+    if (!force) {
+      console.log(`SKIP: post ${post.slug} already exists (pass --force to overwrite)`)
+      return false
+    }
+    removeExistingPost(post.slug)
+    src = fs.readFileSync(path, "utf8")
   }
   const marker = "export const blogPosts: BlogPost[] = ["
   const i = src.indexOf(marker)
@@ -173,13 +249,18 @@ const played = matches
   .map((m) => ({ m, r: results[m.id] }))
   .filter(({ r }) => r && (r.status === "FT" || r.status === "AET" || r.status === "PEN"))
 
-console.log(`${TODAY}: ${played.length} finished WC matches`)
+const tomorrow = nextDayIso(TODAY)
+const nextDayMatches = matches
+  .filter((m) => m.date === tomorrow && m.homeTeam !== "TBD" && m.awayTeam !== "TBD")
+  .sort((a, b) => a.matchNumber - b.matchNumber)
+
+console.log(`${TODAY}: ${played.length} finished WC matches; ${nextDayMatches.length} fixtures next day`)
 if (!played.length) {
   console.log("Nothing to recap. Exiting.")
   process.exit(0)
 }
-const post = buildPost(TODAY, played)
-const inserted = insertIntoBlogPosts(post)
+const post = buildPost(TODAY, played, nextDayMatches)
+const inserted = insertIntoBlogPosts(post, { force: FORCE })
 if (inserted) {
   console.log(`Wrote post: ${post.title}`)
   console.log(`URL: /blog/${post.slug}/`)

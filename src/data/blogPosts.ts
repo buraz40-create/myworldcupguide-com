@@ -10,6 +10,7 @@ export type BlogBlock =
   | { type: "quote"; text: string; cite?: string }
   | { type: "callout"; tone: "info" | "warning"; text: string }
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
+  | { type: "video"; videoId: string; title?: string; channel?: string }
 
 export type BlogPost = {
   slug: string
@@ -29,7 +30,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "world-cup-2026-recap-2026-06-11",
     title: "World Cup 2026 Recap: Thursday, June 11, 2026",
-    description: "Results and highlights from every World Cup 2026 match on Thursday, June 11, 2026. 1 match, 2 goals, full scoreline table and links to video highlights.",
+    description: "Results from every World Cup 2026 match on Thursday, June 11, 2026: 1 match, 2 goals, 1 highlight video embedded.",
     date: "2026-06-11",
     author: "My World Cup Guide editorial",
     authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
@@ -37,21 +38,38 @@ export const blogPosts: BlogPost[] = [
     tags: ["recap","results","world cup 2026","2026-06-11"],
     readMinutes: 3,
     body: [
-      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Thursday, June 11, 2026, with 2 total goals scored. Full scorelines and links to highlights below." },
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Thursday, June 11, 2026, with 2 total goals scored. Highlights embedded below." },
       {
         type: "table",
         caption: "All World Cup 2026 results from Thursday, June 11, 2026.",
         headers: ["Match","Score","Round"],
         rows: [
-          ["[Mexico vs South Africa](/matches/mexico-vs-south-africa-match-m01/)","2-0","Group A"],
+          ["[Mexico vs South Africa](/matches/mexico-vs-south-africa-1/)","2-0","Group A"],
         ],
       },
       { type: "h2", text: "Standout result" },
-      { type: "p", text: "Mexico 2-0 South Africa was the day's biggest margin, a 2-goal win for Mexico over South Africa. Watch the [match highlights and full match report](/matches/mexico-vs-south-africa-match-m01/)." },
-      { type: "h2", text: "Tomorrow" },
-      { type: "p", text: "See the [full World Cup 2026 schedule](/schedule/) for tomorrow's fixtures, or the [predictor bracket](/predictor/) to lock in your knockout picks based on what you saw today." },
+      { type: "p", text: "Mexico 2-0 South Africa was the day's biggest margin, a 2-goal win for Mexico over South Africa. See the [full match report](/matches/mexico-vs-south-africa-1/)." },
+      { type: "h2", text: "Highlights" },
+      { type: "p", text: "Mexico 2-0 South Africa . [match page](/matches/mexico-vs-south-africa-1/)." },
+      {
+        type: "video",
+        videoId: "mFYECh9HedE",
+        title: "🔴Mexico Vs South Africa Match | FIFA World Cup 2026 Group Stage | Football World Cup 2026 | N18G",
+        channel: "CNBC-TV18",
+      },
+      { type: "h2", text: "Next up . Friday, June 12, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Canada vs Bosnia and Herzegovina](/matches/canada-vs-bosnia-and-herzegovina-3/) . Group B . 15:00 local",
+        "[United States vs Paraguay](/matches/united-states-vs-paraguay-4/) . Group D . 18:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
     ],
   },
+
+
   {
     slug: "world-cup-2026-recap-2026-06-01",
     title: "World Cup 2026 Recap: Monday, June 1, 2026",

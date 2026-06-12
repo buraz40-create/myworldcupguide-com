@@ -1,7 +1,39 @@
+import Link from "next/link"
 import type { BlogBlock } from "@/data/blogPosts"
 
 function slugifyHeading(text: string): string {
   return text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
+}
+
+// Minimal inline markdown for [text](url). External URLs open in new tab,
+// internal links use Next's <Link>. Everything else renders as plain text.
+function renderInline(text: string): React.ReactNode {
+  const parts: React.ReactNode[] = []
+  const re = /\[([^\]]+)\]\(([^)]+)\)/g
+  let last = 0
+  let m: RegExpExecArray | null
+  let i = 0
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) parts.push(text.slice(last, m.index))
+    const [, label, href] = m
+    const isExternal = /^https?:\/\//i.test(href)
+    if (isExternal) {
+      parts.push(
+        <a key={`l${i++}`} href={href} target="_blank" rel="noopener" className="text-[#7E43FF] font-semibold underline hover:text-[#4f1ea1]">
+          {label}
+        </a>
+      )
+    } else {
+      parts.push(
+        <Link key={`l${i++}`} href={href} className="text-[#7E43FF] font-semibold underline hover:text-[#4f1ea1]">
+          {label}
+        </Link>
+      )
+    }
+    last = m.index + m[0].length
+  }
+  if (last < text.length) parts.push(text.slice(last))
+  return parts.length ? parts : text
 }
 
 export default function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
@@ -11,7 +43,7 @@ export default function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
         if (b.type === "p") {
           return (
             <p key={i} className="text-[#231645] text-base leading-relaxed">
-              {b.text}
+              {renderInline(b.text)}
             </p>
           )
         }
@@ -109,7 +141,7 @@ export default function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
                             key={ci}
                             className={`px-3 py-3 align-top ${ci === 0 ? "font-semibold text-[#231645]" : "text-[#615E6E]"}`}
                           >
-                            {cell}
+                            {renderInline(cell)}
                           </td>
                         ))}
                       </tr>
@@ -121,6 +153,27 @@ export default function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
                 <figcaption className="text-xs text-[#615E6E] mt-2 px-1">{b.caption}</figcaption>
               )}
             </figure>
+          )
+        }
+        if (b.type === "video") {
+          return (
+            <section key={i} className="my-6 rounded-2xl bg-white border border-black/5 shadow-sm p-4 md:p-5">
+              <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
+                <iframe
+                  src={`https://www.youtube.com/embed/${b.videoId}`}
+                  title={b.title ?? "Match highlights"}
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full rounded-xl"
+                  loading="lazy"
+                />
+              </div>
+              {(b.title || b.channel) && (
+                <p className="text-sm text-[#615E6E] mt-3">
+                  {b.title}{b.channel ? ` (${b.channel})` : ""}
+                </p>
+              )}
+            </section>
           )
         }
         return null
