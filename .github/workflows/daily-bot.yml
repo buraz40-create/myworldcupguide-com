@@ -34,6 +34,11 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: node scripts/fetch-highlights.mjs
 
+      - name: Fetch YouTube match previews
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: node scripts/fetch-match-previews.mjs
+
       - name: Generate matchday recap blog post (yesterday)
         run: node scripts/generate-matchday-recap.mjs || true
 
@@ -41,7 +46,7 @@ jobs:
         run: |
           git config user.name "wc-bot"
           git config user.email "bot@myworldcupguide.com"
-          git add src/data/matchResults.json src/data/blogPosts.ts
+          git add src/data/matchResults.json src/data/blogPosts.ts src/data/contentVideos.json
           if git diff --cached --quiet; then
             echo "no data changes"
           else

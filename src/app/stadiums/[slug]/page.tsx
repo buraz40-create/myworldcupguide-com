@@ -11,6 +11,8 @@ import MatchDayPanel from "@/components/MatchDayPanel"
 import StadiumMap from "@/components/StadiumMap"
 import StadiumSeatingChart from "@/components/StadiumSeatingChart"
 import { alternatesFor } from "@/lib/hreflang"
+import YouTubeEmbed from "@/components/YouTubeEmbed"
+import { getStadiumVideo } from "@/lib/contentVideos"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -437,6 +439,13 @@ export default async function StadiumPage({ params }: Props) {
             </Link>
           </section>
         )}
+
+        {(() => {
+          const v = getStadiumVideo(stadium.slug)
+          return v ? (
+            <YouTubeEmbed videoId={v.videoId} title={v.title} channel={v.channel} heading={`Inside ${stadium.name}`} />
+          ) : null
+        })()}
 
         <div className="pt-6 border-t border-black/[0.06]">
           <Link

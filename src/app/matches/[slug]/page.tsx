@@ -394,11 +394,17 @@ export default async function MatchPage({ params }: Props) {
           ))}
         </div>
 
-        {/* Post-match highlights (rendered only after a video has been linked by the daily bot) */}
+        {/* Post-match highlights (preferred), else pre-match preview if the
+            bot has linked one for an upcoming match. */}
         {(() => {
           const r = getResult(m.id)
-          if (!r?.videoId) return null
-          return <MatchHighlightEmbed videoId={r.videoId} title={r.videoTitle ?? `${m.homeTeam} vs ${m.awayTeam} highlights`} channel={r.videoChannel} />
+          if (r?.videoId) {
+            return <MatchHighlightEmbed videoId={r.videoId} title={r.videoTitle ?? `${m.homeTeam} vs ${m.awayTeam} highlights`} channel={r.videoChannel} />
+          }
+          if (r?.previewVideoId) {
+            return <MatchHighlightEmbed videoId={r.previewVideoId} title={r.previewVideoTitle ?? `${m.homeTeam} vs ${m.awayTeam} preview`} channel={r.previewVideoChannel} />
+          }
+          return null
         })()}
 
         {/* Tickets - multi-vendor search row */}

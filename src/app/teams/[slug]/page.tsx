@@ -8,6 +8,8 @@ import { matches } from "@/data/matches"
 import { stadiums } from "@/data/stadiums"
 import { cities } from "@/data/cities"
 import { alternatesFor } from "@/lib/hreflang"
+import YouTubeEmbed from "@/components/YouTubeEmbed"
+import { getTeamVideo } from "@/lib/contentVideos"
 import { getBaseCamp, distanceMiles } from "@/data/baseCamps"
 import { stadiumDetails } from "@/data/stadiumDetails"
 
@@ -675,6 +677,13 @@ export default async function TeamPage({ params }: Props) {
             ))}
           </div>
         </section>
+
+        {(() => {
+          const v = getTeamVideo(team.slug)
+          return v ? (
+            <YouTubeEmbed videoId={v.videoId} title={v.title} channel={v.channel} heading={`${team.name} on the way to 2026`} />
+          ) : null
+        })()}
 
         {/* ── Back link ── */}
         <div className="pt-6 border-t border-black/[0.06]">

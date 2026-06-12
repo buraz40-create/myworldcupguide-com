@@ -11,6 +11,8 @@ import StadiumMap from "@/components/StadiumMap"
 import HotelSearchCTA from "@/components/HotelSearchCTA"
 import TourSearchCTA from "@/components/TourSearchCTA"
 import { alternatesFor } from "@/lib/hreflang"
+import YouTubeEmbed from "@/components/YouTubeEmbed"
+import { getCityVideo } from "@/lib/contentVideos"
 
 type Props = { params: Promise<{ slug: string }> }
 
@@ -588,6 +590,13 @@ export default async function CityPage({ params }: Props) {
             </div>
           </section>
         )}
+
+        {(() => {
+          const v = getCityVideo(city.slug)
+          return v ? (
+            <YouTubeEmbed videoId={v.videoId} title={v.title} channel={v.channel} heading={`Visitor's view of ${city.name}`} />
+          ) : null
+        })()}
 
         <div className="pt-6 border-t border-black/[0.06]">
           <Link href="/cities" className="inline-flex items-center gap-2 text-[#7E43FF] hover:text-[#231645] transition-colors font-semibold">

@@ -1,15 +1,19 @@
 import results from "@/data/matchResults.json"
 
 export type MatchResult = {
-  homeScore: number
-  awayScore: number
-  status: "FT" | "AET" | "PEN" | "live" | "scheduled"
+  homeScore?: number
+  awayScore?: number
+  status?: "FT" | "AET" | "PEN" | "live" | "scheduled"
   penaltyHome?: number
   penaltyAway?: number
   videoId?: string
   videoTitle?: string
   videoChannel?: string
   videoFetchedAt?: string
+  previewVideoId?: string
+  previewVideoTitle?: string
+  previewVideoChannel?: string
+  previewFetchedAt?: string
 }
 
 const data = results as Record<string, MatchResult>

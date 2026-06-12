@@ -1,0 +1,404 @@
+{
+  "stadiums": {
+    "metlife-stadium": {
+      "videoId": "XZU10kOo2EE",
+      "title": "⁴ᴷ⁶⁰ Walking MetLife Stadium in East Rutherford, New Jersey",
+      "channel": "Walking & Driving Incognito",
+      "fetchedAt": "2026-06-12T12:51:19.368Z"
+    },
+    "att-stadium": {
+      "videoId": "1yvSucuvYBw",
+      "title": "🏈 NFL Dallas Cowboys AT&amp;T Stadium Tour - Bucket List!",
+      "channel": "Ultimate Bucket List",
+      "fetchedAt": "2026-06-12T12:51:19.749Z"
+    },
+    "sofi-stadium": {
+      "videoId": "jfJILuSZFIY",
+      "title": "Inside The $5 Billion SoFi Stadium",
+      "channel": "VISION",
+      "fetchedAt": "2026-06-12T12:51:20.140Z"
+    },
+    "mercedes-benz-stadium": {
+      "videoId": "tkVt5MC_AiY",
+      "title": "Atlanta&#39;s Mercedes-Benz Stadium: All-Access",
+      "channel": "SportTechie",
+      "fetchedAt": "2026-06-12T12:51:20.610Z"
+    },
+    "nrg-stadium": {
+      "videoId": "FiKCnHICPBs",
+      "title": "H-Town Experience!! Stadium Vlog #29- Houston Texans | NRG Stadium",
+      "channel": "Garrett Stadium Travel",
+      "fetchedAt": "2026-06-12T12:51:21.038Z"
+    },
+    "arrowhead-stadium": {
+      "videoId": "YwqhfKuCtjI",
+      "title": "We Toured CHIEFS Stadium in Kansas City | GEHA Field at Arrowhead Stadium",
+      "channel": "Here and There with Becca and Jeffrey",
+      "fetchedAt": "2026-06-12T12:51:21.374Z"
+    },
+    "levis-stadium": {
+      "videoId": "1ebxb8HQ9IU",
+      "title": "LEVI&#39;S STADIUM TOUR | Home of the San Francisco 49ers",
+      "channel": "Emily Harrigan",
+      "fetchedAt": "2026-06-12T12:51:21.791Z"
+    },
+    "lincoln-financial-field": {
+      "videoId": "Ts1eeRU6whY",
+      "title": "lincoln financial field Philadelphia Eagles Stadium Tour",
+      "channel": "Jhao33",
+      "fetchedAt": "2026-06-12T12:51:22.120Z"
+    },
+    "gillette-stadium": {
+      "videoId": "TtLHZI1B7fI",
+      "title": "Guide to Gillette Stadium | Gillette World Sport",
+      "channel": "World Sport",
+      "fetchedAt": "2026-06-12T12:51:22.445Z"
+    },
+    "lumen-field": {
+      "videoId": "Zghz13xrYM8",
+      "title": "Inside the NFL&#39;s Loudest Stadium",
+      "channel": "Constructify",
+      "fetchedAt": "2026-06-12T12:51:22.796Z"
+    },
+    "hard-rock-stadium": {
+      "videoId": "C_0EKzJQd6Q",
+      "title": "MIAMI DOLPHINS at Hard Rock Stadium | Tour &amp; Review",
+      "channel": "Concession Critics",
+      "fetchedAt": "2026-06-12T12:51:23.507Z"
+    },
+    "estadio-azteca": {
+      "videoId": "O1svKMat83w",
+      "title": "Tour por el Estadio Azteca l ¿El mejor estadio del mundo?",
+      "channel": "Fernando en la tribuna",
+      "fetchedAt": "2026-06-12T12:51:23.880Z"
+    },
+    "estadio-bbva": {
+      "videoId": "FKTIkffTAyw",
+      "title": "¡Almorcé en el Estadio BBVA de Rayados! ¿Mejor restaurante en un estadio de fútbol? [EPISODIO 4]",
+      "channel": "Federico MX Sudamerica",
+      "fetchedAt": "2026-06-12T12:51:24.630Z"
+    },
+    "estadio-akron": {
+      "videoId": "5ak4iY3fh-g",
+      "title": "English football fan visits the Estadio Akron: Chivas Guadalajara (Part 8)",
+      "channel": "Sam's Concourse Corner",
+      "fetchedAt": "2026-06-12T12:51:24.977Z"
+    },
+    "bc-place": {
+      "videoId": "MecQf_u023s",
+      "title": "Welcome to the new, multipurpose BC Place",
+      "channel": "BC Place",
+      "fetchedAt": "2026-06-12T12:51:25.342Z"
+    },
+    "bmo-field": {
+      "videoId": "H9pyB3wt-Rg",
+      "title": "A first look at BMO&#39;s FIFA transformation",
+      "channel": "CBC News Toronto",
+      "fetchedAt": "2026-06-12T12:51:25.621Z"
+    }
+  },
+  "cities": {
+    "new-york-new-jersey": {
+      "videoId": "_XXwZROjckI",
+      "title": "New York City - What It&#39;s Like Now 🇺🇸",
+      "channel": "Peter Santenello",
+      "fetchedAt": "2026-06-12T12:50:09.575Z"
+    },
+    "los-angeles": {
+      "videoId": "bTvr_2v-0HI",
+      "title": "Los Angeles Vacation Travel Guide | Expedia",
+      "channel": "Expedia",
+      "fetchedAt": "2026-06-12T12:51:27.394Z"
+    },
+    "dallas": {
+      "videoId": "GFvQN5FJvU0",
+      "title": "Texas USA: Diverse Cities &amp; Awesome People",
+      "channel": "CoolVision",
+      "fetchedAt": "2026-06-12T12:51:27.796Z"
+    },
+    "san-francisco-bay-area": {
+      "videoId": "7VwEOyAcvJM",
+      "title": "Breaking Down My $306,500 Salary In San Francisco | Cost Of Living",
+      "channel": "Business Insider",
+      "fetchedAt": "2026-06-12T12:51:28.583Z"
+    },
+    "miami": {
+      "videoId": "NOof2E0kMlM",
+      "title": "When Desis Go to Miami, Florida",
+      "channel": "Slayy Point",
+      "fetchedAt": "2026-06-12T12:51:28.953Z"
+    },
+    "seattle": {
+      "videoId": "sO5-oFuDPEA",
+      "title": "22 Things to Do in Seattle, Washington",
+      "channel": "Through My Lens",
+      "fetchedAt": "2026-06-12T12:51:29.337Z"
+    },
+    "boston": {
+      "videoId": "UyxPUIslaYw",
+      "title": "Boston Food Tour - HUGE ITALIAN FOOD + 16” Chicken Parmesan Sub!! | Boston, Massachusetts",
+      "channel": "Mark Wiens",
+      "fetchedAt": "2026-06-12T12:51:29.828Z"
+    },
+    "philadelphia": {
+      "videoId": "EZozuJQZ7Q0",
+      "title": "The Ultimate PHILADELPHIA FOOD TOUR!! Hoagies, Cheese Steak + Best Local Philly Food!!",
+      "channel": "Mark Wiens",
+      "fetchedAt": "2026-06-12T12:51:30.204Z"
+    },
+    "kansas-city": {
+      "videoId": "TZDspjkxPTI",
+      "title": "Day in the Life of the #1 BBQ in Kansas City",
+      "channel": "Gareth Leonard",
+      "fetchedAt": "2026-06-12T12:51:31.001Z"
+    },
+    "atlanta": {
+      "videoId": "Mrb2Ot0u7co",
+      "title": "20 MICHELIN Eats UNDER $16! Michelin CHEAP EATS in Atlanta Georgia",
+      "channel": "Mike Chen",
+      "fetchedAt": "2026-06-12T12:51:31.773Z"
+    },
+    "houston": {
+      "videoId": "GFvQN5FJvU0",
+      "title": "Texas USA: Diverse Cities &amp; Awesome People",
+      "channel": "CoolVision",
+      "fetchedAt": "2026-06-12T12:51:32.158Z"
+    },
+    "guadalajara": {
+      "videoId": "mtV26pDB83E",
+      "title": "Guadalajara en 24 horas 🇲🇽 Lo mejor para Ver y Comer",
+      "channel": "En los zapatos de Mónica",
+      "fetchedAt": "2026-06-12T12:51:32.539Z"
+    },
+    "mexico-city": {
+      "videoId": "OO9kSxcT9Rg",
+      "title": "The Ultimate MEXICAN STREET FOOD TACOS Tour of Mexico City! (ft. La Ruta de la Garnacha)",
+      "channel": "Mark Wiens",
+      "fetchedAt": "2026-06-12T12:51:32.956Z"
+    },
+    "monterrey": {
+      "videoId": "weBketbLEEU",
+      "title": "Comida CALLEJERA en Monterrey, comiendo en Monterrey.",
+      "channel": "Calixto Serna - México Cooking Club",
+      "fetchedAt": "2026-06-12T12:51:33.298Z"
+    },
+    "toronto": {
+      "videoId": "7uY0Ab5HlZ0",
+      "title": "Toronto Vacation Travel Guide | Expedia",
+      "channel": "Expedia",
+      "fetchedAt": "2026-06-12T12:51:33.736Z"
+    },
+    "vancouver": {
+      "videoId": "G9Xh95FO0i4",
+      "title": "95 hours on Canada’s BEST train! (Vancouver to Toronto on Via Rail)",
+      "channel": "Kara and Nate",
+      "fetchedAt": "2026-06-12T12:51:34.100Z"
+    }
+  },
+  "teams": {
+    "mexico": {
+      "videoId": "kYIf8I1dvdo",
+      "title": "Brazil v Mexico | 2018 FIFA World Cup | Match Highlights",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:34.851Z"
+    },
+    "south-korea": {
+      "videoId": "c0-ZhEkEFtA",
+      "title": "Samba boys turn on the style | Brazil v Korea Republic | Round of 16 | FIFA World Cup Qatar 2022",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:52:55.045Z"
+    },
+    "switzerland": {
+      "videoId": "HbE96IMB9Vw",
+      "title": "Ramos hits HAT-TRICK! | Portugal v Switzerland | Round of 16 | FIFA World Cup Qatar 2022",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:38.889Z"
+    },
+    "bosnia-and-herzegovina": {
+      "videoId": "TTevNMcwExk",
+      "title": "FULL PENALTIES: Bosnia and Herzegovina vs Italy | FIFA World Cup 2026™ UEFA Qualifiers ⚽️ FOX Soccer",
+      "channel": "FOX Soccer",
+      "fetchedAt": "2026-06-12T12:51:40.160Z"
+    },
+    "brazil": {
+      "videoId": "t8IK0ZqfxNI",
+      "title": "Brazil v Belgium | 2018 FIFA World Cup | Match Highlights",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:52:57.777Z"
+    },
+    "scotland": {
+      "videoId": "73cVhK9qL1o",
+      "title": "SCOTLAND 4-2 DENMARK | Scotland Qualify for 2026 World Cup! | World Cup Qualifier Highlights",
+      "channel": "Scotland National Team",
+      "fetchedAt": "2026-06-12T12:51:41.464Z"
+    },
+    "haiti": {
+      "videoId": "scUPE_lmrgc",
+      "title": "Costa Rica vs. Haiti: Extended Highlights | CONCACAF World Cup Qualifiers | CBS Sports",
+      "channel": "CBS Sports Golazo America",
+      "fetchedAt": "2026-06-12T12:51:42.807Z"
+    },
+    "paraguay": {
+      "videoId": "cXE4N5k50Ao",
+      "title": "USA vs Paraguay - FULL Match Highlights &amp; Goals | FIFA International Friendly | November 15, 2025",
+      "channel": "House of Highlights",
+      "fetchedAt": "2026-06-12T12:51:43.940Z"
+    },
+    "turkey": {
+      "videoId": "gjp6ea_GUOc",
+      "title": "Saldır Türkiye - Mae Echoes (World Cup 2026 / Dünya Kupası Milli Takım Marşı) #bizimçocuklar ",
+      "channel": "Mae Echoes",
+      "fetchedAt": "2026-06-12T12:51:44.312Z"
+    },
+    "germany": {
+      "videoId": "epg75De5I5k",
+      "title": "USA vs Germany - ALL GOALS &amp; Highlights | FIFA International Friendly 2026",
+      "channel": "House of Highlights",
+      "fetchedAt": "2026-06-12T12:51:44.748Z"
+    },
+    "ivory-coast": {
+      "videoId": "ErW1Z8bs1TY",
+      "title": "Scotland vs. Ivory Coast | Full Game Highlights | ESPN FC",
+      "channel": "ESPN FC",
+      "fetchedAt": "2026-06-12T12:51:45.580Z"
+    },
+    "curacao": {
+      "videoId": "gw6QIgRtMcQ",
+      "title": "Scotland v Curaçao | Scotland Score Four in Hampden Send Off! | Friendly Highlights",
+      "channel": "Scotland National Team",
+      "fetchedAt": "2026-06-12T12:51:45.956Z"
+    },
+    "japan": {
+      "videoId": "fJeJuc27ggE",
+      "title": "Belgium v Japan | 2018 FIFA World Cup | Match Highlights",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:47.108Z"
+    },
+    "tunisia": {
+      "videoId": "oWyIizeHdtU",
+      "title": "Belgium 5-0 Tunisia | The perfect send-off to the World Cup | #REDDEVILS",
+      "channel": "Royal Belgian Football Association",
+      "fetchedAt": "2026-06-12T12:51:47.463Z"
+    },
+    "sweden": {
+      "videoId": "4e9a3KptfC0",
+      "title": "Germany v Sweden | 2018 FIFA World Cup | Match Highlights",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:48.042Z"
+    },
+    "belgium": {
+      "videoId": "J1RDiaSUEdY",
+      "title": "USA vs Belgium - FULL Match Highlights &amp; Goals | FIFA International Friendly | March 28, 2026",
+      "channel": "House of Highlights",
+      "fetchedAt": "2026-06-12T12:53:00.984Z"
+    },
+    "egypt": {
+      "videoId": "LPzZa-Btx6I",
+      "title": "Egypt v Uruguay | 2018 FIFA World Cup | Match Highlights",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:49.586Z"
+    },
+    "spain": {
+      "videoId": "1IoXVLODaQw",
+      "title": "Spain vs Netherland | World Cup 2026 Qualifiers | All Goals &amp; Highlights",
+      "channel": "Sport50",
+      "fetchedAt": "2026-06-12T12:51:50.334Z"
+    },
+    "uruguay": {
+      "videoId": "auqyXFLZ_zw",
+      "title": "Uruguay v Portugal | 2018 FIFA World Cup | Match Highlights",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:50.939Z"
+    },
+    "saudi-arabia": {
+      "videoId": "spLV1gF0fkI",
+      "title": "HUGE upset by sensational Saudis | Argentina v Saudi Arabia highlights | FIFA World Cup Qatar 2022",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:53:02.187Z"
+    },
+    "cape-verde": {
+      "videoId": "gNPaLqENz_c",
+      "title": "HIGHLIGHTS | Ghana 🆚 Cape Verde #TotalEnergiesAFCON2023 - MD1 Group B",
+      "channel": "CAF TV",
+      "fetchedAt": "2026-06-12T12:53:02.649Z"
+    },
+    "france": {
+      "videoId": "ntQsMSuEbyg",
+      "title": "France v Belgium | 2018 FIFA World Cup | Match Highlights",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:53.142Z"
+    },
+    "senegal": {
+      "videoId": "6k9UqACx1Cs",
+      "title": "USA vs Senegal - ALL GOALS &amp; Highlights | FIFA International Friendly 2026",
+      "channel": "House of Highlights",
+      "fetchedAt": "2026-06-12T12:51:53.635Z"
+    },
+    "norway": {
+      "videoId": "lyuBo3S0zZQ",
+      "title": "Morocco vs. Norway | Full Game Highlights | ESPN FC",
+      "channel": "ESPN FC",
+      "fetchedAt": "2026-06-12T12:51:54.280Z"
+    },
+    "iraq": {
+      "videoId": "6YTxxwzCEp4",
+      "title": "HIGHLIGHTS: Iraq vs Bolivia | FIFA World Cup Play-off Tournament Final",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:54.742Z"
+    },
+    "algeria": {
+      "videoId": "1SPVxYpRzAs",
+      "title": "Tunisia v Algeria | FIFA Arab Cup Qatar 2021 Final | Match Highlights",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:56.307Z"
+    },
+    "jordan": {
+      "videoId": "_8Yy9YoVoqI",
+      "title": "Jordan - Kuwait | Highlights | #AsianQualifiers - Road To 26",
+      "channel": "AFC Asian Cup",
+      "fetchedAt": "2026-06-12T12:51:56.807Z"
+    },
+    "portugal": {
+      "videoId": "2EV1TIikqRU",
+      "title": "USA vs Portugal - ALL GOALS &amp; Highlights | FIFA International Friendly 2026",
+      "channel": "House of Highlights",
+      "fetchedAt": "2026-06-12T12:51:57.198Z"
+    },
+    "colombia": {
+      "videoId": "y4SeAfCg7-o",
+      "title": "Colombia v Japan | 2018 FIFA World Cup | Match Highlights",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:57.733Z"
+    },
+    "uzbekistan": {
+      "videoId": "C5nxz9XL6X4",
+      "title": "Canada vs Uzbekistan Extended Highlights | International Friendly",
+      "channel": "FOX Soccer",
+      "fetchedAt": "2026-06-12T12:51:58.087Z"
+    },
+    "dr-congo": {
+      "videoId": "MbkQhKpvmHA",
+      "title": "Cameroon vs DR Congo RDC | All Goals &amp; Highlights | Extended | World Cup qualification",
+      "channel": "TV3 TANZANIA",
+      "fetchedAt": "2026-06-12T12:51:58.441Z"
+    },
+    "croatia": {
+      "videoId": "GrsEAvRerTg",
+      "title": "2018 WORLD CUP FINAL: France 4-2 Croatia",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:59.312Z"
+    },
+    "panama": {
+      "videoId": "nc9zirKrT0Q",
+      "title": "Panama v Tunisia | 2018 FIFA World Cup | Match Highlights",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:51:59.724Z"
+    },
+    "ghana": {
+      "videoId": "RJ4jlutcSbY",
+      "title": "Cristiano Ronaldo breaks ANOTHER record! | Portugal v Ghana highlights | FIFA World Cup Qatar 2022",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-12T12:52:00.162Z"
+    }
+  }
+}
