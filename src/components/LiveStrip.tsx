@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import { matches, slugForMatch, type Match } from "@/data/matches"
 import { getResult, type MatchResult } from "@/lib/matchResults"
+import { getKickoff } from "@/lib/matchTime"
 
 // Today's ISO date for filtering. We compare on the calendar date (not kickoff
 // epoch) so a match that's currently in progress still appears in the strip
@@ -40,18 +41,19 @@ type LiveData = {
 }
 
 function FinishedCard({ m, r }: { m: Match; r: MatchResult }) {
+  const k = getKickoff(m)
   const middle = r.status === "PEN" && r.penaltyHome != null
     ? `${r.homeScore}-${r.awayScore} · ${r.penaltyHome}-${r.penaltyAway}p`
     : `${r.homeScore}-${r.awayScore}${r.status === "AET" ? " AET" : ""}`
   return (
     <Link
       href={`/matches/${slugForMatch(m)}/`}
-      className="block rounded-xl p-3 min-w-[210px] flex-shrink-0 text-white hover:-translate-y-0.5 transition-transform shadow-[0_2px_10px_-4px_rgba(35,22,69,0.35)]"
+      className="block rounded-xl p-3 min-w-[230px] flex-shrink-0 text-white hover:-translate-y-0.5 transition-transform shadow-[0_2px_10px_-4px_rgba(35,22,69,0.35)]"
       style={{ background: "linear-gradient(135deg, #231645 0%, #4f1ea1 60%, #7E43FF 100%)" }}
     >
       <div className="flex items-center justify-between gap-2 mb-1">
         <span className="text-[9px] font-extrabold uppercase tracking-widest text-white/80 px-2 py-0.5 rounded-full bg-white/15">Final</span>
-        <span className="text-[10px] text-white/80 tabular-nums">{formatDate(m.date)}</span>
+        <span className="text-[10px] text-white/80 tabular-nums">{k.etDateLabel}</span>
       </div>
       <div className="text-sm font-bold truncate">{m.homeTeam}</div>
       <div className="text-lg font-extrabold tabular-nums my-0.5 text-white leading-none">{middle}</div>
@@ -61,11 +63,12 @@ function FinishedCard({ m, r }: { m: Match; r: MatchResult }) {
 }
 
 function LiveCard({ m, live }: { m: Match; live: LiveData }) {
+  const k = getKickoff(m)
   const label = live.status === "halftime" ? "HT" : (live.clock ?? "LIVE")
   return (
     <Link
       href={`/matches/${slugForMatch(m)}/`}
-      className="block rounded-xl p-3 min-w-[210px] flex-shrink-0 text-white hover:-translate-y-0.5 transition-transform shadow-[0_2px_10px_-4px_rgba(220,38,38,0.45)]"
+      className="block rounded-xl p-3 min-w-[230px] flex-shrink-0 text-white hover:-translate-y-0.5 transition-transform shadow-[0_2px_10px_-4px_rgba(220,38,38,0.45)]"
       style={{ background: "linear-gradient(135deg, #b91c1c 0%, #dc2626 60%, #ef4444 100%)" }}
     >
       <div className="flex items-center justify-between gap-2 mb-1">
@@ -73,7 +76,7 @@ function LiveCard({ m, live }: { m: Match; live: LiveData }) {
           <span className="inline-block w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
           {label}
         </span>
-        <span className="text-[10px] text-white/80 tabular-nums">{formatDate(m.date)}</span>
+        <span className="text-[10px] text-white/80 tabular-nums">{k.etDateLabel}</span>
       </div>
       <div className="text-sm font-bold truncate">{m.homeTeam}</div>
       <div className="text-lg font-extrabold tabular-nums my-0.5 text-white leading-none">{live.homeScore}-{live.awayScore}</div>
@@ -83,10 +86,11 @@ function LiveCard({ m, live }: { m: Match; live: LiveData }) {
 }
 
 function UpcomingCard({ m }: { m: Match }) {
+  const k = getKickoff(m)
   return (
     <Link
       href={`/matches/${slugForMatch(m)}/`}
-      className="block rounded-xl p-3 min-w-[210px] flex-shrink-0 text-[#231645] hover:-translate-y-0.5 transition-transform border border-[#7E43FF]/15 shadow-[0_2px_10px_-4px_rgba(126,67,255,0.25)]"
+      className="block rounded-xl p-3 min-w-[230px] flex-shrink-0 text-[#231645] hover:-translate-y-0.5 transition-transform border border-[#7E43FF]/15 shadow-[0_2px_10px_-4px_rgba(126,67,255,0.25)]"
       style={{ background: "linear-gradient(135deg, #f4ecff 0%, #e8dcff 50%, #d6c2ff 100%)" }}
     >
       <div className="flex items-center justify-between gap-2 mb-1">
@@ -96,10 +100,15 @@ function UpcomingCard({ m }: { m: Match }) {
         >
           {m.group ? `Group ${m.group}` : m.round}
         </span>
-        <span className="text-[10px] text-[#4f1ea1] font-semibold tabular-nums">{formatDate(m.date)} · {m.time}</span>
+        <span className="text-[10px] text-[#4f1ea1] font-semibold tabular-nums">{k.etDateLabel}</span>
       </div>
       <div className="text-sm font-bold truncate">{m.homeTeam}</div>
-      <div className="text-[10px] text-[#615E6E] my-0.5 font-bold">vs</div>
+      <div className="text-sm font-extrabold my-0.5 text-[#231645] leading-tight tabular-nums">
+        {k.etTime} ET
+        {!k.isSameAsEt && (
+          <span className="text-[10px] font-semibold text-[#615E6E] ml-1.5">({k.localTime} {k.localLabel})</span>
+        )}
+      </div>
       <div className="text-sm font-bold truncate">{m.awayTeam}</div>
     </Link>
   )
