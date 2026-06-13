@@ -28,6 +28,42 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-12",
+    title: "World Cup 2026 Recap: Friday, June 12, 2026",
+    description: "Results from every World Cup 2026 match on Friday, June 12, 2026: 2 matches, 7 goals.",
+    date: "2026-06-12",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-12"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "2 matches from the 2026 FIFA World Cup were played on Friday, June 12, 2026, with 7 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Friday, June 12, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Canada vs Bosnia and Herzegovina](/matches/canada-vs-bosnia-and-herzegovina-3/)","1-1","Group B"],
+          ["[United States vs Paraguay](/matches/united-states-vs-paraguay-4/)","4-1","Group D"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "United States 4-1 Paraguay was the day's biggest margin, a 3-goal win for United States over Paraguay. See the [full match report](/matches/united-states-vs-paraguay-4/)." },
+      { type: "h2", text: "Next up . Saturday, June 13, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Qatar vs Switzerland](/matches/qatar-vs-switzerland-5/) . Group B . 12:00 local",
+        "[Brazil vs Morocco](/matches/brazil-vs-morocco-6/) . Group C . 18:00 local",
+        "[Haiti vs Scotland](/matches/haiti-vs-scotland-7/) . Group C . 21:00 local",
+        "[Australia vs Turkey](/matches/australia-vs-turkey-8/) . Group D . 21:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-11",
     title: "World Cup 2026 Recap: Thursday, June 11, 2026",
     description: "Results from every World Cup 2026 match on Thursday, June 11, 2026: 1 match, 2 goals, 1 highlight video embedded.",
