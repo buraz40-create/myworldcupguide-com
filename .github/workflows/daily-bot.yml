@@ -54,8 +54,28 @@ jobs:
             git push
           fi
 
-      - name: Build site
-        run: npm run build
+      - name: Build site (clean)
+        run: |
+          rm -rf .next out
+          npm run build
+
+      - name: Verify build contains latest match data
+        run: |
+          # Cross-check that the latest FT score from matchResults.json made it
+          # into the rendered homepage. If not, the deploy would ship stale data.
+          node -e '
+            const fs = require("fs")
+            const results = JSON.parse(fs.readFileSync("src/data/matchResults.json", "utf8"))
+            const final = Object.entries(results).filter(([,r]) => r.status === "FT" || r.status === "AET" || r.status === "PEN")
+            if (!final.length) { console.log("no FT data, skipping verify"); process.exit(0) }
+            const html = fs.readFileSync("out/index.html", "utf8")
+            const purpleCount = (html.match(/#231645 0%, #4f1ea1/g) || []).length
+            console.log(`FT matches in data: ${final.length}, FT cards in home HTML: ${purpleCount}`)
+            if (purpleCount === 0 && final.length > 0) {
+              console.error("MISMATCH: build did not render any Final cards despite", final.length, "FT results")
+              process.exit(1)
+            }
+          '
 
       - name: Package out/ directory
         run: |
