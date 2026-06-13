@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from "react"
+/* eslint-disable @next/next/no-img-element */
 import Link from "next/link"
 import { matches, slugForMatch, type Match } from "@/data/matches"
 import { getResult, type MatchResult } from "@/lib/matchResults"
@@ -141,7 +142,7 @@ export default function LiveStrip() {
     }
     finished.sort((a, b) => matchEpoch(b.m) - matchEpoch(a.m))
     upcoming.sort((a, b) => matchEpoch(a.m) - matchEpoch(b.m))
-    return [...finished.slice(0, 4), ...upcoming.slice(0, 8)]
+    return [...finished, ...upcoming.slice(0, 8)]
   }, [])
 
   // Map of matchId -> LiveData populated by the polling effect.
@@ -171,8 +172,15 @@ export default function LiveStrip() {
           if (!home || !away) continue
           const statusName = comp.status?.type?.name ?? ""
           let liveStatus: LiveData["status"] | null = null
-          if (statusName === "STATUS_IN_PROGRESS") liveStatus = "live"
-          else if (statusName === "STATUS_HALFTIME") liveStatus = "halftime"
+          if (statusName === "STATUS_HALFTIME") liveStatus = "halftime"
+          else if (
+            statusName === "STATUS_IN_PROGRESS" ||
+            statusName === "STATUS_FIRST_HALF" ||
+            statusName === "STATUS_SECOND_HALF" ||
+            statusName === "STATUS_END_PERIOD" ||
+            statusName === "STATUS_OVERTIME" ||
+            statusName === "STATUS_END_EXTRA_TIME_PERIOD"
+          ) liveStatus = "live"
           if (!liveStatus) continue
           const dateIso = ev.date?.slice(0, 10) ?? ""
           const k = `${dateIso}|${canon(home.team?.displayName)}|${canon(away.team?.displayName)}`
@@ -203,6 +211,23 @@ export default function LiveStrip() {
     el.scrollBy({ left: dir * 240, behavior: "smooth" })
   }
 
+  // Collapse older Final cards into a "+N more" toggle. We always keep the
+  // 5 most recent finals visible; everything before that is hidden until
+  // the user opts in.
+  const [showAllFinals, setShowAllFinals] = useState(false)
+  const finalsTotal = items.filter((it) => it.kind === "done").length
+  const FINALS_VISIBLE = 5
+  const hiddenFinalsCount = Math.max(0, finalsTotal - FINALS_VISIBLE)
+  const visibleItems = useMemo(() => {
+    if (showAllFinals || hiddenFinalsCount === 0) return items
+    let kept = 0
+    return items.filter((it) => {
+      if (it.kind !== "done") return true
+      kept++
+      return kept <= FINALS_VISIBLE
+    })
+  }, [items, showAllFinals, hiddenFinalsCount])
+
   if (items.length === 0) return null
 
   return (
@@ -223,7 +248,15 @@ export default function LiveStrip() {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
         <div ref={railRef} className="flex gap-3 overflow-x-auto no-scrollbar -mx-4 px-4 pb-1 snap-x">
-          {items.map((it) => {
+          {hiddenFinalsCount > 0 && (
+            <button
+              onClick={() => setShowAllFinals((v) => !v)}
+              className="snap-start flex-shrink-0 rounded-xl px-3 py-2 text-xs font-bold text-[#231645] bg-white border border-black/[0.08] hover:bg-[#faf9fe] transition-colors min-w-[110px]"
+            >
+              {showAllFinals ? "Hide older" : `+${hiddenFinalsCount} earlier`}
+            </button>
+          )}
+          {visibleItems.map((it) => {
             const live = liveById[it.m.id]
             if (live) {
               return (
