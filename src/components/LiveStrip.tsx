@@ -44,24 +44,46 @@ type LiveData = {
   clock?: string                // e.g. "65'", "HT"
 }
 
+// Short 3-letter team code . falls back to first 3 letters of the name.
+function teamCode(name: string): string {
+  const SPECIAL: Record<string, string> = {
+    "United States": "USA", "South Korea": "KOR", "South Africa": "RSA",
+    "Czech Republic": "CZE", "Bosnia and Herzegovina": "BIH",
+    "Saudi Arabia": "KSA", "Ivory Coast": "CIV", "New Zealand": "NZL",
+    "Cape Verde": "CPV", "DR Congo": "COD",
+  }
+  if (SPECIAL[name]) return SPECIAL[name]
+  return name.replace(/[^a-zA-Z]/g, "").slice(0, 3).toUpperCase()
+}
+
 function FinishedCard({ m, r }: { m: Match; r: MatchResult }) {
   const k = getKickoff(m)
   const middle = r.status === "PEN" && r.penaltyHome != null
-    ? `${r.homeScore}-${r.awayScore} · ${r.penaltyHome}-${r.penaltyAway}p`
+    ? `${r.homeScore}-${r.awayScore} (${r.penaltyHome}-${r.penaltyAway}p)`
     : `${r.homeScore}-${r.awayScore}${r.status === "AET" ? " AET" : ""}`
   return (
     <Link
       href={`/matches/${slugForMatch(m)}/`}
-      className="block rounded-xl p-3 min-w-[230px] flex-shrink-0 text-white hover:-translate-y-0.5 transition-transform shadow-[0_2px_10px_-4px_rgba(35,22,69,0.35)]"
+      title={`${m.homeTeam} ${r.homeScore}-${r.awayScore} ${m.awayTeam}`}
+      className="group block rounded-xl px-3 py-2 min-w-[140px] hover:min-w-[230px] flex-shrink-0 text-white hover:-translate-y-0.5 transition-all duration-200 shadow-[0_2px_10px_-4px_rgba(35,22,69,0.35)] overflow-hidden"
       style={{ background: "linear-gradient(135deg, #231645 0%, #4f1ea1 60%, #7E43FF 100%)" }}
     >
-      <div className="flex items-center justify-between gap-2 mb-1">
-        <span className="text-[9px] font-extrabold uppercase tracking-widest text-white/80 px-2 py-0.5 rounded-full bg-white/15">Final</span>
-        <span className="text-[10px] text-white/80 tabular-nums">{k.etDateLabel}</span>
+      <div className="flex items-center justify-between gap-2 mb-0.5">
+        <span className="text-[8px] font-extrabold uppercase tracking-widest text-white/80">Final</span>
+        <span className="text-[9px] text-white/70 tabular-nums">{k.etDateLabel}</span>
       </div>
-      <div className="text-sm font-bold truncate">{m.homeTeam}</div>
-      <div className="text-lg font-extrabold tabular-nums my-0.5 text-white leading-none">{middle}</div>
-      <div className="text-sm font-bold truncate">{m.awayTeam}</div>
+      {/* Compact (default) */}
+      <div className="flex items-center gap-2 tabular-nums group-hover:hidden">
+        <span className="text-xs font-bold w-9 text-right">{teamCode(m.homeTeam)}</span>
+        <span className="text-base font-extrabold whitespace-nowrap">{middle}</span>
+        <span className="text-xs font-bold w-9 text-left">{teamCode(m.awayTeam)}</span>
+      </div>
+      {/* Expanded (on hover) */}
+      <div className="hidden group-hover:block">
+        <div className="text-sm font-bold truncate">{m.homeTeam}</div>
+        <div className="text-lg font-extrabold tabular-nums my-0.5 leading-none">{middle}</div>
+        <div className="text-sm font-bold truncate">{m.awayTeam}</div>
+      </div>
     </Link>
   )
 }
