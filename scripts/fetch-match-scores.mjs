@@ -29,6 +29,9 @@ const NAME_ALIASES = {
   "Czechia": "Czech Republic",
   "Cape Verde Islands": "Cape Verde",
   "Curacao": "Curaçao",
+  "Bosnia-Herzegovina": "Bosnia and Herzegovina",
+  "Bosnia & Herzegovina": "Bosnia and Herzegovina",
+  "BIH": "Bosnia and Herzegovina",
 }
 
 function canon(name) {
