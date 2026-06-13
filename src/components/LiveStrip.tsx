@@ -162,7 +162,7 @@ export default function LiveStrip() {
         upcoming.push({ kind: "next", m })
       }
     }
-    finished.sort((a, b) => matchEpoch(b.m) - matchEpoch(a.m))
+    finished.sort((a, b) => matchEpoch(a.m) - matchEpoch(b.m))
     upcoming.sort((a, b) => matchEpoch(a.m) - matchEpoch(b.m))
     return [...finished, ...upcoming.slice(0, 8)]
   }, [])
@@ -242,11 +242,14 @@ export default function LiveStrip() {
   const hiddenFinalsCount = Math.max(0, finalsTotal - FINALS_VISIBLE)
   const visibleItems = useMemo(() => {
     if (showAllFinals || hiddenFinalsCount === 0) return items
-    let kept = 0
+    // Hide the EARLIEST finals (oldest first), keep the most recent ones near
+    // the live/upcoming cards so the rail flows oldest → newest → next up.
+    const finalsToHide = hiddenFinalsCount
+    let skipped = 0
     return items.filter((it) => {
       if (it.kind !== "done") return true
-      kept++
-      return kept <= FINALS_VISIBLE
+      if (skipped < finalsToHide) { skipped++; return false }
+      return true
     })
   }, [items, showAllFinals, hiddenFinalsCount])
 
