@@ -65,20 +65,20 @@ function FinishedCard({ m, r }: { m: Match; r: MatchResult }) {
     <Link
       href={`/matches/${slugForMatch(m)}/`}
       title={`${m.homeTeam} ${r.homeScore}-${r.awayScore} ${m.awayTeam}`}
-      className="group block rounded-xl px-3 py-2 min-w-[140px] hover:min-w-[230px] flex-shrink-0 text-white hover:-translate-y-0.5 transition-all duration-200 shadow-[0_2px_10px_-4px_rgba(35,22,69,0.35)] overflow-hidden"
+      className="group block rounded-xl p-3 min-w-[140px] hover:min-w-[230px] flex-shrink-0 text-white hover:-translate-y-0.5 transition-all duration-200 shadow-[0_2px_10px_-4px_rgba(35,22,69,0.35)] overflow-hidden"
       style={{ background: "linear-gradient(135deg, #231645 0%, #4f1ea1 60%, #7E43FF 100%)" }}
     >
-      <div className="flex items-center justify-between gap-2 mb-0.5">
-        <span className="text-[8px] font-extrabold uppercase tracking-widest text-white/80">Final</span>
-        <span className="text-[9px] text-white/70 tabular-nums">{k.etDateLabel}</span>
+      <div className="flex items-center justify-between gap-2 mb-1">
+        <span className="text-[9px] font-extrabold uppercase tracking-widest text-white/80 px-2 py-0.5 rounded-full bg-white/15">Final</span>
+        <span className="text-[10px] text-white/80 tabular-nums">{k.etDateLabel}</span>
       </div>
-      {/* Compact (default) */}
-      <div className="flex items-center gap-2 tabular-nums group-hover:hidden">
-        <span className="text-xs font-bold w-9 text-right">{teamCode(m.homeTeam)}</span>
-        <span className="text-base font-extrabold whitespace-nowrap">{middle}</span>
-        <span className="text-xs font-bold w-9 text-left">{teamCode(m.awayTeam)}</span>
+      {/* Compact (default): team codes on home/away lines, score centered */}
+      <div className="group-hover:hidden">
+        <div className="text-sm font-bold truncate tabular-nums">{teamCode(m.homeTeam)}</div>
+        <div className="text-lg font-extrabold tabular-nums my-0.5 leading-none">{middle}</div>
+        <div className="text-sm font-bold truncate tabular-nums">{teamCode(m.awayTeam)}</div>
       </div>
-      {/* Expanded (on hover) */}
+      {/* Expanded (on hover): full team names */}
       <div className="hidden group-hover:block">
         <div className="text-sm font-bold truncate">{m.homeTeam}</div>
         <div className="text-lg font-extrabold tabular-nums my-0.5 leading-none">{middle}</div>
