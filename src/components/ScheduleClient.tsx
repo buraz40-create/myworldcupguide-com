@@ -5,6 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { matches, slugForMatch, type Match } from "@/data/matches"
 import { getKickoff } from "@/lib/matchTime"
+import { getResult } from "@/lib/matchResults"
 import { stadiums } from "@/data/stadiums"
 import { cities } from "@/data/cities"
 import { groups } from "@/data/groups"
@@ -333,13 +334,28 @@ export default function ScheduleClient({ quickAnswers }: ScheduleClientProps = {
                             </span>
                           </div>
                         ) : (
-                          <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-                            <TeamSide name={m.homeTeam} align="right" />
-                            <span className="text-[0.65rem] font-extrabold text-[#615E6E] bg-[#f5f4fa] rounded-full px-2.5 py-1 uppercase tracking-widest flex-shrink-0">
-                              vs
-                            </span>
-                            <TeamSide name={m.awayTeam} align="left" />
-                          </div>
+                          (() => {
+                            const r = getResult(m.id)
+                            const isFinal = r && (r.status === "FT" || r.status === "AET" || r.status === "PEN")
+                            return (
+                              <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3">
+                                <TeamSide name={m.homeTeam} align="right" />
+                                {isFinal ? (
+                                  <span
+                                    className="text-base font-extrabold text-white bg-[#231645] rounded-full px-3 py-1 tabular-nums flex-shrink-0"
+                                    title={`${r.status === "PEN" ? `${r.penaltyHome}-${r.penaltyAway} pens` : r.status}`}
+                                  >
+                                    {r.homeScore}-{r.awayScore}{r.status === "AET" ? " AET" : ""}
+                                  </span>
+                                ) : (
+                                  <span className="text-[0.65rem] font-extrabold text-[#615E6E] bg-[#f5f4fa] rounded-full px-2.5 py-1 uppercase tracking-widest flex-shrink-0">
+                                    vs
+                                  </span>
+                                )}
+                                <TeamSide name={m.awayTeam} align="left" />
+                              </div>
+                            )
+                          })()
                         )}
                       </div>
 
