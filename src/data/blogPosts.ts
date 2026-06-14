@@ -28,6 +28,43 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-13",
+    title: "World Cup 2026 Recap: Saturday, June 13, 2026",
+    description: "Results from every World Cup 2026 match on Saturday, June 13, 2026: 3 matches, 5 goals.",
+    date: "2026-06-13",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-13"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "3 matches from the 2026 FIFA World Cup were played on Saturday, June 13, 2026, with 5 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Saturday, June 13, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Qatar vs Switzerland](/matches/qatar-vs-switzerland-5/)","1-1","Group B"],
+          ["[Brazil vs Morocco](/matches/brazil-vs-morocco-6/)","1-1","Group C"],
+          ["[Haiti vs Scotland](/matches/haiti-vs-scotland-7/)","0-1","Group C"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Haiti 0-1 Scotland was the day's biggest margin, a 1-goal win for Scotland over Haiti. See the [full match report](/matches/haiti-vs-scotland-7/)." },
+      { type: "h2", text: "Next up . Sunday, June 14, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Germany vs Curaçao](/matches/germany-vs-cura-ao-9/) . Group E . 12:00 local",
+        "[Netherlands vs Japan](/matches/netherlands-vs-japan-10/) . Group F . 15:00 local",
+        "[Ivory Coast vs Ecuador](/matches/ivory-coast-vs-ecuador-11/) . Group E . 19:00 local",
+        "[Sweden vs Tunisia](/matches/sweden-vs-tunisia-12/) . Group F . 20:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-12",
     title: "World Cup 2026 Recap: Friday, June 12, 2026",
     description: "Results from every World Cup 2026 match on Friday, June 12, 2026: 2 matches, 7 goals.",
