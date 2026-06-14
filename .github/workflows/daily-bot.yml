@@ -67,24 +67,33 @@ jobs:
       - name: Snapshot rendered HTML
         run: |
           echo "=== team codes rendered on home page ==="
-          grep -oE "MEX|RSA|KOR|CZE|CAN|BIH|USA|PAR|QAT|SWI|BRA|MAR|HAI|SCO|AUS|TUR" out/index.html | sort -u
+          grep -oE "MEX|RSA|KOR|CZE|CAN|BIH|USA|PAR|QAT|SWI|BRA|MAR|HAI|SCO|AUS|TUR" out/index.html | sort -u || true
+          echo "=== scores embedded on schedule page ==="
+          grep -oE "[0-9]+-[0-9]+" out/schedule/index.html | sort | uniq -c | head -20 || true
 
       - name: Verify build contains latest match data
         run: |
           # Cross-check that the latest FT score from matchResults.json made it
-          # into the rendered homepage. If not, the deploy would ship stale data.
+          # into BOTH the homepage strip AND the schedule page. If either is
+          # missing the scores, fail the run before deploy so we don't ship
+          # stale HTML.
           node -e '
             const fs = require("fs")
             const results = JSON.parse(fs.readFileSync("src/data/matchResults.json", "utf8"))
             const final = Object.entries(results).filter(([,r]) => r.status === "FT" || r.status === "AET" || r.status === "PEN")
             if (!final.length) { console.log("no FT data, skipping verify"); process.exit(0) }
-            const html = fs.readFileSync("out/index.html", "utf8")
-            const purpleCount = (html.match(/#231645 0%, #4f1ea1/g) || []).length
-            console.log(`FT matches in data: ${final.length}, FT cards in home HTML: ${purpleCount}`)
-            if (purpleCount === 0 && final.length > 0) {
-              console.error("MISMATCH: build did not render any Final cards despite", final.length, "FT results")
-              process.exit(1)
-            }
+            const home = fs.readFileSync("out/index.html", "utf8")
+            const sched = fs.readFileSync("out/schedule/index.html", "utf8")
+            // Home: count FinishedCard purple gradients.
+            const homeCards = (home.match(/#231645 0%, #4f1ea1/g) || []).length
+            // Schedule: count score badges (dark purple pill with NN-NN).
+            const schedScores = new Set()
+            for (const [, r] of final) schedScores.add(`${r.homeScore}-${r.awayScore}`)
+            let schedHits = 0
+            for (const s of schedScores) if (sched.includes(s)) schedHits++
+            console.log(`FT in data: ${final.length}; home FT cards: ${homeCards}; schedule distinct scores rendered: ${schedHits}/${schedScores.size}`)
+            if (homeCards === 0) { console.error("FAIL: home missing FT cards"); process.exit(1) }
+            if (schedHits === 0) { console.error("FAIL: schedule missing FT scores"); process.exit(1) }
           '
 
       - name: Package out/ directory
