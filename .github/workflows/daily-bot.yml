@@ -54,10 +54,20 @@ jobs:
             git push
           fi
 
+      - name: Snapshot JSON before build
+        run: |
+          echo "=== matchResults.json BEFORE build ==="
+          node -e "const d = require('./src/data/matchResults.json'); console.log('FT count:', Object.values(d).filter(v => v.status === 'FT').length); console.log('keys:', Object.keys(d).join(','))"
+
       - name: Build site (clean)
         run: |
-          rm -rf .next out
+          rm -rf .next out node_modules/.cache
           npm run build
+
+      - name: Snapshot rendered HTML
+        run: |
+          echo "=== team codes rendered on home page ==="
+          grep -oE "MEX|RSA|KOR|CZE|CAN|BIH|USA|PAR|QAT|SWI|BRA|MAR|HAI|SCO|AUS|TUR" out/index.html | sort -u
 
       - name: Verify build contains latest match data
         run: |
