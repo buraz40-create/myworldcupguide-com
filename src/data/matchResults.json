@@ -70,5 +70,10 @@
     "videoTitle": "Australia vs Türkiye Extended Highlights 🌎🏆 2026 FIFA World Cup™",
     "videoChannel": "FOX Sports",
     "videoFetchedAt": "2026-06-14T10:58:24.923Z"
+  },
+  "m09": {
+    "homeScore": 7,
+    "awayScore": 1,
+    "status": "FT"
   }
 }
