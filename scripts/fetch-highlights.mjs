@@ -102,14 +102,36 @@ function parseIsoDuration(d) {
   return (parseInt(mm[1] ?? "0", 10) * 60) + parseInt(mm[2] ?? "0", 10)
 }
 
-function looksLikeHighlight(item, stats) {
+const HIGHLIGHT_NEG = [
+  "preview", "prediction", "reaction", "irl stream",
+  "pes 21", "pes 22", "pes 23", "pes 24", "efootball",
+  "video game", "gameplay", "simulation", "fifa 24", "fifa 25", "fifa 26",
+  "lyrics", "song", "anthem",
+]
+
+function looksLikeHighlight(item, stats, { home, away }) {
   const dur = parseIsoDuration(stats?.duration)
   if (dur > 0 && dur < 90) return false           // Shorts
   if (dur > 60 * 35) return false                  // Full match replay
   const title = (item.snippet?.title ?? "").toLowerCase()
-  if (title.includes("preview") || title.includes("prediction")) return false
-  if (title.includes("reaction")) return false
+  if (HIGHLIGHT_NEG.some((w) => title.includes(w))) return false
+  // The title must mention BOTH teams (or close variants). Reject when one
+  // side is missing . the API often returns highlights of unrelated matches.
+  const titleHasHome = nameVariants(home).some((v) => title.includes(v.toLowerCase()))
+  const titleHasAway = nameVariants(away).some((v) => title.includes(v.toLowerCase()))
+  if (!titleHasHome || !titleHasAway) return false
   return true
+}
+
+function nameVariants(name) {
+  const v = [name]
+  if (name === "United States") v.push("USA", "USMNT")
+  if (name === "South Korea") v.push("Korea")
+  if (name === "Czech Republic") v.push("Czechia")
+  if (name === "Bosnia and Herzegovina") v.push("Bosnia", "Herzegovina")
+  if (name === "Ivory Coast") v.push("Côte d'Ivoire", "Cote d'Ivoire")
+  if (name === "Türkiye" || name === "Turkey") v.push("Turkey", "Türkiye")
+  return v
 }
 
 async function pickBestVideo(home, away, dateIso) {
@@ -132,7 +154,7 @@ async function pickBestVideo(home, away, dateIso) {
     const ids = items.map((i) => i.id?.videoId).filter(Boolean)
     const stats = await ytStats(ids)
     const candidates = items
-      .filter((i) => i.id?.videoId && looksLikeHighlight(i, stats[i.id.videoId]))
+      .filter((i) => i.id?.videoId && looksLikeHighlight(i, stats[i.id.videoId], { home, away }))
       .map((i) => ({ item: i, views: stats[i.id.videoId]?.views ?? 0 }))
       .sort((a, b) => b.views - a.views)
     if (candidates.length) {

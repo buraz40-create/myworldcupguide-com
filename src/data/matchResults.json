@@ -3,44 +3,72 @@
     "homeScore": 2,
     "awayScore": 0,
     "status": "FT",
-    "videoId": "mFYECh9HedE",
-    "videoTitle": "🔴Mexico Vs South Africa Match | FIFA World Cup 2026 Group Stage | Football World Cup 2026 | N18G",
-    "videoChannel": "CNBC-TV18",
-    "videoFetchedAt": "2026-06-12T12:37:23.604Z"
+    "videoId": "r1Afsds3ZD0",
+    "videoTitle": "Mexico vs South Africa Highlights 🌎🏆 2026 FIFA World Cup™",
+    "videoChannel": "FOX Sports",
+    "videoFetchedAt": "2026-06-14T10:58:36.327Z"
   },
   "m02": {
     "homeScore": 2,
     "awayScore": 1,
-    "status": "FT"
+    "status": "FT",
+    "videoId": "QWoDfCkh7f8",
+    "videoTitle": "South Korea vs Czechia Highlights 🌎🏆 2026 FIFA World Cup™",
+    "videoChannel": "FOX Sports",
+    "videoFetchedAt": "2026-06-14T10:58:21.074Z"
   },
   "m03": {
     "homeScore": 1,
     "awayScore": 1,
-    "status": "FT"
+    "status": "FT",
+    "videoId": "cPwJaA22gWc",
+    "videoTitle": "Canada vs Bosnia and Herzegovina Extended Highlights 🌎🏆 2026 FIFA World Cup™",
+    "videoChannel": "FOX Sports",
+    "videoFetchedAt": "2026-06-14T10:58:22.110Z"
   },
   "m04": {
     "homeScore": 4,
     "awayScore": 1,
-    "status": "FT"
+    "status": "FT",
+    "videoId": "lpDZwAxVkc4",
+    "videoTitle": "United States vs Paraguay Extended Highlights 🌎🏆 2026 FIFA World Cup™",
+    "videoChannel": "FOX Sports",
+    "videoFetchedAt": "2026-06-14T10:58:22.966Z"
   },
   "m05": {
     "homeScore": 1,
     "awayScore": 1,
-    "status": "FT"
+    "status": "FT",
+    "videoId": "Wt3C9dG2kjY",
+    "videoTitle": "Switzerland vs Qatar Highlights | The Match Before World Cup 2026",
+    "videoChannel": "bunkerbuster132",
+    "videoFetchedAt": "2026-06-14T10:58:23.481Z"
   },
   "m06": {
     "homeScore": 1,
     "awayScore": 1,
-    "status": "FT"
+    "status": "FT",
+    "videoId": "3cEYTGspqY0",
+    "videoTitle": "THE BATTLE FOR THE TOP SPOT -Brazil vs Morocco Highlights | The MatchBefore World Cup 2026",
+    "videoChannel": "USA in Focus",
+    "videoFetchedAt": "2026-06-14T10:58:23.963Z"
   },
   "m07": {
     "homeScore": 0,
     "awayScore": 1,
-    "status": "FT"
+    "status": "FT",
+    "videoId": "ZSxiDMRmNSA",
+    "videoTitle": "FIFA World Cup 2026 LIVE | Haiti vs Scotland LIVE From Boston Stadium | Scott McTominay | N18G",
+    "videoChannel": "CNN-News18",
+    "videoFetchedAt": "2026-06-14T10:58:24.461Z"
   },
   "m08": {
     "homeScore": 2,
     "awayScore": 0,
-    "status": "FT"
+    "status": "FT",
+    "videoId": "LgT_qQktvjw",
+    "videoTitle": "Australia vs Türkiye Extended Highlights 🌎🏆 2026 FIFA World Cup™",
+    "videoChannel": "FOX Sports",
+    "videoFetchedAt": "2026-06-14T10:58:24.923Z"
   }
 }
