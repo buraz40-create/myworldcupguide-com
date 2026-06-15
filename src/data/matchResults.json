@@ -97,8 +97,8 @@
     "status": "FT"
   },
   "m14": {
-    "homeScore": 0,
+    "homeScore": 1,
     "awayScore": 1,
-    "status": "live"
+    "status": "FT"
   }
 }
