@@ -5,6 +5,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { groups, type GroupTeam, type GroupStrength } from "@/data/groups"
 import { teams } from "@/data/teams"
+import { matches } from "@/data/matches"
+import { getResult } from "@/lib/matchResults"
 import QuickAnswers from "@/components/QuickAnswers"
 
 import { getGroupStandings } from "@/lib/standings"
@@ -250,6 +252,31 @@ export default function GroupsClient({ quickAnswers }: GroupsClientProps = {}) {
                     })
                   })()}
                 </div>
+
+                {/* Recent results . pulled live from matchResults.json */}
+                {(() => {
+                  const groupMatches = matches.filter((m) => m.group === group.letter)
+                  const played = groupMatches
+                    .map((m) => ({ m, r: getResult(m.id) }))
+                    .filter(({ r }) => r && (r.status === "FT" || r.status === "AET" || r.status === "PEN"))
+                  if (!played.length) return null
+                  return (
+                    <div className="px-5 pt-2.5 pb-2 border-t border-black/[0.05]" style={{ background: "#faf9fe" }}>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-[#7E43FF] mb-1.5">Results</p>
+                      <ul className="space-y-1">
+                        {played.map(({ m, r }) => (
+                          <li key={m.id} className="text-xs text-[#231645] flex items-center gap-2">
+                            <span className="truncate flex-1">{m.homeTeam}</span>
+                            <span className="font-extrabold tabular-nums bg-[#231645] text-white rounded-full px-2 py-0.5 text-[11px] flex-shrink-0">
+                              {r!.homeScore}-{r!.awayScore}{r!.status === "AET" ? " AET" : ""}
+                            </span>
+                            <span className="truncate flex-1 text-right">{m.awayTeam}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )
+                })()}
 
                 {/* Qualification zone legend */}
                 <div className="px-5 py-2.5 border-t border-black/[0.05]" style={{ background: "#fafafa" }}>
