@@ -225,7 +225,7 @@ export default function LiveStrip() {
     return () => { cancelled = true; clearInterval(id) }
   }, [items])
 
-  // Carousel ref + arrows
+  // Carousel ref + arrows.
   const railRef = useRef<HTMLDivElement | null>(null)
   const scrollBy = (dir: 1 | -1) => {
     const el = railRef.current
@@ -239,6 +239,17 @@ export default function LiveStrip() {
   const [showAllFinals, setShowAllFinals] = useState(false)
   const finalsTotal = items.filter((it) => it.kind === "done").length
   const FINALS_VISIBLE = 5
+
+  // On mount/data change, position the rail so the latest FT card is right
+  // at the visible region (instead of the leftmost = oldest FT card). Fans
+  // care about what just finished + what's next, not three matches ago.
+  useEffect(() => {
+    const el = railRef.current
+    if (!el) return
+    const visibleFinals = Math.min(finalsTotal, FINALS_VISIBLE)
+    const cardWidth = 153 // 140 min-width + 12 gap
+    el.scrollLeft = Math.max(0, (visibleFinals - 2) * cardWidth)
+  }, [finalsTotal])
   const hiddenFinalsCount = Math.max(0, finalsTotal - FINALS_VISIBLE)
   const visibleItems = useMemo(() => {
     if (showAllFinals || hiddenFinalsCount === 0) return items
