@@ -28,6 +28,44 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-14",
+    title: "World Cup 2026 Recap: Sunday, June 14, 2026",
+    description: "Results from every World Cup 2026 match on Sunday, June 14, 2026: 4 matches, 19 goals.",
+    date: "2026-06-14",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-14"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "4 matches from the 2026 FIFA World Cup were played on Sunday, June 14, 2026, with 19 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Sunday, June 14, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Germany vs Curaçao](/matches/germany-vs-cura-ao-9/)","7-1","Group E"],
+          ["[Netherlands vs Japan](/matches/netherlands-vs-japan-10/)","2-2","Group F"],
+          ["[Ivory Coast vs Ecuador](/matches/ivory-coast-vs-ecuador-11/)","1-0","Group E"],
+          ["[Sweden vs Tunisia](/matches/sweden-vs-tunisia-12/)","5-1","Group F"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Germany 7-1 Curaçao was the day's biggest margin, a 6-goal win for Germany over Curaçao. See the [full match report](/matches/germany-vs-cura-ao-9/)." },
+      { type: "h2", text: "Next up . Monday, June 15, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Spain vs Cape Verde](/matches/spain-vs-cape-verde-13/) . Group H . 12:00 local",
+        "[Belgium vs Egypt](/matches/belgium-vs-egypt-14/) . Group G . 15:00 local",
+        "[Saudi Arabia vs Uruguay](/matches/saudi-arabia-vs-uruguay-15/) . Group H . 18:00 local",
+        "[Iran vs New Zealand](/matches/iran-vs-new-zealand-16/) . Group G . 18:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-13",
     title: "World Cup 2026 Recap: Saturday, June 13, 2026",
     description: "Results from every World Cup 2026 match on Saturday, June 13, 2026: 3 matches, 5 goals.",
