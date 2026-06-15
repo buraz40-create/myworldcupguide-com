@@ -10,6 +10,8 @@ import { getCityBySlug } from "@/data/cities"
 import { getBaseCamp } from "@/data/baseCamps"
 import { groupWinnerOdds, championOdds } from "@/data/marketOdds"
 import { alternatesFor } from "@/lib/hreflang"
+import { getResult } from "@/lib/matchResults"
+import { getGroupStandings } from "@/lib/standings"
 
 const SITE = "https://myworldcupguide.com"
 
@@ -198,20 +200,28 @@ export default async function GroupPage({ params }: Props) {
         {/* Fixtures */}
         <section className="mb-10">
           <h2 className="text-2xl font-extrabold text-[#231645] mb-1">All 6 Group {L} Fixtures</h2>
-          <p className="text-sm text-[#615E6E] mb-5">Every Group {L} match with kickoff time, venue, and host city.</p>
+          <p className="text-sm text-[#615E6E] mb-5">Every Group {L} match with kickoff time, venue, and host city. Scores update after full-time.</p>
           <div className="space-y-3">
             {groupMatches.map((m) => {
               const v = getStadiumBySlug(m.stadiumSlug)
               const c = getCityBySlug(m.citySlug)
+              const r = getResult(m.id)
+              const isFinal = r && (r.status === "FT" || r.status === "AET" || r.status === "PEN")
               return (
                 <Link key={m.id} href={`/matches/${slugForMatch(m)}/`} className="card p-5 hover:-translate-y-0.5 transition-transform flex flex-col md:flex-row md:items-center gap-3 block">
                   <div className="flex items-center gap-3 md:w-48">
                     <span className="text-[10px] font-extrabold text-[#7E43FF] bg-[#f1ecff] rounded px-2 py-1 tabular-nums">M{m.matchNumber}</span>
                     <span className="text-sm font-bold text-[#231645]">{fmtLong(m.date)}</span>
-                    <span className="text-xs text-[#615E6E] tabular-nums ml-auto">{m.time}</span>
+                    <span className="text-xs text-[#615E6E] tabular-nums ml-auto">{isFinal ? "FT" : m.time}</span>
                   </div>
-                  <div className="flex-1 text-sm font-extrabold text-[#231645]">
-                    {m.homeTeam} <span className="text-[#615E6E] font-medium mx-2">vs</span> {m.awayTeam}
+                  <div className="flex-1 text-sm font-extrabold text-[#231645] flex items-center gap-2">
+                    <span>{m.homeTeam}</span>
+                    {isFinal ? (
+                      <span className="bg-[#231645] text-white tabular-nums rounded-full px-2.5 py-0.5 text-xs">{r.homeScore}-{r.awayScore}{r.status === "AET" ? " AET" : ""}</span>
+                    ) : (
+                      <span className="text-[#615E6E] font-medium">vs</span>
+                    )}
+                    <span>{m.awayTeam}</span>
                   </div>
                   <p className="text-xs text-[#615E6E] md:text-right">{v?.name ?? m.stadiumSlug} · {c?.name ?? m.citySlug}</p>
                 </Link>
@@ -219,6 +229,52 @@ export default async function GroupPage({ params }: Props) {
             })}
           </div>
         </section>
+
+        {/* Standings . populated automatically from FT results in matchResults.json */}
+        {(() => {
+          const standings = getGroupStandings(L)
+          if (!standings.some((s) => s.played > 0)) return null
+          return (
+            <section className="mb-10">
+              <h2 className="text-2xl font-extrabold text-[#231645] mb-1">Group {L} Standings</h2>
+              <p className="text-sm text-[#615E6E] mb-5">Live as matches conclude. Top two qualify automatically; the best 8 third-placed teams across all groups also advance.</p>
+              <div className="overflow-x-auto rounded-2xl border border-black/[0.06] bg-white shadow-sm">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-[#f8f7fd] border-b border-black/[0.06] text-[10px] font-bold uppercase tracking-widest text-[#615E6E]">
+                      <th className="text-left px-3 py-3">#</th>
+                      <th className="text-left px-3 py-3">Team</th>
+                      <th className="px-2 py-3 text-center">P</th>
+                      <th className="px-2 py-3 text-center">W</th>
+                      <th className="px-2 py-3 text-center">D</th>
+                      <th className="px-2 py-3 text-center">L</th>
+                      <th className="px-2 py-3 text-center">GF</th>
+                      <th className="px-2 py-3 text-center">GA</th>
+                      <th className="px-2 py-3 text-center">GD</th>
+                      <th className="px-3 py-3 text-center text-[#231645]">Pts</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {standings.map((s, i) => (
+                      <tr key={s.team} className="border-b border-black/[0.04] last:border-0">
+                        <td className="px-3 py-2.5 text-[#615E6E] tabular-nums">{i + 1}</td>
+                        <td className="px-3 py-2.5 font-semibold text-[#231645]">{s.team}</td>
+                        <td className="px-2 py-2.5 text-center tabular-nums text-[#615E6E]">{s.played}</td>
+                        <td className="px-2 py-2.5 text-center tabular-nums text-[#615E6E]">{s.won}</td>
+                        <td className="px-2 py-2.5 text-center tabular-nums text-[#615E6E]">{s.drawn}</td>
+                        <td className="px-2 py-2.5 text-center tabular-nums text-[#615E6E]">{s.lost}</td>
+                        <td className="px-2 py-2.5 text-center tabular-nums text-[#615E6E]">{s.gf}</td>
+                        <td className="px-2 py-2.5 text-center tabular-nums text-[#615E6E]">{s.ga}</td>
+                        <td className="px-2 py-2.5 text-center tabular-nums text-[#615E6E]">{s.gd >= 0 ? `+${s.gd}` : s.gd}</td>
+                        <td className="px-3 py-2.5 text-center font-extrabold text-[#231645] tabular-nums">{s.pts}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )
+        })()}
 
         {/* Team cards */}
         <section className="mb-10">

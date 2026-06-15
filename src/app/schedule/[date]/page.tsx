@@ -3,6 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { matches, slugForMatch } from "@/data/matches"
 import { getKickoff } from "@/lib/matchTime"
+import { getResult } from "@/lib/matchResults"
 import { getStadiumBySlug } from "@/data/stadiums"
 import { getCityBySlug } from "@/data/cities"
 import { teams } from "@/data/teams"
@@ -196,7 +197,17 @@ export default async function MatchDayPage({ params }: Props) {
                       {homeIso && <span className={`fi fi-${homeIso}`} style={{ fontSize: "1.4em", flexShrink: 0 }} aria-hidden />}
                     </div>
                     <div className="flex justify-center">
-                      <span className="text-[10px] font-extrabold text-[#615E6E] bg-[#f5f4fa] rounded-full px-2 py-0.5 uppercase tracking-widest">vs</span>
+                      {(() => {
+                        const r = getResult(m.id)
+                        const isFinal = r && (r.status === "FT" || r.status === "AET" || r.status === "PEN")
+                        return isFinal ? (
+                          <span className="text-sm font-extrabold text-white bg-[#231645] rounded-full px-2.5 py-0.5 tabular-nums whitespace-nowrap">
+                            {r.homeScore}-{r.awayScore}{r.status === "AET" ? " AET" : ""}
+                          </span>
+                        ) : (
+                          <span className="text-[10px] font-extrabold text-[#615E6E] bg-[#f5f4fa] rounded-full px-2 py-0.5 uppercase tracking-widest">vs</span>
+                        )
+                      })()}
                     </div>
                     <div className="flex items-center gap-2 min-w-0">
                       {awayIso && <span className={`fi fi-${awayIso}`} style={{ fontSize: "1.4em", flexShrink: 0 }} aria-hidden />}

@@ -7,6 +7,8 @@ import { groups, type GroupTeam, type GroupStrength } from "@/data/groups"
 import { teams } from "@/data/teams"
 import QuickAnswers from "@/components/QuickAnswers"
 
+import { getGroupStandings } from "@/lib/standings"
+
 const teamSlugMap = new Map(teams.map((t) => [t.name, t.slug]))
 
 const groupColors = [
@@ -194,57 +196,59 @@ export default function GroupsClient({ quickAnswers }: GroupsClientProps = {}) {
                     <span className="text-center text-[0.6rem] font-extrabold uppercase tracking-wider text-[#231645] w-8">Pts</span>
                   </div>
 
-                  {/* Team rows */}
-                  {group.teams.map((team, idx) => {
-                    const isFavorite = group.favorites.includes(team.name)
-                    const isQualificationZone = idx < 2
-                    const slug = teamSlugMap.get(team.name)
-                    return (
-                      <div
-                        key={team.name}
-                        className="flex items-center gap-1 py-2 px-1 rounded-lg transition-colors hover:bg-black/[0.02]"
-                        style={{
-                          borderBottom: idx < group.teams.length - 1 ? "1px solid rgba(0,0,0,0.04)" : "none",
-                        }}
-                      >
-                        {/* Position */}
-                        <span
-                          className="w-5 text-center text-xs font-bold flex-shrink-0"
-                          style={{ color: isQualificationZone ? color : "#615E6E" }}
-                        >
-                          {idx + 1}
-                        </span>
-
-                        {/* Qualification bar */}
+                  {/* Team rows . sorted by live standings once any matches have been played. */}
+                  {(() => {
+                    const standings = getGroupStandings(group.letter)
+                    const byName = new Map(standings.map((s) => [s.team, s]))
+                    const anyPlayed = standings.some((s) => s.played > 0)
+                    const ordered = anyPlayed
+                      ? standings.map((s) => group.teams.find((t) => t.name === s.team)!).filter(Boolean)
+                      : group.teams
+                    return ordered.map((team, idx) => {
+                      const isFavorite = group.favorites.includes(team.name)
+                      const isQualificationZone = idx < 2
+                      const slug = teamSlugMap.get(team.name)
+                      const s = byName.get(team.name)
+                      return (
                         <div
-                          className="w-0.5 h-5 rounded-full flex-shrink-0 mx-0.5"
-                          style={{ background: isQualificationZone ? color : "transparent" }}
-                        />
-
-                        {/* Flag + name */}
-                        <Link
-                          href={slug ? `/teams/${slug}` : "#"}
-                          className="flex items-center gap-2 flex-1 min-w-0 group"
+                          key={team.name}
+                          className="flex items-center gap-1 py-2 px-1 rounded-lg transition-colors hover:bg-black/[0.02]"
+                          style={{
+                            borderBottom: idx < group.teams.length - 1 ? "1px solid rgba(0,0,0,0.04)" : "none",
+                          }}
                         >
-                          <FlagImg iso2={team.iso2} name={team.name} />
-                          <span className={`text-sm leading-tight truncate group-hover:text-[#7E43FF] transition-colors ${isFavorite ? "font-bold text-[#231645]" : "font-medium text-[#231645]"}`}>
-                            {team.name}
+                          <span
+                            className="w-5 text-center text-xs font-bold flex-shrink-0"
+                            style={{ color: isQualificationZone ? color : "#615E6E" }}
+                          >
+                            {idx + 1}
                           </span>
-                          <TeamBadges team={team} />
-                        </Link>
-
-                        {/* Stats - all 0 until tournament starts */}
-                        <span className={VAL}>0</span>
-                        <span className={VAL}>0</span>
-                        <span className={VAL}>0</span>
-                        <span className={VAL}>0</span>
-                        <span className={VAL}>0</span>
-                        <span className={VAL}>0</span>
-                        <span className={VAL}>0</span>
-                        <span className={PTS} style={{ color }}>0</span>
-                      </div>
-                    )
-                  })}
+                          <div
+                            className="w-0.5 h-5 rounded-full flex-shrink-0 mx-0.5"
+                            style={{ background: isQualificationZone ? color : "transparent" }}
+                          />
+                          <Link
+                            href={slug ? `/teams/${slug}` : "#"}
+                            className="flex items-center gap-2 flex-1 min-w-0 group"
+                          >
+                            <FlagImg iso2={team.iso2} name={team.name} />
+                            <span className={`text-sm leading-tight truncate group-hover:text-[#7E43FF] transition-colors ${isFavorite ? "font-bold text-[#231645]" : "font-medium text-[#231645]"}`}>
+                              {team.name}
+                            </span>
+                            <TeamBadges team={team} />
+                          </Link>
+                          <span className={VAL}>{s?.played ?? 0}</span>
+                          <span className={VAL}>{s?.won ?? 0}</span>
+                          <span className={VAL}>{s?.drawn ?? 0}</span>
+                          <span className={VAL}>{s?.lost ?? 0}</span>
+                          <span className={VAL}>{s?.gf ?? 0}</span>
+                          <span className={VAL}>{s?.ga ?? 0}</span>
+                          <span className={VAL}>{s ? (s.gd >= 0 ? `+${s.gd}` : s.gd) : 0}</span>
+                          <span className={PTS} style={{ color }}>{s?.pts ?? 0}</span>
+                        </div>
+                      )
+                    })
+                  })()}
                 </div>
 
                 {/* Qualification zone legend */}
