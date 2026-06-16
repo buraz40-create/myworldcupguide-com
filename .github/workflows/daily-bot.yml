@@ -43,28 +43,45 @@ jobs:
         run: node scripts/generate-matchday-recap.mjs || true
 
       - name: Commit data updates
+        id: commit
         run: |
           git config user.name "wc-bot"
           git config user.email "bot@myworldcupguide.com"
           git add src/data/matchResults.json src/data/blogPosts.ts src/data/contentVideos.json
           if git diff --cached --quiet; then
             echo "no data changes"
+            echo "changed=false" >> $GITHUB_OUTPUT
           else
             git commit -m "bot: daily match scores + highlights + recap"
             git push
+            echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
+      # Skip the build + deploy on scheduled runs when nothing changed. The
+      # site is ~56 MB of static export, so this cuts the bot's bandwidth
+      # footprint to near zero on no-op runs. Manual workflow_dispatch runs
+      # always proceed so they can be used to force a redeploy after code
+      # pushes that didn't change data.
+      - name: Skip if nothing to deploy
+        if: steps.commit.outputs.changed != 'true' && github.event_name != 'workflow_dispatch'
+        run: |
+          echo "No data changes and not a manual run . skipping build + deploy to save bandwidth."
+          echo "SKIP_DEPLOY=true" >> $GITHUB_ENV
+
       - name: Snapshot JSON before build
+        if: env.SKIP_DEPLOY != 'true'
         run: |
           echo "=== matchResults.json BEFORE build ==="
           node -e "const d = require('./src/data/matchResults.json'); console.log('FT count:', Object.values(d).filter(v => v.status === 'FT').length); console.log('keys:', Object.keys(d).join(','))"
 
       - name: Build site (clean)
+        if: env.SKIP_DEPLOY != 'true'
         run: |
           rm -rf .next out node_modules/.cache
           npm run build
 
       - name: Snapshot rendered HTML
+        if: env.SKIP_DEPLOY != 'true'
         run: |
           echo "=== team codes rendered on home page ==="
           grep -oE "MEX|RSA|KOR|CZE|CAN|BIH|USA|PAR|QAT|SWI|BRA|MAR|HAI|SCO|AUS|TUR" out/index.html | sort -u || true
@@ -72,6 +89,7 @@ jobs:
           grep -oE "[0-9]+-[0-9]+" out/schedule/index.html | sort | uniq -c | head -20 || true
 
       - name: Verify build contains latest match data
+        if: env.SKIP_DEPLOY != 'true'
         run: |
           # Cross-check that the latest FT score from matchResults.json made it
           # into BOTH the homepage strip AND the schedule page. If either is
@@ -97,11 +115,13 @@ jobs:
           '
 
       - name: Package out/ directory
+        if: env.SKIP_DEPLOY != 'true'
         run: |
           rm -f out/api/votes.json
           cd out && zip -r ../site.zip . -x ".*"
 
       - name: Upload to HostGator via FTPS
+        if: env.SKIP_DEPLOY != 'true'
         env:
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
@@ -111,10 +131,12 @@ jobs:
           curl --ssl-reqd -k --user "$FTP_USER:$FTP_PASS" -T extract.php "ftp://$FTP_HOST/public_html/"
 
       - name: Trigger server-side extract
+        if: env.SKIP_DEPLOY != 'true'
         env:
           EXTRACT_TOKEN: ${{ secrets.EXTRACT_TOKEN }}
         run: |
           curl -sk "https://myworldcupguide.com/extract.php?t=$EXTRACT_TOKEN" | tail -5
 
       - name: Ping IndexNow
+        if: env.SKIP_DEPLOY != 'true'
         run: node scripts/submit-indexnow.mjs || true
