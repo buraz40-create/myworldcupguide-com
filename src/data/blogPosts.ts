@@ -28,6 +28,42 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-15",
+    title: "World Cup 2026 Recap: Monday, June 15, 2026",
+    description: "Results from every World Cup 2026 match on Monday, June 15, 2026: 4 matches, 8 goals.",
+    date: "2026-06-15",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-15"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "4 matches from the 2026 FIFA World Cup were played on Monday, June 15, 2026, with 8 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Monday, June 15, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Spain vs Cape Verde](/matches/spain-vs-cape-verde-13/)","0-0","Group H"],
+          ["[Belgium vs Egypt](/matches/belgium-vs-egypt-14/)","1-1","Group G"],
+          ["[Saudi Arabia vs Uruguay](/matches/saudi-arabia-vs-uruguay-15/)","1-1","Group H"],
+          ["[Iran vs New Zealand](/matches/iran-vs-new-zealand-16/)","2-2","Group G"],
+        ],
+      },
+      { type: "h2", text: "Next up . Tuesday, June 16, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[France vs Senegal](/matches/france-vs-senegal-17/) . Group I . 15:00 local",
+        "[Iraq vs Norway](/matches/iraq-vs-norway-18/) . Group I . 18:00 local",
+        "[Argentina vs Algeria](/matches/argentina-vs-algeria-19/) . Group J . 20:00 local",
+        "[Austria vs Jordan](/matches/austria-vs-jordan-20/) . Group J . 21:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-14",
     title: "World Cup 2026 Recap: Sunday, June 14, 2026",
     description: "Results from every World Cup 2026 match on Sunday, June 14, 2026: 4 matches, 19 goals.",
