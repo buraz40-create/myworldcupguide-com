@@ -140,6 +140,10 @@ const TEAM_NEG = [
   "t20", "icc", "cricket", "wicket", "innings", "batting", "rugby",
   "u-17", "u17", "u-20", "u20", "u-23", "futsal",
   "shock you", "things that",
+  // Portugal-Ronaldo content keeps outranking real Ghana coverage on view
+  // count. Block obvious "Cristiano Ronaldo breaks" / "Ronaldo record" titles
+  // that mention Ghana only as the opponent.
+  "ronaldo breaks", "ronaldo record", "ronaldo hat",
 ]
 
 const QUERIES = {

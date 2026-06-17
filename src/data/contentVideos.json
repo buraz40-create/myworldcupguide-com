@@ -394,11 +394,89 @@
       "channel": "FIFA",
       "fetchedAt": "2026-06-12T12:51:59.724Z"
     },
-    "ghana": {
-      "videoId": "RJ4jlutcSbY",
-      "title": "Cristiano Ronaldo breaks ANOTHER record! | Portugal v Ghana highlights | FIFA World Cup Qatar 2022",
+    "south-africa": {
+      "videoId": "r1Afsds3ZD0",
+      "title": "Mexico vs South Africa Highlights 🌎🏆 2026 FIFA World Cup™",
+      "channel": "FOX Sports",
+      "fetchedAt": "2026-06-17T21:58:52.039Z"
+    },
+    "czech-republic": {
+      "videoId": "qBqwnR_ODJc",
+      "title": "South Korea vs Czech Republic | World Cup 2026 | PES 21 Video Game - Simulation",
+      "channel": "Football Gamer Rony",
+      "fetchedAt": "2026-06-17T21:58:52.659Z"
+    },
+    "canada": {
+      "videoId": "ez8m_NReoLs",
+      "title": "Jessie Reyez and Elyanna perform Illuminate at FIFA World Cup 2026 Opening Match in Canada!",
       "channel": "FIFA",
-      "fetchedAt": "2026-06-12T12:52:00.162Z"
+      "fetchedAt": "2026-06-17T21:58:53.167Z"
+    },
+    "qatar": {
+      "videoId": "EXXe-G-_lxI",
+      "title": "The Official FIFA World Cup Qatar 2022™ Theme | FIFA World Cup 2022 Soundtrack",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-17T21:58:53.774Z"
+    },
+    "morocco": {
+      "videoId": "PHjukOhzFLE",
+      "title": "Allez Les Bleus | France v Morocco | Semi-Final | FIFA World Cup Qatar 2022",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-17T21:58:54.383Z"
+    },
+    "united-states": {
+      "videoId": "2EV1TIikqRU",
+      "title": "USA vs Portugal - ALL GOALS &amp; Highlights | FIFA International Friendly 2026",
+      "channel": "House of Highlights",
+      "fetchedAt": "2026-06-17T21:58:54.925Z"
+    },
+    "australia": {
+      "videoId": "PYD42JzyuzI",
+      "title": "Socceroos waltz on | Australia v Denmark | FIFA World Cup Qatar 2022",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-17T21:58:55.453Z"
+    },
+    "ecuador": {
+      "videoId": "f6Islppt1kI",
+      "title": "Morocco vs. Ecuador | Full Game Highlights | ESPN FC",
+      "channel": "ESPN FC",
+      "fetchedAt": "2026-06-17T21:58:56.480Z"
+    },
+    "netherlands": {
+      "videoId": "wrGTlwdLI-0",
+      "title": "This World Cup Match Was PURE WAR 😱 | Argentina vs Netherlands 2022",
+      "channel": "Iconic Football",
+      "fetchedAt": "2026-06-17T21:58:57.065Z"
+    },
+    "iran": {
+      "videoId": "-C80_VKBMZc",
+      "title": "CRAZY ENDING! Final 5 Minutes of Wales v IR Iran | 2022 FIFA World Cup",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-17T21:58:57.515Z"
+    },
+    "new-zealand": {
+      "videoId": "UZ_7qFbFYRY",
+      "title": "Iran vs New Zealand Extended Highlights 🌎🏆 2026 FIFA World Cup™",
+      "channel": "FOX Sports",
+      "fetchedAt": "2026-06-17T21:58:58.060Z"
+    },
+    "argentina": {
+      "videoId": "wrGTlwdLI-0",
+      "title": "This World Cup Match Was PURE WAR 😱 | Argentina vs Netherlands 2022",
+      "channel": "Iconic Football",
+      "fetchedAt": "2026-06-17T21:58:58.562Z"
+    },
+    "england": {
+      "videoId": "vMhk-Tt1tXU",
+      "title": "England 2-2 Belgium | Bellingham Scores Last Kick Of The Game! | Highlights",
+      "channel": "England",
+      "fetchedAt": "2026-06-17T21:59:00.805Z"
+    },
+    "ghana": {
+      "videoId": "RBTwgmZpQYY",
+      "title": "Ghana Train Before Panama | FIFA World Cup 2026™",
+      "channel": "FIFA",
+      "fetchedAt": "2026-06-17T12:00:00.000Z"
     }
   }
 }
