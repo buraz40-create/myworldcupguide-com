@@ -136,7 +136,23 @@ jobs:
         env:
           EXTRACT_TOKEN: ${{ secrets.EXTRACT_TOKEN }}
         run: |
-          curl -sk "https://myworldcupguide.com/extract.php?t=$EXTRACT_TOKEN" | tail -5
+          # HostGator throws a JS-based anti-bot challenge ("humans_21909") on
+          # bare curl requests. Pass a real browser UA + the cookie the
+          # challenge sets so the request reaches extract.php directly.
+          response=$(curl -sk \
+            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+            -b "humans_21909=1" \
+            "https://myworldcupguide.com/extract.php?t=$EXTRACT_TOKEN")
+          echo "extract response: $response"
+          # Fail the run if extract didn't actually execute (still showing the JS challenge).
+          if echo "$response" | grep -q "humans_2[0-9]*=1"; then
+            echo "FAIL: HostGator anti-bot challenge blocked extract"
+            exit 1
+          fi
+          if ! echo "$response" | grep -q "extracted"; then
+            echo "FAIL: extract.php did not report success"
+            exit 1
+          fi
 
       - name: Ping IndexNow
         if: env.SKIP_DEPLOY != 'true'
