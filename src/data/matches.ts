@@ -40,7 +40,7 @@ export const matches: Match[] = [
   { id:"m23", matchNumber:23, round:"Group Stage", group:"L", date:"2026-06-17", time:"19:00", homeTeam:"Ghana", awayTeam:"Panama", stadiumSlug:"bmo-field", citySlug:"toronto" },
   { id:"m24", matchNumber:24, round:"Group Stage", group:"K", date:"2026-06-17", time:"20:00", homeTeam:"Uzbekistan", awayTeam:"Colombia", stadiumSlug:"estadio-azteca", citySlug:"mexico-city" },
   { id:"m25", matchNumber:25, round:"Group Stage", group:"A", date:"2026-06-18", time:"12:00", homeTeam:"Czech Republic", awayTeam:"South Africa", stadiumSlug:"mercedes-benz-stadium", citySlug:"atlanta" },
-  { id:"m26", matchNumber:26, round:"Group Stage", group:"B", date:"2026-06-18", time:"15:00", homeTeam:"Switzerland", awayTeam:"Bosnia and Herzegovina", stadiumSlug:"sofi-stadium", citySlug:"los-angeles" },
+  { id:"m26", matchNumber:26, round:"Group Stage", group:"B", date:"2026-06-18", time:"12:00", homeTeam:"Switzerland", awayTeam:"Bosnia and Herzegovina", stadiumSlug:"sofi-stadium", citySlug:"los-angeles" },
   { id:"m27", matchNumber:27, round:"Group Stage", group:"B", date:"2026-06-18", time:"18:00", homeTeam:"Canada", awayTeam:"Qatar", stadiumSlug:"bc-place", citySlug:"vancouver" },
   { id:"m28", matchNumber:28, round:"Group Stage", group:"A", date:"2026-06-18", time:"21:00", homeTeam:"Mexico", awayTeam:"South Korea", stadiumSlug:"estadio-akron", citySlug:"guadalajara" },
   { id:"m29", matchNumber:29, round:"Group Stage", group:"D", date:"2026-06-19", time:"12:00", homeTeam:"United States", awayTeam:"Australia", stadiumSlug:"lumen-field", citySlug:"seattle" },
