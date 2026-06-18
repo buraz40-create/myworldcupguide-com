@@ -32,6 +32,10 @@ const NAME_ALIASES = {
   "Bosnia-Herzegovina": "Bosnia and Herzegovina",
   "Bosnia & Herzegovina": "Bosnia and Herzegovina",
   "BIH": "Bosnia and Herzegovina",
+  "Congo DR": "DR Congo",
+  "DR Congo": "DR Congo",
+  "Democratic Republic of the Congo": "DR Congo",
+  "Cape Verde Islands": "Cape Verde",
 }
 
 function canon(name) {
