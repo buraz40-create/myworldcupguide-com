@@ -28,6 +28,44 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-17",
+    title: "World Cup 2026 Recap: Wednesday, June 17, 2026",
+    description: "Results from every World Cup 2026 match on Wednesday, June 17, 2026: 4 matches, 13 goals.",
+    date: "2026-06-17",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-17"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "4 matches from the 2026 FIFA World Cup were played on Wednesday, June 17, 2026, with 13 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Wednesday, June 17, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Portugal vs DR Congo](/matches/portugal-vs-dr-congo-21/)","1-1","Group K"],
+          ["[England vs Croatia](/matches/england-vs-croatia-22/)","4-2","Group L"],
+          ["[Ghana vs Panama](/matches/ghana-vs-panama-23/)","1-0","Group L"],
+          ["[Uzbekistan vs Colombia](/matches/uzbekistan-vs-colombia-24/)","1-3","Group K"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "England 4-2 Croatia was the day's biggest margin, a 2-goal win for England over Croatia. See the [full match report](/matches/england-vs-croatia-22/)." },
+      { type: "h2", text: "Next up . Thursday, June 18, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Czech Republic vs South Africa](/matches/czech-republic-vs-south-africa-25/) . Group A . 12:00 local",
+        "[Switzerland vs Bosnia and Herzegovina](/matches/switzerland-vs-bosnia-and-herzegovina-26/) . Group B . 12:00 local",
+        "[Canada vs Qatar](/matches/canada-vs-qatar-27/) . Group B . 18:00 local",
+        "[Mexico vs South Korea](/matches/mexico-vs-south-korea-28/) . Group A . 21:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-16",
     title: "World Cup 2026 Recap: Tuesday, June 16, 2026",
     description: "Results from every World Cup 2026 match on Tuesday, June 16, 2026: 3 matches, 12 goals.",
