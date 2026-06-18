@@ -1,11 +1,12 @@
 name: Daily World Cup Bot
 
-# Runs every 6 hours (00, 06, 12, 18 UTC). Catches new highlights within a
-# few hours of full-time across all timezones. Also runnable manually via
-# the Actions tab.
+# Runs every hour at :05 (offset to avoid the cron rush at :00). With the
+# skip-on-no-change guard later in the workflow, runs that find no new FT
+# matches exit early without deploying the 56 MB site.zip, so 24 runs/day
+# costs only ~5-8 actual deploys during typical group-stage days.
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "5 * * * *"
   workflow_dispatch:
 
 permissions:
