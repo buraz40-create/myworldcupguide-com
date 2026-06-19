@@ -28,6 +28,44 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-18",
+    title: "World Cup 2026 Recap: Thursday, June 18, 2026",
+    description: "Results from every World Cup 2026 match on Thursday, June 18, 2026: 4 matches, 14 goals.",
+    date: "2026-06-18",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-18"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "4 matches from the 2026 FIFA World Cup were played on Thursday, June 18, 2026, with 14 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Thursday, June 18, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Czech Republic vs South Africa](/matches/czech-republic-vs-south-africa-25/)","1-1","Group A"],
+          ["[Switzerland vs Bosnia and Herzegovina](/matches/switzerland-vs-bosnia-and-herzegovina-26/)","4-1","Group B"],
+          ["[Canada vs Qatar](/matches/canada-vs-qatar-27/)","6-0","Group B"],
+          ["[Mexico vs South Korea](/matches/mexico-vs-south-korea-28/)","1-0","Group A"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Canada 6-0 Qatar was the day's biggest margin, a 6-goal win for Canada over Qatar. See the [full match report](/matches/canada-vs-qatar-27/)." },
+      { type: "h2", text: "Next up . Friday, June 19, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[United States vs Australia](/matches/united-states-vs-australia-29/) . Group D . 12:00 local",
+        "[Scotland vs Morocco](/matches/scotland-vs-morocco-30/) . Group C . 18:00 local",
+        "[Brazil vs Haiti](/matches/brazil-vs-haiti-31/) . Group C . 21:00 local",
+        "[Turkey vs Paraguay](/matches/turkey-vs-paraguay-32/) . Group D . 20:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-17",
     title: "World Cup 2026 Recap: Wednesday, June 17, 2026",
     description: "Results from every World Cup 2026 match on Wednesday, June 17, 2026: 4 matches, 13 goals.",
