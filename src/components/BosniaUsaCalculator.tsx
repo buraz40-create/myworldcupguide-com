@@ -82,6 +82,30 @@ export default function BosniaUsaCalculator() {
   const bosniaPos = standings.findIndex((r) => r.team === "Bosnia") + 1
   const bosnia = standings.find((r) => r.team === "Bosnia")!
 
+  // Detect tiebreak situations involving Bosnia for explanation text.
+  const tiedWith = standings.filter((r) => r.team !== "Bosnia" && r.pts === bosnia.pts)
+  const tiebreakNote = tiedWith.length > 0
+    ? (() => {
+        const aheadOf = tiedWith.filter((t) => {
+          const tIdx = standings.findIndex((r) => r.team === t.team)
+          const bIdx = standings.findIndex((r) => r.team === "Bosnia")
+          return tIdx < bIdx
+        })
+        if (aheadOf.length === 0) return null
+        const opp = aheadOf[0]
+        // Identify which tiebreak step decides it.
+        let step: string
+        if (bosnia.gd < opp.gd) {
+          step = `GD: ${opp.team} ${opp.gd >= 0 ? "+" : ""}${opp.gd} vs Bosnia ${bosnia.gd >= 0 ? "+" : ""}${bosnia.gd}`
+        } else if (bosnia.gd === opp.gd && bosnia.gf < opp.gf) {
+          step = `GF (GD tied): ${opp.team} ${opp.gf} vs Bosnia ${bosnia.gf}`
+        } else {
+          step = `head-to-head / FIFA rank`
+        }
+        return `Tied with ${opp.team} on ${bosnia.pts} pts — FIFA tiebreak (Article 12.5) goes points → GD → GF → H2H. ${opp.team} wins on ${step}.`
+      })()
+    : null
+
   // Qualification verdict
   let verdict: { headline: string; sub: string; r32: string; tone: "good" | "ok" | "bad" }
   if (bosniaPos === 1) {
@@ -101,25 +125,47 @@ export default function BosniaUsaCalculator() {
   } else if (bosniaPos === 3 && bosnia.pts >= 4) {
     verdict = {
       headline: "3rd in Group B — likely advances as best-third",
-      sub: `${bosnia.pts} pts is a strong best-third total. FIFA Annex C slots Group B's 3rd into Match 81.`,
+      sub: `${bosnia.pts} pts is a strong best-third total. FIFA Annex C slots Group B's 3rd into Match 81.${tiebreakNote ? " " + tiebreakNote : ""}`,
       r32: "Match 81 vs Group D winner (likely USA) · Lumen Field, Seattle · Wed Jul 1 · 4 PM PT / 7 PM ET",
       tone: "ok",
     }
   } else if (bosniaPos === 3) {
     verdict = {
       headline: "3rd in Group B — marginal best-third chance",
-      sub: `${bosnia.pts} pts may not be enough; depends on other groups' 3rd-placers.`,
+      sub: `${bosnia.pts} pts may not be enough; depends on other groups' 3rd-placers.${tiebreakNote ? " " + tiebreakNote : ""}`,
       r32: "If they slip in, Match 81 vs Group D winner (likely USA) at Lumen Field, Seattle on July 1.",
       tone: "bad",
     }
   } else {
     verdict = {
       headline: "4th in Group B — eliminated",
-      sub: "Below 3rd-place threshold.",
+      sub: `Below 3rd-place threshold.${tiebreakNote ? " " + tiebreakNote : ""}`,
       r32: "—",
       tone: "bad",
     }
   }
+
+  // Bracket path depends on which finishing position Bosnia projects to.
+  type PathStep = { round: string; match: string; venue: string; date: string }
+  const bracketPath: PathStep[] = bosniaPos === 1
+    ? [
+        { round: "R32", match: "M85 vs best-3rd from E/F/G/I/J", venue: "BC Place, Vancouver", date: "Thu Jul 2 · 8 PM PT" },
+        { round: "R16", match: "M97 · W(M85) vs W(M86)", venue: "Mercedes-Benz Stadium, Atlanta", date: "Tue Jul 7 · 5 PM ET" },
+        { round: "QF", match: "Path leads to the Brazil/Argentina side of the bracket", venue: "TBD", date: "Jul 10-11" },
+      ]
+    : bosniaPos === 2
+    ? [
+        { round: "R32", match: "M73 vs Runner-up of Group A (likely South Korea)", venue: "SoFi Stadium, Los Angeles", date: "Sun Jun 28 · 3 PM PT" },
+        { round: "R16", match: "M89 · W(M73) vs W(M74)", venue: "NRG Stadium, Houston", date: "Sun Jul 5 · 12 PM CT" },
+        { round: "QF", match: "Path crosses into the Germany/England side", venue: "TBD", date: "Jul 9-10" },
+      ]
+    : bosniaPos === 3 && bosnia.pts >= 4
+    ? [
+        { round: "R32", match: "M81 vs Group D winner (likely USA)", venue: "Lumen Field, Seattle", date: "Wed Jul 1 · 4 PM PT" },
+        { round: "R16", match: "M93 · W(M81) vs W(M82)", venue: "NRG Stadium, Houston", date: "Mon Jul 6 · 3 PM CT" },
+        { round: "QF", match: "Path likely meets the Brazil/Argentina side", venue: "TBD", date: "Jul 10-11" },
+      ]
+    : []
 
   const toneClass =
     verdict.tone === "good" ? "bg-[#10b981]/10 border-[#10b981]/40 text-[#065f46]"
@@ -245,25 +291,33 @@ export default function BosniaUsaCalculator() {
         {matchOutcome.map((m) => <Bar key={m.team} label={m.team} percent={m.pct} color={m.color} />)}
       </div>
 
-      {/* Bracket path tree */}
-      <div className="rounded-xl bg-[#f8f7fd] p-4">
-        <h3 className="text-base font-extrabold text-[#231645] mb-3">Bracket path if Bosnia advance</h3>
-        <ol className="space-y-2 text-sm">
-          <li className="flex items-start gap-2">
-            <span className="text-[10px] font-extrabold text-white bg-[#7E43FF] rounded-full px-2 py-0.5 mt-0.5 flex-shrink-0">R32</span>
-            <span className="text-[#231645]"><strong>M81</strong> · Bosnia vs USA · Lumen Field, Seattle · Jul 1, 7 PM ET</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-[10px] font-extrabold text-white bg-[#4f1ea1] rounded-full px-2 py-0.5 mt-0.5 flex-shrink-0">R16</span>
-            <span className="text-[#231645]"><strong>M93</strong> · Winner(M81) vs Winner(M82) · NRG Stadium, Houston · Jul 6, 3 PM ET</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <span className="text-[10px] font-extrabold text-white bg-[#231645] rounded-full px-2 py-0.5 mt-0.5 flex-shrink-0">QF</span>
-            <span className="text-[#231645]">Would likely face winner of (Brazil/Argentina bracket) at AT&amp;T Stadium · Jul 10-11</span>
-          </li>
-        </ol>
-        <p className="text-[10px] text-[#615E6E] mt-3">Exact downstream paths depend on M82, M93 outcomes — simulate the full bracket on the <a href="/predictor/" className="text-[#7E43FF] font-semibold underline">predictor</a>.</p>
-      </div>
+      {/* Bracket path tree . dynamic based on Bosnia's projected position */}
+      {bracketPath.length > 0 ? (
+        <div className="rounded-xl bg-[#f8f7fd] p-4">
+          <h3 className="text-base font-extrabold text-[#231645] mb-1">Bracket path if Bosnia finish {bosniaPos === 1 ? "1st" : bosniaPos === 2 ? "2nd" : "3rd"}</h3>
+          <p className="text-xs text-[#615E6E] mb-3">Updates live based on the sliders above.</p>
+          <ol className="space-y-2 text-sm">
+            {bracketPath.map((step, i) => {
+              const badge = step.round === "R32" ? "bg-[#7E43FF]" : step.round === "R16" ? "bg-[#4f1ea1]" : "bg-[#231645]"
+              return (
+                <li key={i} className="flex items-start gap-2">
+                  <span className={`text-[10px] font-extrabold text-white ${badge} rounded-full px-2 py-0.5 mt-0.5 flex-shrink-0`}>{step.round}</span>
+                  <span className="text-[#231645]">
+                    <strong>{step.match}</strong>
+                    <span className="block text-[11px] text-[#615E6E] mt-0.5">{step.venue} · {step.date}</span>
+                  </span>
+                </li>
+              )
+            })}
+          </ol>
+          <p className="text-[10px] text-[#615E6E] mt-3">Exact downstream paths depend on later results — simulate the full bracket on the <a href="/predictor/" className="text-[#7E43FF] font-semibold underline">predictor</a>.</p>
+        </div>
+      ) : (
+        <div className="rounded-xl bg-[#fef2f2] border border-[#ef4444]/30 p-4">
+          <p className="text-sm font-bold text-[#7f1d1d]">No bracket path under these inputs.</p>
+          <p className="text-xs text-[#7f1d1d]/80 mt-1">Bosnia would be eliminated or below the best-third cutoff. Try a bigger margin vs Qatar or a different m49 result.</p>
+        </div>
+      )}
     </section>
   )
 }
