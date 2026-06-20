@@ -205,7 +205,7 @@ export default function BosniaUsaCalculator() {
       <div className="mb-5">
         <p className="text-[10px] font-extrabold uppercase tracking-widest text-[#7E43FF] mb-1">Interactive</p>
         <h2 className="text-xl md:text-2xl font-extrabold text-[#231645] mb-2">Run the Bosnia vs USA R32 scenario</h2>
-        <p className="text-sm text-[#615E6E]">Move the sliders below to project Group B&apos;s final table and see whether Bosnia gets through to face the USA at Lumen Field on July 1.</p>
+        <p className="text-sm text-[#615E6E]">Move the sliders below to project Group B&apos;s final table and see whether Bosnia gets through to face the USA at Levi&apos;s Stadium in Santa Clara on July 1.</p>
       </div>
 
       {/* Inputs */}
