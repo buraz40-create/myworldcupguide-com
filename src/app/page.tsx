@@ -6,7 +6,7 @@ import { getRecentBlogPosts } from "@/data/blogPosts"
 import HeroParticles from "@/components/HeroParticles"
 import BlocksGrid from "@/components/BlocksGrid"
 import AnimatedCounter from "@/components/AnimatedCounter"
-import GlobeWrapper from "@/components/GlobeWrapper"
+import QualifiedTeamsGrid from "@/components/QualifiedTeamsGrid"
 import CityMarquee from "@/components/CityMarquee"
 
 const HOMEPAGE_FAQS = [
@@ -318,19 +318,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── GLOBE ── */}
+      {/* ── 48 NATIONS GRID ── */}
       <section className="py-10 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="section-panel panel-blue px-8 py-12 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <div className="section-panel panel-blue px-6 md:px-10 py-12 relative overflow-hidden">
             <BlocksGrid count={20} className="opacity-30" />
             <div className="relative z-10 text-center mb-8">
-              <div className="pill inline-flex mb-4">Interactive Globe</div>
-              <h2 className="text-3xl font-extrabold text-[#231645] mb-2">48 Nations · One Tournament</h2>
-              <p className="text-[#615E6E]">Spin the globe - hover any dot to see the country. Hosts pulse purple.</p>
+              <div className="pill inline-flex mb-4">48 Qualified Nations</div>
+              <h2 className="text-3xl font-extrabold text-[#231645] mb-2">Every team. Every confederation.</h2>
+              <p className="text-[#615E6E]">Hover any flag for FIFA rank, tap to open the team guide.</p>
             </div>
-            <GlobeWrapper />
-            <div className="text-center mt-6 relative z-10">
-              <Link href="/globe" className="btn-primary text-sm">Explore Full Globe →</Link>
+            <div className="relative z-10">
+              <QualifiedTeamsGrid />
+            </div>
+            <div className="text-center mt-8 relative z-10">
+              <Link href="/globe" className="btn-primary text-sm">Open the interactive globe →</Link>
             </div>
           </div>
         </div>
