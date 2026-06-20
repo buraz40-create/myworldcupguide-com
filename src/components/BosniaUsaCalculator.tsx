@@ -38,8 +38,9 @@ function Bar({ label, percent, color = "#7E43FF" }: { label: string; percent: nu
 }
 
 export default function BosniaUsaCalculator() {
-  const [bihMargin, setBihMargin] = useState(1)      // Bosnia goals over Qatar (0..7)
-  const [bihGoals, setBihGoals] = useState(2)        // Bosnia total goals scored
+  const [bihGoals, setBihGoals] = useState(2)        // Bosnia goals in m50
+  const [qatGoals, setQatGoals] = useState(0)        // Qatar goals in m50
+  const bihMargin = bihGoals - qatGoals              // derived: + = win, 0 = draw, - = loss
   const [m49, setM49] = useState<SwissCanResult>("sui_wins")
   const [m49CanMargin, setM49CanMargin] = useState(1) // if Canada wins, by how many
 
@@ -53,20 +54,16 @@ export default function BosniaUsaCalculator() {
       { team: "Qatar", pts: 1, gd: -6, gf: 1 },
     ]
 
-    // Apply Bosnia vs Qatar.
-    //   margin > 0 . Bosnia wins (+3 pts, gd swing)
-    //   margin = 0 . Draw (+1 pt each, gd unchanged)
-    const qatGoals = Math.max(0, bihGoals - bihMargin)
+    // Apply Bosnia vs Qatar. Each team gets points based on the scoreline,
+    // and GF/GA always update by the goals scored/conceded.
     cand = cand.map((r) => {
       if (r.team === "Bosnia") {
-        return bihMargin > 0
-          ? { ...r, pts: r.pts + 3, gd: r.gd + bihMargin, gf: r.gf + bihGoals }
-          : { ...r, pts: r.pts + 1, gf: r.gf + bihGoals }
+        const ptsAdd = bihMargin > 0 ? 3 : bihMargin === 0 ? 1 : 0
+        return { ...r, pts: r.pts + ptsAdd, gd: r.gd + bihMargin, gf: r.gf + bihGoals }
       }
       if (r.team === "Qatar") {
-        return bihMargin > 0
-          ? { ...r, gd: r.gd - bihMargin, gf: r.gf + qatGoals }
-          : { ...r, pts: r.pts + 1, gf: r.gf + qatGoals }
+        const ptsAdd = bihMargin < 0 ? 3 : bihMargin === 0 ? 1 : 0
+        return { ...r, pts: r.pts + ptsAdd, gd: r.gd - bihMargin, gf: r.gf + qatGoals }
       }
       return r
     })
@@ -214,10 +211,12 @@ export default function BosniaUsaCalculator() {
       {/* Inputs */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
         <div>
-          <label className="block text-xs font-extrabold uppercase tracking-widest text-[#231645] mb-1.5">Bosnia 🇧🇦 score vs Qatar 🇶🇦</label>
-          <div className="flex items-center gap-3 mb-1">
-            <span className="text-xs text-[#615E6E] w-12 text-right">{bihGoals} - {Math.max(0, bihGoals - bihMargin)}</span>
-            <span className="text-[10px] text-[#615E6E]">({bihMargin > 0 ? `BIH wins by ${bihMargin}` : "Draw"})</span>
+          <label className="block text-xs font-extrabold uppercase tracking-widest text-[#231645] mb-1.5">Bosnia 🇧🇦 vs Qatar 🇶🇦 (m50)</label>
+          <div className="flex items-baseline gap-3 mb-2">
+            <span className="text-lg font-extrabold text-[#231645] tabular-nums">{bihGoals} - {qatGoals}</span>
+            <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${bihMargin > 0 ? "bg-[#10b981]/15 text-[#065f46]" : bihMargin === 0 ? "bg-[#7E43FF]/15 text-[#4f1ea1]" : "bg-[#ef4444]/15 text-[#7f1d1d]"}`}>
+              {bihMargin > 0 ? "Bosnia win" : bihMargin === 0 ? "Draw" : "Qatar win"}
+            </span>
           </div>
           <div className="space-y-2">
             <div>
@@ -225,8 +224,8 @@ export default function BosniaUsaCalculator() {
               <input type="range" min={0} max={9} value={bihGoals} onChange={(e) => setBihGoals(parseInt(e.target.value))} className="w-full" style={{ accentColor: "#7E43FF" }} />
             </div>
             <div>
-              <label className="block text-[10px] font-bold text-[#615E6E] mb-1">Win margin: {bihMargin}</label>
-              <input type="range" min={0} max={bihGoals} value={Math.min(bihMargin, bihGoals)} onChange={(e) => setBihMargin(parseInt(e.target.value))} className="w-full" style={{ accentColor: "#7E43FF" }} />
+              <label className="block text-[10px] font-bold text-[#615E6E] mb-1">Qatar goals: {qatGoals}</label>
+              <input type="range" min={0} max={9} value={qatGoals} onChange={(e) => setQatGoals(parseInt(e.target.value))} className="w-full" style={{ accentColor: "#7E43FF" }} />
             </div>
           </div>
         </div>
