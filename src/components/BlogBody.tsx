@@ -1,5 +1,10 @@
 import Link from "next/link"
 import type { BlogBlock } from "@/data/blogPosts"
+import BosniaUsaCalculator from "@/components/BosniaUsaCalculator"
+
+const EMBEDS: Record<string, React.ComponentType> = {
+  BosniaUsaCalculator,
+}
 
 function slugifyHeading(text: string): string {
   return text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "")
@@ -154,6 +159,10 @@ export default function BlogBody({ blocks }: { blocks: BlogBlock[] }) {
               )}
             </figure>
           )
+        }
+        if (b.type === "embed") {
+          const Comp = EMBEDS[b.component]
+          return Comp ? <Comp key={i} /> : null
         }
         if (b.type === "video") {
           return (

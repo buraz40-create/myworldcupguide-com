@@ -11,6 +11,7 @@ export type BlogBlock =
   | { type: "callout"; tone: "info" | "warning"; text: string }
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "video"; videoId: string; title?: string; channel?: string }
+  | { type: "embed"; component: "BosniaUsaCalculator" }
 
 export type BlogPost = {
   slug: string
@@ -39,6 +40,7 @@ export const blogPosts: BlogPost[] = [
     readMinutes: 5,
     body: [
       { type: "p", text: "Picture it: 4 July weekend, Lumen Field roaring, the hosts USA on the front foot - and the lowest-ranked side in Group B somehow lined up across the centre circle. Bosnia and Herzegovina vs the United States in the Round of 32 is the World Cup 2026 plot twist nobody's penciling in yet, but it's the most likely R32 path for both teams." },
+      { type: "embed", component: "BosniaUsaCalculator" },
       { type: "h2", text: "How both teams get there" },
       { type: "p", text: "USA's path is the easy one. They're already on 6 points with a +5 goal difference after handling Paraguay 4-1 and Australia 2-0. A draw or even a controllable loss to Türkiye on June 25 keeps them top of Group D - which slots them into [Match 81 at Lumen Field, Seattle, on Wednesday July 1 at 7pm ET](/matches/usa-vs-r32-tbd/). The opponent: whichever best third-placed team gets allocated to slot M81 by FIFA's Annex C." },
       { type: "p", text: "Bosnia's path is the cliff-edge one. After a 1-1 draw with Canada and a 4-1 loss to Switzerland, they need to beat Qatar on June 24 to climb to 4 points - then hope they're among the 8 best third-placed teams across all 12 groups. Football Meets Data's simulator has Group B's 3rd at 75.1% to qualify. If they make it, FIFA's allocation table places Group B's third-placer directly into M81. That's how the Bosnia vs USA tie crystallises." },
