@@ -1,5 +1,7 @@
 import Link from "next/link"
+import Image from "next/image"
 import { cities } from "@/data/cities"
+import { stadiums } from "@/data/stadiums"
 import { getRecentBlogPosts } from "@/data/blogPosts"
 import HeroParticles from "@/components/HeroParticles"
 import BlocksGrid from "@/components/BlocksGrid"
@@ -30,6 +32,7 @@ export default function HomePage() {
   const usaCities = cities.filter((c) => c.country === "USA")
   const mexicoCities = cities.filter((c) => c.country === "Mexico")
   const canadaCities = cities.filter((c) => c.country === "Canada")
+  const stadiumBySlug = new Map(stadiums.map((s) => [s.slug, s]))
   const recentPosts = getRecentBlogPosts(3)
 
   const faqJsonLd = {
@@ -244,20 +247,46 @@ export default function HomePage() {
                     <div className="flex-1 h-px bg-black/[0.08]" />
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {list.map((city) => (
-                      <Link key={city.slug} href={`/cities/${city.slug}`} className="card p-5 block group">
-                        <div className="flex justify-between items-start mb-2">
-                          <h4 className="font-bold text-[#231645] text-sm group-hover:text-[#7E43FF] transition-colors leading-tight">
-                            {city.name}
-                          </h4>
-                          <span className="text-xs font-semibold text-[#7E43FF] bg-[#7E43FF]/8 px-2 py-0.5 rounded-full ml-2 flex-shrink-0">
-                            {city.games}
+                    {list.map((city) => {
+                      const stadium = stadiumBySlug.get(city.stadiumSlug)
+                      const img = stadium?.image ?? "/hero-bg.jpg"
+                      return (
+                        <Link
+                          key={city.slug}
+                          href={`/cities/${city.slug}`}
+                          className="group relative block rounded-2xl overflow-hidden h-44 shadow-[0_2px_12px_-4px_rgba(35,22,69,0.12)] hover:shadow-[0_8px_28px_-6px_rgba(126,67,255,0.35)] hover:-translate-y-1 transition-all duration-300"
+                        >
+                          {/* Stadium photo */}
+                          <Image
+                            src={img}
+                            alt={`${city.stadium} in ${city.name}`}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                            unoptimized
+                          />
+                          {/* Bottom gradient overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#231645]/95 via-[#231645]/55 to-transparent" />
+                          {/* Games badge */}
+                          <span className="absolute top-3 right-3 text-[10px] font-extrabold uppercase tracking-widest text-[#231645] bg-white/95 px-2.5 py-1 rounded-full shadow-md">
+                            {city.games} match{city.games === 1 ? "" : "es"}
                           </span>
-                        </div>
-                        <p className="text-xs text-[#7E43FF] font-medium mb-1.5 truncate">{city.stadium}</p>
-                        <p className="text-xs text-[#615E6E]">{city.capacity.toLocaleString()} seats</p>
-                      </Link>
-                    ))}
+                          {/* Bottom text */}
+                          <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                            <h4 className="font-extrabold text-lg leading-tight mb-0.5">{city.name}</h4>
+                            <p className="text-xs text-white/85 font-semibold truncate">{city.stadium}</p>
+                            <p className="text-[10px] text-white/65 mt-0.5">{city.capacity.toLocaleString()} seats</p>
+                            {/* CTA on hover */}
+                            <span className="block mt-2 max-h-0 overflow-hidden group-hover:max-h-12 transition-all duration-300">
+                              <span className="inline-flex items-center gap-1 text-xs font-bold text-white bg-[#7E43FF] rounded-full px-3 py-1 shadow-md">
+                                Visitor guide
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                              </span>
+                            </span>
+                          </div>
+                        </Link>
+                      )
+                    })}
                   </div>
                 </div>
               ))}
