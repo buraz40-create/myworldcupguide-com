@@ -16,7 +16,7 @@ type OpponentData = {
   iso: string         // ISO-3166 alpha-2 for flagcdn
   group: string       // group letter the third-placer comes from
   fifaRank: number
-  matchupProbability: number // % chance this is the actual M81 opponent
+  matchupProbability: number // % chance this is the actual M82 opponent
   usaWinPct: number          // % USA wins in 90 min
   drawPct: number            // % draw → ET/Pens
   oppWinPct: number          // % opponent wins in 90 min
@@ -168,7 +168,7 @@ export default function USMNTStats() {
       final: (r32Adv * r16Adv * qfAdv * sfAdv * finalWin) / 100000000,
     }
     return [
-      { round: "Round of 32", venue: "Lumen Field, Seattle", date: "Wed Jul 1", thisRound: r32Adv, cumulative: cum.r32, opp: opp.name },
+      { round: "Round of 32", venue: "Levi's Stadium, SF Bay Area", date: "Wed Jul 1", thisRound: r32Adv, cumulative: cum.r32, opp: opp.name },
       { round: "Round of 16", venue: "Lumen Field, Seattle", date: "Mon Jul 6", thisRound: r16Adv, cumulative: cum.r16, opp: "Belgium (likely)" },
       { round: "Quarter-final", venue: "SoFi Stadium, Los Angeles", date: "Fri Jul 10", thisRound: qfAdv, cumulative: cum.qf, opp: "Brazil/Argentina side" },
       { round: "Semi-final", venue: "AT&T Stadium, Dallas", date: "Tue Jul 14", thisRound: sfAdv, cumulative: cum.sf, opp: "Spain/Germany side" },
@@ -180,7 +180,7 @@ export default function USMNTStats() {
     <section className="rounded-2xl border border-black/[0.06] bg-white shadow-sm p-5 md:p-7 my-8">
       <div className="mb-5">
         <p className="text-[10px] font-extrabold uppercase tracking-widest text-[#7E43FF] mb-1">USMNT R32 Dashboard</p>
-        <h2 className="text-xl md:text-2xl font-extrabold text-[#231645] mb-2">Pick the M81 opponent</h2>
+        <h2 className="text-xl md:text-2xl font-extrabold text-[#231645] mb-2">Pick the M82 opponent</h2>
         <p className="text-sm text-[#615E6E]">Five third-placers can land at Lumen Field on July 1. Tap one to see the full stat comparison, head-to-head, travel disadvantage, and projected USMNT tournament path.</p>
       </div>
 
@@ -210,7 +210,7 @@ export default function USMNTStats() {
         <div className="flex items-start gap-4 mb-4">
           <img src={FLAG(opp.iso)} alt={`${opp.name} flag`} width={64} height={48} className="rounded-md flex-shrink-0 shadow-md" />
           <div className="flex-1">
-            <p className="text-[10px] font-extrabold uppercase tracking-widest text-white/70">Projected M81 opponent</p>
+            <p className="text-[10px] font-extrabold uppercase tracking-widest text-white/70">Projected M82 opponent</p>
             <h3 className="text-2xl font-extrabold mt-0.5 mb-1">USA vs {opp.name}</h3>
             <p className="text-sm text-white/85">{opp.oneline}</p>
           </div>
@@ -274,7 +274,7 @@ export default function USMNTStats() {
       {/* Tournament probability tree */}
       <div className="mb-6">
         <h3 className="text-base font-extrabold text-[#231645] mb-1">USMNT tournament probability tree</h3>
-        <p className="text-xs text-[#615E6E] mb-4">Win probability at each stage (assuming the M81 opponent above), and cumulative probability of reaching that round.</p>
+        <p className="text-xs text-[#615E6E] mb-4">Win probability at each stage (assuming the M82 opponent above), and cumulative probability of reaching that round.</p>
         <div className="space-y-3">
           {stages.map((s, i) => (
             <div key={s.round} className="rounded-xl border border-black/[0.06] p-3">
