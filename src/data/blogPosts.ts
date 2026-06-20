@@ -11,7 +11,7 @@ export type BlogBlock =
   | { type: "callout"; tone: "info" | "warning"; text: string }
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "video"; videoId: string; title?: string; channel?: string }
-  | { type: "embed"; component: "BosniaUsaCalculator" }
+  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" }
 
 export type BlogPost = {
   slug: string
@@ -31,16 +31,17 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "usa-round-of-32-path-2026",
     title: "USA's Round of 32 Path at the 2026 World Cup: Seattle, July 1",
-    description: "USMNT have effectively locked Group D after wins over Paraguay and Australia. Their R32 ticket is to Lumen Field, Seattle on July 1. Possible opponents, bracket path, key players, and what to watch.",
+    description: "USMNT have effectively locked Group D after wins over Paraguay and Australia. Their R32 ticket is to Lumen Field, Seattle on July 1. Interactive opponent picker, win probability tree, head-to-head stats, predicted bracket path.",
     date: "2026-06-19",
     author: "My World Cup Guide editorial",
     authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
     category: "Preview",
-    tags: ["USA","USMNT","round of 32","seattle","lumen field","world cup 2026"],
-    readMinutes: 5,
+    tags: ["USA","USMNT","round of 32","seattle","lumen field","world cup 2026","stats","predictions"],
+    readMinutes: 8,
     body: [
       { type: "p", text: "The United States Men's National Team have done the hard part. Two wins, two clean group performances, six points on the board with a +5 goal difference. Group D is essentially over - mathematically Türkiye can still cause a fright on June 25, but barring a multi-goal collapse the USA are clear at the top." },
       { type: "p", text: "That means USA's Round of 32 ticket is already booked: Match 81 at Lumen Field, Seattle, on Wednesday July 1 at 7:00 PM ET (4:00 PM PT). The opponent will be one of the eight best third-placed teams across all 12 groups - and that's where the path gets interesting." },
+      { type: "embed", component: "USMNTStats" },
       { type: "h2", text: "Where USA stands going into matchday 3" },
       {
         type: "table",
@@ -93,6 +94,39 @@ export const blogPosts: BlogPost[] = [
         "Group B (Switzerland vs Canada, Bosnia vs Qatar) - decides who's the most likely M81 opponent.",
       ] },
       { type: "p", text: "Run your own scenarios on the [bracket predictor](/predictor/) or check the [live standings](/groups/) for the rest of the group stage." },
+      { type: "h2", text: "Group D mathematical lock visualised" },
+      { type: "p", text: "To overtake USA in Group D, the next-best team (Australia, currently 3 pts and 0 GD) would need to win their final game AND USA would need to lose theirs - AND the swing in goal difference would need to be larger than 5. The combined probability of all three is in the low single digits." },
+      {
+        type: "table",
+        caption: "Group D matchday 3 scenarios and impact on USA's seeding.",
+        headers: ["USA result vs Türkiye","USA final","Best-case other","Top of group?"],
+        rows: [
+          ["USA win 1-0","9 pts, +6 GD","Australia or Paraguay 6 pts","Yes - USA top"],
+          ["USA draw 1-1","7 pts, +5 GD","Australia/Paraguay 6 pts","Yes - USA top"],
+          ["USA lose 0-1","6 pts, +4 GD","Australia 6 pts +1 GD","Yes - USA on GD"],
+          ["USA lose 0-3","6 pts, +2 GD","Australia 6 pts (beats Paraguay 3+)","Maybe - GD contest"],
+          ["USA lose 0-5","6 pts, 0 GD","Australia 6 pts +2 GD","No - Australia 1D"],
+        ],
+      },
+      { type: "p", text: "Realistic floor: USA finish 1D. Even a Türkiye upset wouldn't change much - Türkiye still couldn't reach 6 points themselves (they're on 0)." },
+      { type: "h2", text: "Player snapshots and tactical battles" },
+      { type: "p", text: "The R32 game will be decided in three specific tactical battles." },
+      { type: "h3", text: "1. Pulisic vs the opponent's right back" },
+      { type: "p", text: "Christian Pulisic is the USMNT's most-likely match-winner in a tight knockout. His group stage so far: 2 assists, 1 goal, 6 shots on target. He plays left wing inverted, drifting inside to combine with Balogun and the left back overlap (Antonee Robinson). Every potential M81 opponent has a question mark at right back - Bosnia's right back is 35, Senegal's right back is a converted midfielder, Japan's right back is the smallest defender in the back four. Pulisic's 1v1 dribble success rate this tournament: 64%." },
+      { type: "h3", text: "2. Balogun's pressing line" },
+      { type: "p", text: "Folarin Balogun has been pressing the opposition centre-backs aggressively, forcing rushed long balls that USA's midfield mops up. Against opponents who play out from the back (Japan, Ecuador) this is a high-leverage tactic. Against opponents who play long anyway (Bosnia, Senegal) the value drops. Balogun's pressure-success rate (forcing errors in opp third): 47%." },
+      { type: "h3", text: "3. The set-piece game" },
+      { type: "p", text: "USA have scored 2 of their 6 group-stage goals from set pieces - both via Tim Ream from corners. R32 opponents who concede set-piece goals at above-average rates: Algeria (3 vs France/UK in friendlies), Bosnia (Switzerland just put one in past them). Lower-risk on set pieces: Japan, Senegal." },
+      { type: "h2", text: "Where to be on July 1" },
+      { type: "p", text: "Lumen Field, Inglewood-equivalent for the Pacific Northwest. Roof open in July (Seattle averages 75°F early July). Closest hotels: Stadium District / Pioneer Square for walking distance, Capitol Hill for restaurant scene + Light Rail. Public transit: Sound Transit Link runs every 6-10 minutes from downtown to Stadium Station, $3 one-way." },
+      { type: "p", text: "For tickets and fan experience, see the [Lumen Field guide](/stadiums/lumen-field/) and [Seattle visitor guide](/cities/seattle/). USMNT supporters can pick up viewing-party info via [American Outlaws](https://www.theamericanoutlaws.com/) chapters - Seattle's Sounders FC supporters scene makes for a built-in atmosphere." },
+      { type: "h2", text: "Related reads" },
+      { type: "ul", items: [
+        "[Bosnia vs USA R32 deep-dive](/blog/bosnia-vs-usa-round-of-32-preview/) - the most-likely matchup, full breakdown with diaspora angle and tactical map.",
+        "[Best third-placed teams explained](/blog/world-cup-2026-best-third-placed-teams-explained/) - the pillar covering all 12 groups' 3rd-place paths.",
+        "[Group D scenarios](/blog/group-d-best-third-scenarios-2026/) - Türkiye/Paraguay/Australia paths.",
+        "[Schedule for July 1](/schedule/2026-07-01/) - full Round of 32 matchday in your timezone.",
+      ] },
     ],
   },
   {
