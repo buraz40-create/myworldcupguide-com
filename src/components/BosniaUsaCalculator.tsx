@@ -132,15 +132,15 @@ export default function BosniaUsaCalculator() {
   } else if (bosniaPos === 3 && bosnia.pts >= 4) {
     verdict = {
       headline: "3rd in Group B — likely advances as best-third",
-      sub: `${bosnia.pts} pts is a strong best-third total. FIFA Annex C slots Group B's 3rd into Match 82.${tiebreakNote ? " " + tiebreakNote : ""}`,
-      r32: "Match 82 vs Group D winner (likely USA) · Levi's Stadium, Santa Clara · Wed Jul 1 · 8 PM PT / 11 PM ET",
+      sub: `${bosnia.pts} pts is a strong best-third total. FIFA Annex C slots Group B's 3rd into Match 81.${tiebreakNote ? " " + tiebreakNote : ""}`,
+      r32: "Match 81 vs Group D winner (likely USA) · Levi's Stadium, Santa Clara · Wed Jul 1 · 5 PM PT / 8 PM ET",
       tone: "ok",
     }
   } else if (bosniaPos === 3) {
     verdict = {
       headline: "3rd in Group B — marginal best-third chance",
       sub: `${bosnia.pts} pts may not be enough; depends on other groups' 3rd-placers.${tiebreakNote ? " " + tiebreakNote : ""}`,
-      r32: "If they slip in, Match 82 vs Group D winner (likely USA) at Levi's Stadium, Santa Clara on July 1.",
+      r32: "If they slip in, Match 81 vs Group D winner (likely USA) at Levi's Stadium, Santa Clara on July 1.",
       tone: "bad",
     }
   } else {
@@ -168,7 +168,7 @@ export default function BosniaUsaCalculator() {
       ]
     : bosniaPos === 3 && bosnia.pts >= 4
     ? [
-        { round: "R32", match: "M82 vs Group D winner (likely USA)", venue: "Levi's Stadium, Santa Clara", date: "Wed Jul 1 · 8 PM PT" },
+        { round: "R32", match: "M81 vs Group D winner (likely USA)", venue: "Levi's Stadium, Santa Clara", date: "Wed Jul 1 · 5 PM PT" },
         { round: "R16", match: "M94 · W(M81) vs W(M82)", venue: "Lumen Field, Seattle", date: "Mon Jul 6 · 5 PM PT" },
         { round: "QF", match: "M98 · path to Brazil/Argentina side", venue: "SoFi Stadium, Los Angeles", date: "Fri Jul 10 · 3 PM PT" },
       ]
