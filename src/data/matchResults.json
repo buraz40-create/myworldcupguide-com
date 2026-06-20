@@ -179,6 +179,11 @@
   "m30": {
     "homeScore": 0,
     "awayScore": 1,
-    "status": "live"
+    "status": "FT"
+  },
+  "m31": {
+    "homeScore": 3,
+    "awayScore": 0,
+    "status": "FT"
   }
 }
