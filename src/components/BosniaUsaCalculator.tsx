@@ -53,11 +53,21 @@ export default function BosniaUsaCalculator() {
       { team: "Qatar", pts: 1, gd: -6, gf: 1 },
     ]
 
-    // Apply Bosnia vs Qatar (Bosnia wins by bihMargin, scoring bihGoals).
+    // Apply Bosnia vs Qatar.
+    //   margin > 0 . Bosnia wins (+3 pts, gd swing)
+    //   margin = 0 . Draw (+1 pt each, gd unchanged)
     const qatGoals = Math.max(0, bihGoals - bihMargin)
     cand = cand.map((r) => {
-      if (r.team === "Bosnia") return { ...r, pts: r.pts + 3, gd: r.gd + bihMargin, gf: r.gf + bihGoals }
-      if (r.team === "Qatar") return { ...r, gd: r.gd - bihMargin, gf: r.gf + qatGoals }
+      if (r.team === "Bosnia") {
+        return bihMargin > 0
+          ? { ...r, pts: r.pts + 3, gd: r.gd + bihMargin, gf: r.gf + bihGoals }
+          : { ...r, pts: r.pts + 1, gf: r.gf + bihGoals }
+      }
+      if (r.team === "Qatar") {
+        return bihMargin > 0
+          ? { ...r, gd: r.gd - bihMargin, gf: r.gf + qatGoals }
+          : { ...r, pts: r.pts + 1, gf: r.gf + qatGoals }
+      }
       return r
     })
 
@@ -207,7 +217,7 @@ export default function BosniaUsaCalculator() {
           <label className="block text-xs font-extrabold uppercase tracking-widest text-[#231645] mb-1.5">Bosnia 🇧🇦 score vs Qatar 🇶🇦</label>
           <div className="flex items-center gap-3 mb-1">
             <span className="text-xs text-[#615E6E] w-12 text-right">{bihGoals} - {Math.max(0, bihGoals - bihMargin)}</span>
-            <span className="text-[10px] text-[#615E6E]">(BIH {bihMargin >= 0 ? `wins by ${bihMargin}` : "loses"})</span>
+            <span className="text-[10px] text-[#615E6E]">({bihMargin > 0 ? `BIH wins by ${bihMargin}` : "Draw"})</span>
           </div>
           <div className="space-y-2">
             <div>
