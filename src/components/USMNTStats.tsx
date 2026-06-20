@@ -169,7 +169,7 @@ export default function USMNTStats() {
     }
     return [
       { round: "Round of 32", venue: "Lumen Field, Seattle", date: "Wed Jul 1", thisRound: r32Adv, cumulative: cum.r32, opp: opp.name },
-      { round: "Round of 16", venue: "NRG Stadium, Houston", date: "Mon Jul 6", thisRound: r16Adv, cumulative: cum.r16, opp: "Belgium (likely)" },
+      { round: "Round of 16", venue: "AT&T Stadium, Dallas", date: "Mon Jul 6", thisRound: r16Adv, cumulative: cum.r16, opp: "Belgium (likely)" },
       { round: "Quarter-final", venue: "AT&T Stadium, Dallas", date: "Fri Jul 10", thisRound: qfAdv, cumulative: cum.qf, opp: "Brazil/Argentina side" },
       { round: "Semi-final", venue: "MetLife Stadium, NJ", date: "Tue Jul 14", thisRound: sfAdv, cumulative: cum.sf, opp: "Spain/Germany side" },
       { round: "Final", venue: "MetLife Stadium, NJ", date: "Sun Jul 19", thisRound: finalWin, cumulative: cum.final, opp: "Tournament winner" },

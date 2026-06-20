@@ -169,7 +169,7 @@ export default function BosniaUsaCalculator() {
     : bosniaPos === 3 && bosnia.pts >= 4
     ? [
         { round: "R32", match: "M81 vs Group D winner (likely USA)", venue: "Lumen Field, Seattle", date: "Wed Jul 1 · 4 PM PT" },
-        { round: "R16", match: "M93 · W(M81) vs W(M82)", venue: "NRG Stadium, Houston", date: "Mon Jul 6 · 3 PM CT" },
+        { round: "R16", match: "M93 · W(M81) vs W(M82)", venue: "AT&T Stadium, Dallas", date: "Mon Jul 6 · 3 PM CT" },
         { round: "QF", match: "Path likely meets the Brazil/Argentina side", venue: "TBD", date: "Jul 10-11" },
       ]
     : []
