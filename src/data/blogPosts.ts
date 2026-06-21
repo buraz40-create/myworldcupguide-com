@@ -29,6 +29,42 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-20",
+    title: "World Cup 2026 Recap: Saturday, June 20, 2026",
+    description: "Results from every World Cup 2026 match on Saturday, June 20, 2026: 2 matches, 9 goals.",
+    date: "2026-06-20",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-20"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "2 matches from the 2026 FIFA World Cup were played on Saturday, June 20, 2026, with 9 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Saturday, June 20, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Netherlands vs Sweden](/matches/netherlands-vs-sweden-33/)","5-1","Group F"],
+          ["[Germany vs Ivory Coast](/matches/germany-vs-ivory-coast-34/)","2-1","Group E"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Netherlands 5-1 Sweden was the day's biggest margin, a 4-goal win for Netherlands over Sweden. See the [full match report](/matches/netherlands-vs-sweden-33/)." },
+      { type: "h2", text: "Next up . Sunday, June 21, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Spain vs Saudi Arabia](/matches/spain-vs-saudi-arabia-37/) . Group H . 12:00 local",
+        "[Belgium vs Iran](/matches/belgium-vs-iran-38/) . Group G . 15:00 local",
+        "[Uruguay vs Cape Verde](/matches/uruguay-vs-cape-verde-39/) . Group H . 18:00 local",
+        "[New Zealand vs Egypt](/matches/new-zealand-vs-egypt-40/) . Group G . 21:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "usa-round-of-32-path-2026",
     title: "USA's Round of 32 Path at the 2026 World Cup: Seattle, July 1",
     description: "USMNT have effectively locked Group D after wins over Paraguay and Australia. Their R32 ticket is to Levi's Stadium, Santa Clara on July 1. Interactive opponent picker, win probability tree, head-to-head stats, predicted bracket path.",
