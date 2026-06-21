@@ -11,7 +11,7 @@ export type BlogBlock =
   | { type: "callout"; tone: "info" | "warning"; text: string }
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "video"; videoId: string; title?: string; channel?: string }
-  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" }
+  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" | "ScotlandThirdPlace" }
 
 export type BlogPost = {
   slug: string
@@ -62,6 +62,88 @@ export const blogPosts: BlogPost[] = [
         ],
       },
       { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
+    slug: "scotland-best-third-place-qualification-2026",
+    title: "Can Scotland Qualify With 3 Points? The Best-Third Math, and What 1-1 vs Brazil Really Gets Them",
+    description: "Scotland sit 3rd in Group C on 3 points and have never reached a World Cup knockout round in 8 attempts. We break down every matchday-3 scenario vs Brazil, the best-third-placed cutoff, and exactly who else is fighting for the last knockout spots. Interactive qualification calculator included.",
+    date: "2026-06-21",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Analysis",
+    tags: ["Scotland", "best third-placed teams", "group C", "round of 32", "qualification", "world cup 2026", "brazil", "stats"],
+    readMinutes: 9,
+    body: [
+      { type: "p", text: "Scotland have played in eight World Cups. They have never made it out of the group stage. Not once. In 2026, for the first time, the math is genuinely on their side - because this is the first 48-team tournament, and eight of the twelve third-placed teams advance to a Round of 32 that didn't exist in any of Scotland's previous heartbreaks." },
+      { type: "p", text: "Here's where it stands after two matchdays: Scotland beat Haiti 1-0, then lost 0-1 to Morocco. Three points, goal difference zero, sitting 3rd in Group C. One game left - Brazil, in Miami, on June 24. This article answers the only question the Tartan Army cares about right now: what does Scotland actually need, and can they get through with just 3 points?" },
+      { type: "callout", tone: "info", text: "Short version: a draw or win vs Brazil almost certainly sends Scotland through. A loss leaves them on 3 points, clinging to a best-third spot that comes down to goal difference and how the other 11 groups finish. The calculator below lets you test every combination." },
+      { type: "embed", component: "ScotlandThirdPlace" },
+      { type: "h2", text: "Where Group C stands going into matchday 3" },
+      {
+        type: "table",
+        caption: "Group C after matchday 2.",
+        headers: ["Pos", "Team", "Pts", "GD", "GF", "Results"],
+        rows: [
+          ["1", "Brazil", "4", "+4", "6", "1-1 Morocco, 5-1 Haiti"],
+          ["2", "Morocco", "4", "+1", "2", "1-1 Brazil, 1-0 Scotland"],
+          ["3", "Scotland", "3", "0", "1", "1-0 Haiti, 0-1 Morocco"],
+          ["4", "Haiti", "0", "-5", "1", "0-1 Scotland, 1-5 Brazil"],
+        ],
+      },
+      { type: "p", text: "Matchday 3 on June 24: Scotland vs Brazil at Hard Rock Stadium, Miami, and Morocco vs Haiti at Mercedes-Benz Stadium, Atlanta - both kicking off together so neither group game can play for a known result. Brazil and Morocco are both on 4 points; Scotland on 3; Haiti already eliminated." },
+      { type: "h2", text: "Scenario 1: Scotland beat Brazil" },
+      { type: "p", text: "This is the dream, and it's cleaner than it looks. A win takes Scotland to 6 points. Brazil stay on 4. The only team that can also reach 6+ is Morocco, and only if Morocco beat Haiti. So a Scotland win means they finish 1st or 2nd in the group no matter what else happens - automatic qualification, no best-third lottery required. The first knockout berth in Scottish history, sealed by beating Brazil. Unlikely, but the margin between heartbreak and history has never been this thin." },
+      { type: "h2", text: "Scenario 2: Scotland draw Brazil (the 1-1 question)" },
+      { type: "p", text: "A draw - 1-1, 0-0, any draw - puts Scotland on 4 points. That almost certainly leaves them 3rd, because Brazil reach 5 and Morocco are very likely to beat or draw an eliminated Haiti side. So the question becomes: is 4 points enough to be a top-8 third-placed team?" },
+      { type: "p", text: "Historically, in this exact 12-group, 8-qualifier format, 4 points has always landed inside the top 8. The reason is simple arithmetic: with 12 groups, the number of third-placed teams reaching 4+ points is usually 5 to 7. A 4-point third has only ever been cut in the most extreme simulations where eight other groups all produced a 4-point third with better goal difference - which has not happened in any realistic projection of this tournament. A 1-1 draw with Brazil should be enough." },
+      { type: "callout", tone: "warning", text: "The catch with a draw: goal difference still matters. Scotland's GD is currently 0. If they draw 0-0 they stay at 0; a 2-2 draw keeps it at 0 but boosts goals-for, which is the next tiebreak after GD. Against the other 4-point thirds, every goal could be the difference. Score if you can." },
+      { type: "h2", text: "Scenario 3: Scotland lose to Brazil - the 3-point survival math" },
+      { type: "p", text: "This is the painful one, and it's the question you actually asked: can Scotland go through on 3 points? The honest answer is yes, but it's a coin flip, and it's out of their hands." },
+      { type: "p", text: "If Scotland lose, they finish on 3 points with a goal difference around -1 to -3 depending on the margin. They'd be a 3-point third-placed team, and whether that makes the top 8 depends entirely on how many other groups produce a third-placer on 4 points or more. Right now, as of June 21, here's the live best-third picture:" },
+      {
+        type: "table",
+        caption: "Best third-placed teams as of June 21 (top 8 advance). Most still have a game to play.",
+        headers: ["#", "Team", "Group", "Pts", "GD"],
+        rows: [
+          ["1", "Sweden", "F", "3", "0"],
+          ["2", "Scotland", "C", "3", "0"],
+          ["3", "Paraguay", "D", "3", "-2"],
+          ["4", "Belgium", "G", "1", "0"],
+          ["5", "Portugal", "K", "1", "0"],
+          ["6", "Czechia", "A", "1", "-1"],
+          ["7", "Ecuador", "E", "1", "-1"],
+          ["8", "Bosnia and Herzegovina", "B", "1", "-3"],
+          ["9", "Saudi Arabia", "H", "1", "-4"],
+          ["10", "Panama", "L", "0", "-1"],
+          ["11", "Senegal", "I", "0", "-2"],
+          ["12", "Jordan", "J", "0", "-2"],
+        ],
+      },
+      { type: "p", text: "Scotland are 2nd in that table today - but it's a mirage. Belgium, Portugal, Ecuador, Czechia and others sitting on 1 point all still have a matchday-3 game, and most are favoured to win or draw it into 4 points. That's the trap: the cutoff line you need to beat isn't today's, it's the one after every group finishes." },
+      { type: "h2", text: "Who actually makes it in with 3 points?" },
+      { type: "p", text: "A 3-point third-placer survives only when enough groups fail to produce a 4-point third. In this tournament that's plausible but not safe. Our projection has four groups (G, K, A, E) likely to send a 4-point third up - Belgium, Portugal, Czechia and Ecuador are all favourites or live underdogs in winnable final games. That leaves roughly four spots for the 3-point pack." },
+      {
+        type: "table",
+        caption: "Projected final third-placed tiers (editorial model).",
+        headers: ["Tier", "Likely teams", "Read"],
+        rows: [
+          ["4+ points", "Belgium, Portugal, Czechia, Ecuador", "Favoured to win/draw matchday 3 into 4 pts - these are the locks above Scotland"],
+          ["3 points", "Sweden, Scotland, Paraguay, Panama, Senegal", "The survival pack. Decided on goal difference, then goals scored"],
+          ["1 or fewer", "Saudi Arabia, Jordan, Bosnia (if Qatar hold them)", "Almost certainly eliminated"],
+        ],
+      },
+      { type: "p", text: "If four groups produce a 4-point third, four of the 3-point teams still get in - and Scotland's goal difference of 0 is better than Paraguay (-2) and most of the rest. That's why a narrow loss (0-1, 1-2) keeps the door open and a heavy loss (0-3, 0-4) probably slams it shut. The cruelty of Scotland's situation: even if they lose, they should be cheering for low-scoring chaos in Groups F, D and L so the other 3-point thirds don't outscore them on the tiebreak." },
+      { type: "callout", tone: "info", text: "Tiebreak order for third-placed teams (FIFA Article): points, then goal difference, then goals scored, then disciplinary points, then drawing of lots. Scotland's GD of 0 is their single biggest asset if it comes down to the 3-point bunch. Protect it." },
+      { type: "h2", text: "The bottom line for the Tartan Army" },
+      { type: "ul", items: [
+        "**Beat Brazil:** through as group 1st/2nd. History made, no maths needed.",
+        "**Draw Brazil (1-1):** 4 points, third place, and 4 points has never missed the top 8 in this format. Near-certain qualification.",
+        "**Lose narrowly (0-1):** 3 points, GD around -1, genuine best-third chance - roughly a coin flip that hinges on other groups.",
+        "**Lose heavily (0-3+):** 3 points but a wrecked goal difference. Almost certainly out.",
+      ] },
+      { type: "p", text: "For the first time in Scotland's World Cup history, a draw with one of the favourites probably books a knockout place. Eight tournaments of going home early, and the 2026 format has finally handed them a real escape route. They just need a point in Miami - and to not concede a hatful if it goes wrong." },
+      { type: "p", text: "Run your own combinations in the [calculator above](#), check the [live Group C standings](/groups/c/), or simulate the full bracket on the [predictor](/predictor/). For the deeper format explainer, see [how the best third-placed teams rule works](/blog/world-cup-2026-best-third-placed-teams-explained/)." },
     ],
   },
   {

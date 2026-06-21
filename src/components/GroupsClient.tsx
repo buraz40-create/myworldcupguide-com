@@ -73,6 +73,10 @@ function TeamBadges({ team }: { team: GroupTeam }) {
 const COL = "text-center text-xs text-[#615E6E] w-8"
 const VAL = "text-center text-sm text-[#231645] w-8"
 const PTS = "text-center text-sm font-extrabold w-8"
+// Secondary stat columns (W/D/L/GF/GA) are hidden on phones so the team name
+// has room; they reappear at sm and up. MP/GD/Pts stay visible everywhere.
+const COL_OPT = COL + " hidden sm:block"
+const VAL_OPT = VAL + " hidden sm:block"
 
 type QA = { question: string; answer: string | (string | { text: string; href: string })[] }
 type GroupsClientProps = { quickAnswers?: QA[] }
@@ -189,11 +193,11 @@ export default function GroupsClient({ quickAnswers }: GroupsClientProps = {}) {
                     <span className="text-[0.6rem] font-bold uppercase tracking-wider text-[#615E6E] w-5 text-center">#</span>
                     <span className="text-[0.6rem] font-bold uppercase tracking-wider text-[#615E6E] flex-1 ml-8">Team</span>
                     <span className={COL}>MP</span>
-                    <span className={COL}>W</span>
-                    <span className={COL}>D</span>
-                    <span className={COL}>L</span>
-                    <span className={COL}>GF</span>
-                    <span className={COL}>GA</span>
+                    <span className={COL_OPT}>W</span>
+                    <span className={COL_OPT}>D</span>
+                    <span className={COL_OPT}>L</span>
+                    <span className={COL_OPT}>GF</span>
+                    <span className={COL_OPT}>GA</span>
                     <span className={COL}>GD</span>
                     <span className="text-center text-[0.6rem] font-extrabold uppercase tracking-wider text-[#231645] w-8">Pts</span>
                   </div>
@@ -240,11 +244,11 @@ export default function GroupsClient({ quickAnswers }: GroupsClientProps = {}) {
                             <TeamBadges team={team} />
                           </Link>
                           <span className={VAL}>{s?.played ?? 0}</span>
-                          <span className={VAL}>{s?.won ?? 0}</span>
-                          <span className={VAL}>{s?.drawn ?? 0}</span>
-                          <span className={VAL}>{s?.lost ?? 0}</span>
-                          <span className={VAL}>{s?.gf ?? 0}</span>
-                          <span className={VAL}>{s?.ga ?? 0}</span>
+                          <span className={VAL_OPT}>{s?.won ?? 0}</span>
+                          <span className={VAL_OPT}>{s?.drawn ?? 0}</span>
+                          <span className={VAL_OPT}>{s?.lost ?? 0}</span>
+                          <span className={VAL_OPT}>{s?.gf ?? 0}</span>
+                          <span className={VAL_OPT}>{s?.ga ?? 0}</span>
                           <span className={VAL}>{s ? (s.gd >= 0 ? `+${s.gd}` : s.gd) : 0}</span>
                           <span className={PTS} style={{ color }}>{s?.pts ?? 0}</span>
                         </div>

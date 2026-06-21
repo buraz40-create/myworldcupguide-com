@@ -2,10 +2,12 @@ import Link from "next/link"
 import type { BlogBlock } from "@/data/blogPosts"
 import BosniaUsaCalculator from "@/components/BosniaUsaCalculator"
 import USMNTStats from "@/components/USMNTStats"
+import ScotlandThirdPlace from "@/components/ScotlandThirdPlace"
 
 const EMBEDS: Record<string, React.ComponentType> = {
   BosniaUsaCalculator,
   USMNTStats,
+  ScotlandThirdPlace,
 }
 
 function slugifyHeading(text: string): string {
