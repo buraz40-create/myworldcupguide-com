@@ -11,7 +11,7 @@ export type BlogBlock =
   | { type: "callout"; tone: "info" | "warning"; text: string }
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "video"; videoId: string; title?: string; channel?: string }
-  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" | "ScotlandThirdPlace" }
+  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" | "ScotlandThirdPlace" | "GroupBDecider" }
 
 export type BlogPost = {
   slug: string
@@ -64,6 +64,95 @@ export const blogPosts: BlogPost[] = [
         ],
       },
       { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
+    slug: "bosnia-do-or-die-vs-qatar-2026",
+    title: "Bosnia's Do-or-Die: Beat Qatar or Go Home, and Why Even a Win Might Not Be Enough",
+    description: "Bosnia and Herzegovina sit bottom of Group B on 1 point and face Qatar in a literal knockout match on June 24. We break down exactly what Bosnia need: not just a win, but a goal difference big enough to survive the best-third cutoff. Interactive Group B calculator included.",
+    date: "2026-06-22",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Analysis",
+    tags: ["Bosnia and Herzegovina", "Qatar", "group B", "do or die", "best third-placed teams", "round of 32", "world cup 2026", "qualification"],
+    readMinutes: 8,
+    body: [
+      { type: "p", text: "Bosnia and Herzegovina came to their first World Cup since 2014 with belief and left the first two matchdays with one point and a goal difference of minus three. A 1-1 draw with Canada was respectable. A 4-1 loss to Switzerland was not. Now they sit bottom of Group B, and their tournament comes down to one game on June 24: Qatar, at Lumen Field in Seattle." },
+      { type: "p", text: "It is the simplest kind of football match. Bosnia and Qatar are both on a single point, and they play each other. Win and you live. Lose and you are out. Draw, and both of you are almost certainly going home. There is nowhere to hide and no other result to lean on. But here is the catch that most previews miss: for Bosnia, winning may not actually be enough." },
+      { type: "callout", tone: "warning", text: "Bosnia cannot finish in the top two of Group B. Canada and Switzerland are both on 4 points and will almost certainly stay there. So Bosnia are playing for 3rd place and a spot among the eight best third-placed teams - and that race is decided on goal difference, where Bosnia start at minus three." },
+      { type: "embed", component: "GroupBDecider" },
+      { type: "h2", text: "Where Group B stands" },
+      {
+        type: "table",
+        caption: "Group B after matchday 2.",
+        headers: ["Pos", "Team", "Pts", "GD", "GF", "Results"],
+        rows: [
+          ["1", "Canada", "4", "+6", "7", "1-1 Bosnia, 6-0 Qatar"],
+          ["2", "Switzerland", "4", "+3", "5", "1-1 Qatar, 4-1 Bosnia"],
+          ["3", "Bosnia and Herzegovina", "1", "-3", "2", "1-1 Canada, 1-4 Switzerland"],
+          ["4", "Qatar", "1", "-6", "1", "1-1 Switzerland, 0-6 Canada"],
+        ],
+      },
+      { type: "p", text: "Canada and Switzerland meet in the other matchday-3 game, both already on four points and effectively safe. Whatever happens there barely touches Bosnia. The only game that decides Bosnia's fate is the one they are playing in." },
+      { type: "h2", text: "What a win actually gets Bosnia" },
+      { type: "p", text: "Beat Qatar and Bosnia jump to 4 points. In this 48-team format, 4 points has historically always been enough to land inside the top eight third-placed teams. So far, so good. But that history assumes a competitive goal difference, and Bosnia's is the problem. A narrow 1-0 win lifts them only to minus two. A 2-1 win leaves them at minus two as well. To get back to a goal difference that comfortably beats the other 4-point thirds, Bosnia need to win by three or four clear goals against a Qatar side that will be playing for its own life." },
+      { type: "p", text: "That is the brutal arithmetic of the Switzerland defeat. Conceding four in one game did not just cost three points, it poisoned the tiebreaker Bosnia now depend on. The other likely 4-point thirds across the tournament, the Belgiums and Portugals and Ecuadors, will mostly carry a goal difference around zero. Bosnia, even after winning, will be dragging a negative number into that comparison." },
+      { type: "h2", text: "The three outcomes" },
+      { type: "ul", items: [
+        "**Win big (3-0, 4-1):** 4 points, goal difference back around minus one or better. A genuine best-third chance that holds up if a couple of other groups disappoint. This is the version Bosnia need.",
+        "**Win narrow (1-0, 2-1):** 4 points but goal difference still minus two or three. On the bubble. Survival depends on at least three other groups failing to produce a clean 4-point third. Possible, uncomfortable.",
+        "**Draw or lose:** out. A draw puts both Bosnia and Qatar on 2 points with no path. A loss ends it outright. There is no scenario where Bosnia advance without winning.",
+      ] },
+      { type: "h2", text: "How Bosnia beat Qatar" },
+      { type: "p", text: "Qatar have conceded ten goals in two games and looked overwhelmed physically against Canada. Bosnia's route is the obvious one: get Edin Dzeko involved early, attack the channels, and turn this into the kind of open game where their extra quality tells. The danger is the opposite, a nervy, cautious match where Bosnia protect a one-goal lead they think is enough, not realising that a one-goal win might leave them short on goal difference anyway. Bosnia cannot afford to manage this game. They have to chase it." },
+      { type: "callout", tone: "info", text: "Third-placed tiebreak order: points, then goal difference, then goals scored, then disciplinary record, then drawing of lots. Bosnia's whole tournament now hinges on the second step. Every extra goal against Qatar is worth as much as the win itself." },
+      { type: "h2", text: "The bottom line" },
+      { type: "p", text: "Bosnia's first World Cup in over a decade comes down to one night in Seattle, and the task is harder than a simple must-win. They must win, and win well. A tight victory keeps them alive but at the mercy of other groups. A convincing one puts their fate back in their own hands. Anything less and a promising return ends at the group stage again." },
+      { type: "p", text: "Run every scoreline in the [calculator above](#), follow the [live Group B standings](/groups/b/), and compare Bosnia's position against the wider field in the [best third-placed teams breakdown](/blog/world-cup-2026-best-third-placed-teams-explained/)." },
+    ],
+  },
+  {
+    slug: "qatar-last-stand-vs-bosnia-2026",
+    title: "Qatar's Last Stand: The Bosnia Decider, and Why a Win Alone Won't Save Them",
+    description: "Qatar sit bottom of Group B on 1 point with a minus-six goal difference after a 6-0 loss to Canada. Their World Cup comes down to a winner-takes-all match against Bosnia on June 24, but their goal difference means even victory may not be enough. Full analysis and interactive calculator.",
+    date: "2026-06-22",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Analysis",
+    tags: ["Qatar", "Bosnia and Herzegovina", "group B", "do or die", "best third-placed teams", "round of 32", "world cup 2026", "qualification"],
+    readMinutes: 7,
+    body: [
+      { type: "p", text: "Qatar's second World Cup has gone almost exactly as the first one did: tough lessons and a leaking defence. A spirited 1-1 draw with Switzerland gave hope. A 6-0 dismantling by Canada took it all back and left Qatar bottom of Group B with one point and a goal difference of minus six. Now their tournament hangs on a single match against Bosnia on June 24 at Lumen Field in Seattle." },
+      { type: "p", text: "The good news is brutal in its clarity: win and Qatar can still reach the knockout stage. The bad news is that for Qatar, even winning may not be enough, and the reason is the same scoreline that has haunted them all tournament: that minus-six goal difference." },
+      { type: "callout", tone: "warning", text: "Qatar cannot catch Canada or Switzerland for the top two. They are playing for 3rd place and a best-third spot, which is settled on goal difference after points. Qatar start that race at minus six - the worst of any team still alive in the tournament." },
+      { type: "embed", component: "GroupBDecider" },
+      { type: "h2", text: "Where Group B stands" },
+      {
+        type: "table",
+        caption: "Group B after matchday 2.",
+        headers: ["Pos", "Team", "Pts", "GD", "GF", "Results"],
+        rows: [
+          ["1", "Canada", "4", "+6", "7", "1-1 Bosnia, 6-0 Qatar"],
+          ["2", "Switzerland", "4", "+3", "5", "1-1 Qatar, 4-1 Bosnia"],
+          ["3", "Bosnia and Herzegovina", "1", "-3", "2", "1-1 Canada, 1-4 Switzerland"],
+          ["4", "Qatar", "1", "-6", "1", "1-1 Switzerland, 0-6 Canada"],
+        ],
+      },
+      { type: "h2", text: "The mountain Qatar have to climb" },
+      { type: "p", text: "A win over Bosnia takes Qatar to 4 points. In this format that total is usually enough to sneak into the top eight third-placed teams. But the tiebreaker after points is goal difference, and a single-goal win barely dents Qatar's number. Beat Bosnia 1-0 and Qatar still sit on minus five. Win 2-0 and it is minus four. To drag their goal difference anywhere near the other 4-point thirds, who mostly hover around zero, Qatar would need to beat Bosnia by something like five or six clear goals, which is the exact kind of result they just suffered, not delivered." },
+      { type: "p", text: "This is why the Canada defeat was so damaging. It was not just a loss, it was six goals of damage to the one number Qatar now have to overcome. Realistically, Qatar's most likely qualifying path is not about their own goal difference climbing high enough, but about chaos elsewhere: several other groups all failing to produce a healthy 4-point third, leaving the door open for a 4-point Qatar even with an ugly minus differential." },
+      { type: "h2", text: "What Qatar need, in order" },
+      { type: "ol", items: [
+        "**Beat Bosnia. Full stop.** A draw or a loss ends Qatar's tournament immediately, with both teams stuck on 2 points or fewer.",
+        "**Win by as many as possible.** Every goal closes the gap on a goal difference that starts at minus six. A blowout is the only version where Qatar control their own fate.",
+        "**Hope other groups misfire.** Even after a good win, Qatar likely need three or four other third-placed teams to stumble below the 4-point line or carry similar baggage.",
+      ] },
+      { type: "callout", tone: "info", text: "Third-placed tiebreak order: points, goal difference, goals scored, disciplinary record, drawing of lots. With a goal difference of minus six, Qatar are relying almost entirely on reaching 4 points and praying the field above them is thin." },
+      { type: "h2", text: "Can they actually beat Bosnia?" },
+      { type: "p", text: "It is not hopeless. Bosnia were beaten 4-1 by Switzerland and have looked defensively shaky themselves. Qatar's draw with the Swiss showed they can compete when they stay compact and counter through their forwards. The problem is that this is not a game Qatar can win cautiously. A 1-0 win, the kind of result they would normally celebrate, probably leaves them short on goal difference. Qatar have to do the one thing they have not managed yet in this tournament: score in numbers. They need to throw bodies forward against a Bosnia side that itself has to attack, which at least promises an open, end-to-end game." },
+      { type: "h2", text: "The bottom line" },
+      { type: "p", text: "Qatar are not eliminated, but their margin for error is gone and their margin for victory has to be huge. The honest assessment: even a win likely leaves Qatar as long-shot best-third hopefuls, watching other groups to learn their fate. A draw or defeat sends them home. After a 6-0 loss, asking for a commanding win is a tall order, but it is the only order Qatar have left." },
+      { type: "p", text: "Test every scoreline in the [calculator above](#), track the [live Group B table](/groups/b/), and see how Qatar's best-third hopes stack up against the rest of the field in the [best third-placed teams analysis](/blog/world-cup-2026-best-third-placed-teams-explained/)." },
     ],
   },
   {

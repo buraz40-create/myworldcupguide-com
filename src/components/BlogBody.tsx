@@ -3,11 +3,13 @@ import type { BlogBlock } from "@/data/blogPosts"
 import BosniaUsaCalculator from "@/components/BosniaUsaCalculator"
 import USMNTStats from "@/components/USMNTStats"
 import ScotlandThirdPlace from "@/components/ScotlandThirdPlace"
+import GroupBDecider from "@/components/GroupBDecider"
 
 const EMBEDS: Record<string, React.ComponentType> = {
   BosniaUsaCalculator,
   USMNTStats,
   ScotlandThirdPlace,
+  GroupBDecider,
 }
 
 function slugifyHeading(text: string): string {
