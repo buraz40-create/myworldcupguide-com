@@ -16,6 +16,10 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} ^/matches/[^/]+/?$
 RewriteRule ^matches/[^/]+/?$ /schedule/ [R=301,L]
+
+# 2026-06-22: renamed the Croatia/Group B best-third article to a neutral slug
+# (old slug read as Croatia-vs-Bosnia hostility). 301 the old URL to the new one.
+RewriteRule ^blog/croatia-rooting-against-bosnia-qatar-decider-2026/?$ /blog/bosnia-qatar-decider-croatia-knockout-hopes-2026/ [R=301,L]
 </IfModule>
 
 # php -- BEGIN cPanel-generated handler, do not edit
