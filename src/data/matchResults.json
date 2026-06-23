@@ -250,5 +250,10 @@
     "homeScore": 1,
     "awayScore": 2,
     "status": "FT"
+  },
+  "m45": {
+    "homeScore": 3,
+    "awayScore": 0,
+    "status": "live"
   }
 }
