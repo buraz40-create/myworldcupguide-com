@@ -235,5 +235,15 @@
     "homeScore": 2,
     "awayScore": 0,
     "status": "FT"
+  },
+  "m42": {
+    "homeScore": 3,
+    "awayScore": 0,
+    "status": "FT"
+  },
+  "m43": {
+    "homeScore": 3,
+    "awayScore": 2,
+    "status": "FT"
   }
 }

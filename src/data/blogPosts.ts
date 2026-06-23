@@ -29,6 +29,43 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-22",
+    title: "World Cup 2026 Recap: Monday, June 22, 2026",
+    description: "Results from every World Cup 2026 match on Monday, June 22, 2026: 3 matches, 10 goals.",
+    date: "2026-06-22",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-22"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "3 matches from the 2026 FIFA World Cup were played on Monday, June 22, 2026, with 10 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Monday, June 22, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Argentina vs Austria](/matches/argentina-vs-austria-41/)","2-0","Group J"],
+          ["[France vs Iraq](/matches/france-vs-iraq-42/)","3-0","Group I"],
+          ["[Norway vs Senegal](/matches/norway-vs-senegal-43/)","3-2","Group I"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "France 3-0 Iraq was the day's biggest margin, a 3-goal win for France over Iraq. See the [full match report](/matches/france-vs-iraq-42/)." },
+      { type: "h2", text: "Next up . Tuesday, June 23, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Portugal vs Uzbekistan](/matches/portugal-vs-uzbekistan-45/) . Group K . 12:00 local",
+        "[England vs Ghana](/matches/england-vs-ghana-46/) . Group L . 16:00 local",
+        "[Panama vs Croatia](/matches/panama-vs-croatia-47/) . Group L . 19:00 local",
+        "[Colombia vs DR Congo](/matches/colombia-vs-dr-congo-48/) . Group K . 20:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "bosnia-qatar-decider-croatia-knockout-hopes-2026",
     title: "What the Bosnia vs Qatar Decider Means for Croatia's Knockout Hopes",
     description: "A Group B match can swing a Group L team's fate. Bosnia vs Qatar on June 24 helps set the cutoff for the eight best third-placed teams, and Croatia are fighting for one of those spots. The cross-group permutation, the probability picture, and what each result would mean for Croatia.",
