@@ -29,6 +29,44 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-23",
+    title: "World Cup 2026 Recap: Tuesday, June 23, 2026",
+    description: "Results from every World Cup 2026 match on Tuesday, June 23, 2026: 2 matches, 5 goals.",
+    date: "2026-06-23",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-23"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "2 matches from the 2026 FIFA World Cup were played on Tuesday, June 23, 2026, with 5 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Tuesday, June 23, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Portugal vs Uzbekistan](/matches/portugal-vs-uzbekistan-45/)","5-0","Group K"],
+          ["[England vs Ghana](/matches/england-vs-ghana-46/)","0-0","Group L"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Portugal 5-0 Uzbekistan was the day's biggest margin, a 5-goal win for Portugal over Uzbekistan. See the [full match report](/matches/portugal-vs-uzbekistan-45/)." },
+      { type: "h2", text: "Next up . Wednesday, June 24, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Switzerland vs Canada](/matches/switzerland-vs-canada-49/) . Group B . 12:00 local",
+        "[Bosnia and Herzegovina vs Qatar](/matches/bosnia-and-herzegovina-vs-qatar-50/) . Group B . 12:00 local",
+        "[Scotland vs Brazil](/matches/scotland-vs-brazil-51/) . Group C . 18:00 local",
+        "[Morocco vs Haiti](/matches/morocco-vs-haiti-52/) . Group C . 18:00 local",
+        "[Czech Republic vs Mexico](/matches/czech-republic-vs-mexico-53/) . Group A . 19:00 local",
+        "[South Africa vs South Korea](/matches/south-africa-vs-south-korea-54/) . Group A . 19:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-22",
     title: "World Cup 2026 Recap: Monday, June 22, 2026",
     description: "Results from every World Cup 2026 match on Monday, June 22, 2026: 3 matches, 10 goals.",

@@ -260,5 +260,10 @@
     "homeScore": 0,
     "awayScore": 0,
     "status": "FT"
+  },
+  "m47": {
+    "homeScore": 0,
+    "awayScore": 0,
+    "status": "live"
   }
 }
