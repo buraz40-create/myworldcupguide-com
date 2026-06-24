@@ -272,13 +272,13 @@
     "status": "FT"
   },
   "m50": {
-    "homeScore": 2,
+    "homeScore": 3,
     "awayScore": 1,
-    "status": "live"
+    "status": "FT"
   },
   "m49": {
-    "homeScore": 0,
-    "awayScore": 0,
-    "status": "live"
+    "homeScore": 2,
+    "awayScore": 1,
+    "status": "FT"
   }
 }
