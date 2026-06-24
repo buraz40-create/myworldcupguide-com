@@ -263,7 +263,12 @@
   },
   "m47": {
     "homeScore": 0,
+    "awayScore": 1,
+    "status": "FT"
+  },
+  "m48": {
+    "homeScore": 1,
     "awayScore": 0,
-    "status": "live"
+    "status": "FT"
   }
 }
