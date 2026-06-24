@@ -270,5 +270,15 @@
     "homeScore": 1,
     "awayScore": 0,
     "status": "FT"
+  },
+  "m50": {
+    "homeScore": 2,
+    "awayScore": 1,
+    "status": "live"
+  },
+  "m49": {
+    "homeScore": 0,
+    "awayScore": 0,
+    "status": "live"
   }
 }
