@@ -29,6 +29,48 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-24",
+    title: "World Cup 2026 Recap: Wednesday, June 24, 2026",
+    description: "Results from every World Cup 2026 match on Wednesday, June 24, 2026: 6 matches, 20 goals.",
+    date: "2026-06-24",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-24"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "6 matches from the 2026 FIFA World Cup were played on Wednesday, June 24, 2026, with 20 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Wednesday, June 24, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Switzerland vs Canada](/matches/switzerland-vs-canada-49/)","2-1","Group B"],
+          ["[Bosnia and Herzegovina vs Qatar](/matches/bosnia-and-herzegovina-vs-qatar-50/)","3-1","Group B"],
+          ["[Scotland vs Brazil](/matches/scotland-vs-brazil-51/)","0-3","Group C"],
+          ["[Morocco vs Haiti](/matches/morocco-vs-haiti-52/)","4-2","Group C"],
+          ["[Czech Republic vs Mexico](/matches/czech-republic-vs-mexico-53/)","0-3","Group A"],
+          ["[South Africa vs South Korea](/matches/south-africa-vs-south-korea-54/)","1-0","Group A"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Scotland 0-3 Brazil was the day's biggest margin, a 3-goal win for Brazil over Scotland. See the [full match report](/matches/scotland-vs-brazil-51/)." },
+      { type: "h2", text: "Next up . Thursday, June 25, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Ecuador vs Germany](/matches/ecuador-vs-germany-55/) . Group E . 16:00 local",
+        "[Curaçao vs Ivory Coast](/matches/cura-ao-vs-ivory-coast-56/) . Group E . 16:00 local",
+        "[Japan vs Sweden](/matches/japan-vs-sweden-57/) . Group F . 18:00 local",
+        "[Tunisia vs Netherlands](/matches/tunisia-vs-netherlands-58/) . Group F . 18:00 local",
+        "[Turkey vs United States](/matches/turkey-vs-united-states-59/) . Group D . 19:00 local",
+        "[Paraguay vs Australia](/matches/paraguay-vs-australia-60/) . Group D . 19:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-23",
     title: "World Cup 2026 Recap: Tuesday, June 23, 2026",
     description: "Results from every World Cup 2026 match on Tuesday, June 23, 2026: 2 matches, 5 goals.",

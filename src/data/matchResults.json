@@ -280,5 +280,25 @@
     "homeScore": 2,
     "awayScore": 1,
     "status": "FT"
+  },
+  "m52": {
+    "homeScore": 4,
+    "awayScore": 2,
+    "status": "FT"
+  },
+  "m51": {
+    "homeScore": 0,
+    "awayScore": 3,
+    "status": "FT"
+  },
+  "m53": {
+    "homeScore": 0,
+    "awayScore": 3,
+    "status": "FT"
+  },
+  "m54": {
+    "homeScore": 1,
+    "awayScore": 0,
+    "status": "FT"
   }
 }
