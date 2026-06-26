@@ -29,6 +29,44 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-25",
+    title: "World Cup 2026 Recap: Thursday, June 25, 2026",
+    description: "Results from every World Cup 2026 match on Thursday, June 25, 2026: 2 matches, 5 goals.",
+    date: "2026-06-25",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-25"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "2 matches from the 2026 FIFA World Cup were played on Thursday, June 25, 2026, with 5 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Thursday, June 25, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Ecuador vs Germany](/matches/ecuador-vs-germany-55/)","2-1","Group E"],
+          ["[Curaçao vs Ivory Coast](/matches/cura-ao-vs-ivory-coast-56/)","0-2","Group E"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Curaçao 0-2 Ivory Coast was the day's biggest margin, a 2-goal win for Ivory Coast over Curaçao. See the [full match report](/matches/cura-ao-vs-ivory-coast-56/)." },
+      { type: "h2", text: "Next up . Friday, June 26, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Norway vs France](/matches/norway-vs-france-61/) . Group I . 15:00 local",
+        "[Senegal vs Iraq](/matches/senegal-vs-iraq-62/) . Group I . 15:00 local",
+        "[Cape Verde vs Saudi Arabia](/matches/cape-verde-vs-saudi-arabia-63/) . Group H . 19:00 local",
+        "[Uruguay vs Spain](/matches/uruguay-vs-spain-64/) . Group H . 20:00 local",
+        "[Egypt vs Iran](/matches/egypt-vs-iran-65/) . Group G . 20:00 local",
+        "[New Zealand vs Belgium](/matches/new-zealand-vs-belgium-66/) . Group G . 20:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-24",
     title: "World Cup 2026 Recap: Wednesday, June 24, 2026",
     description: "Results from every World Cup 2026 match on Wednesday, June 24, 2026: 6 matches, 20 goals.",
