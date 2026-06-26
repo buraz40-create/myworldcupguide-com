@@ -333,12 +333,12 @@
   },
   "m61": {
     "homeScore": 1,
-    "awayScore": 3,
-    "status": "live"
+    "awayScore": 4,
+    "status": "FT"
   },
   "m62": {
-    "homeScore": 1,
+    "homeScore": 5,
     "awayScore": 0,
-    "status": "live"
+    "status": "FT"
   }
 }
