@@ -29,6 +29,46 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-26",
+    title: "World Cup 2026 Recap: Friday, June 26, 2026",
+    description: "Results from every World Cup 2026 match on Friday, June 26, 2026: 4 matches, 11 goals.",
+    date: "2026-06-26",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-26"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "4 matches from the 2026 FIFA World Cup were played on Friday, June 26, 2026, with 11 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Friday, June 26, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Norway vs France](/matches/norway-vs-france-61/)","1-4","Group I"],
+          ["[Senegal vs Iraq](/matches/senegal-vs-iraq-62/)","5-0","Group I"],
+          ["[Cape Verde vs Saudi Arabia](/matches/cape-verde-vs-saudi-arabia-63/)","0-0","Group H"],
+          ["[Uruguay vs Spain](/matches/uruguay-vs-spain-64/)","0-1","Group H"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Senegal 5-0 Iraq was the day's biggest margin, a 5-goal win for Senegal over Iraq. See the [full match report](/matches/senegal-vs-iraq-62/)." },
+      { type: "h2", text: "Next up . Saturday, June 27, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Panama vs England](/matches/panama-vs-england-67/) . Group L . 17:00 local",
+        "[Croatia vs Ghana](/matches/croatia-vs-ghana-68/) . Group L . 17:00 local",
+        "[Colombia vs Portugal](/matches/colombia-vs-portugal-69/) . Group K . 19:30 local",
+        "[DR Congo vs Uzbekistan](/matches/dr-congo-vs-uzbekistan-70/) . Group K . 19:30 local",
+        "[Algeria vs Austria](/matches/algeria-vs-austria-71/) . Group J . 22:00 local",
+        "[Jordan vs Argentina](/matches/jordan-vs-argentina-72/) . Group J . 22:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-25",
     title: "World Cup 2026 Recap: Thursday, June 25, 2026",
     description: "Results from every World Cup 2026 match on Thursday, June 25, 2026: 2 matches, 5 goals.",
