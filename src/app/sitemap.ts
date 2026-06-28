@@ -13,7 +13,7 @@ const SITE = "https://myworldcupguide.com"
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
 
-  const staticRoutes = ["", "/cities", "/stadiums", "/stadiums/compare", "/schedule", "/schedule/friendlies", "/predictor", "/round-of-32", "/tickets", "/tickets/affordability", "/kits", "/how-to-watch", "/faq", "/blog", "/groups", "/globe", "/about", "/contact", "/privacy", "/terms", "/affiliate-disclosure"].map(
+  const staticRoutes = ["", "/cities", "/stadiums", "/stadiums/compare", "/schedule", "/schedule/friendlies", "/predictor", "/round-of-32", "/round-of-16", "/tickets", "/tickets/affordability", "/kits", "/how-to-watch", "/faq", "/blog", "/groups", "/globe", "/about", "/contact", "/privacy", "/terms", "/affiliate-disclosure"].map(
     (path) => ({
       url: `${SITE}${path || "/"}`,
       lastModified,

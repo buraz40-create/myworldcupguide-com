@@ -10,13 +10,12 @@ export default function NavBar() {
   // Top nav. Groups was added back once /groups/[letter]/ became 12 deep,
   // unique pages with live odds rather than a single overview.
   const links = [
-    { href: "/cities", label: "Cities" },
     { href: "/stadiums", label: "Stadiums" },
     { href: "/schedule", label: "Schedule" },
     { href: "/groups", label: "Groups" },
     { href: "/round-of-32", label: "Round of 32" },
+    { href: "/round-of-16", label: "Round of 16" },
     { href: "/predictor", label: "Predictor" },
-    { href: "/kits", label: "Kits" },
     { href: "/tickets", label: "Tickets" },
     { href: "/how-to-watch", label: "Watch" },
     { href: "/blog", label: "Blog" },

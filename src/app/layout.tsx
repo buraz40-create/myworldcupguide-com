@@ -183,8 +183,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <li><Link href="/cities" className="text-[#615E6E] hover:text-[#231645] transition-colors">Host Cities</Link></li>
                   <li><Link href="/stadiums" className="text-[#615E6E] hover:text-[#231645] transition-colors">Stadiums</Link></li>
                   <li><Link href="/schedule" className="text-[#615E6E] hover:text-[#231645] transition-colors">Match Schedule</Link></li>
+                  <li><Link href="/round-of-32" className="text-[#615E6E] hover:text-[#231645] transition-colors">Round of 32</Link></li>
+                  <li><Link href="/round-of-16" className="text-[#615E6E] hover:text-[#231645] transition-colors">Round of 16 Odds</Link></li>
                   <li><Link href="/predictor" className="text-[#615E6E] hover:text-[#231645] transition-colors">Bracket Predictor</Link></li>
                   <li><Link href="/groups" className="text-[#615E6E] hover:text-[#231645] transition-colors">Groups &amp; Bracket</Link></li>
+                  <li><Link href="/kits" className="text-[#615E6E] hover:text-[#231645] transition-colors">Kits &amp; Jerseys</Link></li>
                   <li><Link href="/globe" className="text-[#615E6E] hover:text-[#231645] transition-colors">Qualified Teams</Link></li>
                 </ul>
               </nav>
