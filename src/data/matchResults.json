@@ -390,5 +390,10 @@
     "homeScore": 1,
     "awayScore": 3,
     "status": "FT"
+  },
+  "m73": {
+    "homeScore": 0,
+    "awayScore": 1,
+    "status": "FT"
   }
 }
