@@ -55,7 +55,13 @@ function TeamRow({
         picked ? "bg-[#7E43FF] text-white" : dimmed ? "opacity-45 hover:opacity-100 hover:bg-[#f1ecff]" : "hover:bg-[#f1ecff]"
       }`}
     >
-      <span className={`w-3.5 h-3.5 rounded-full border-2 flex-shrink-0 ${picked ? "border-white bg-white" : "border-[#c9c2e0]"}`} />
+      <span className={`w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center ${picked ? "border-white bg-white" : "border-[#c9c2e0]"}`}>
+        {picked && (
+          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#7E43FF" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        )}
+      </span>
       {team ? (
         <>
           <img src={FLAG(team.iso2)} alt="" width={18} height={13} className="rounded-sm flex-shrink-0" />
