@@ -14,6 +14,7 @@ export default function NavBar() {
     { href: "/stadiums", label: "Stadiums" },
     { href: "/schedule", label: "Schedule" },
     { href: "/groups", label: "Groups" },
+    { href: "/round-of-32", label: "Bracket" },
     { href: "/predictor", label: "Predictor" },
     { href: "/kits", label: "Kits" },
     { href: "/tickets", label: "Tickets" },

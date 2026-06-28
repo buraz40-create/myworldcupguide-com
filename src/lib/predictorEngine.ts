@@ -380,38 +380,62 @@ export function buildBracket(scores: ScoreMap): Bracket | null {
   const qualifiers = getQualifiers(scores)
   if (!qualifiers) return null
 
-  // Track 3rd-placers that have already been assigned to an R32 slot so each
-  // appears in exactly one match (FIFA's Annex C guarantees this).
-  const usedThirds = new Set<string>()
   const allThirds = qualifiers.filter((q) => q.position === 3)
+  const thirdByGroup = new Map<string, Qualifier>()
+  allThirds.forEach((q) => thirdByGroup.set(q.source.charAt(0), q))
+  const qualifiedThirdGroups = allThirds.map((q) => q.source.charAt(0))
 
-  function resolveSlot(slot: R32Slot): Qualifier | null {
+  // Assign the 8 best third-placers to the 8 best3rd slots respecting each
+  // slot's candidate groups (FIFA Annex C). A naive in-order greedy can
+  // dead-end and grab an ineligible 3rd as a fallback, which produced an
+  // illegal same-group R32 pairing (e.g. B1 vs B3). Because FIFA's candidate
+  // sets never list a group for its own winner's slot, a matching that strictly
+  // respects candidate sets is always valid and same-group-free. We solve it
+  // with most-constrained-first backtracking for a deterministic valid result.
+  const b3Slots: { key: string; candidates: string[] }[] = []
+  R32_STRUCTURE.forEach((m, i) => {
+    if (m.teamA.kind === "best3rd") b3Slots.push({ key: `${i}A`, candidates: m.teamA.candidates })
+    if (m.teamB.kind === "best3rd") b3Slots.push({ key: `${i}B`, candidates: m.teamB.candidates })
+  })
+  const orderedSlots = [...b3Slots].sort((a, b) => {
+    const av = a.candidates.filter((g) => qualifiedThirdGroups.includes(g)).length
+    const bv = b.candidates.filter((g) => qualifiedThirdGroups.includes(g)).length
+    return av - bv || a.key.localeCompare(b.key)
+  })
+  const b3Assignment = new Map<string, string>() // slot key -> group letter
+  const usedGroups = new Set<string>()
+  function solveB3(idx: number): boolean {
+    if (idx === orderedSlots.length) return true
+    const slot = orderedSlots[idx]
+    const opts = slot.candidates
+      .filter((g) => qualifiedThirdGroups.includes(g) && !usedGroups.has(g))
+      .sort()
+    for (const g of opts) {
+      b3Assignment.set(slot.key, g)
+      usedGroups.add(g)
+      if (solveB3(idx + 1)) return true
+      usedGroups.delete(g)
+      b3Assignment.delete(slot.key)
+    }
+    return false
+  }
+  solveB3(0)
+
+  function resolveSlot(slot: R32Slot, key: string): Qualifier | null {
     if (slot.kind === "winner") {
       return qualifiers!.find((q) => q.position === 1 && q.source === slot.group + "1") ?? null
     }
     if (slot.kind === "runnerup") {
       return qualifiers!.find((q) => q.position === 2 && q.source === slot.group + "2") ?? null
     }
-    // best3rd . approximation of FIFA Annex C: prefer 3rd-placers whose group
-    // is in the candidate set, then any remaining unused 3rd. Best-ranked first.
-    const matching = allThirds
-      .filter((q) => !usedThirds.has(q.team) && slot.candidates.includes(q.source.charAt(0)))
-      .sort((a, b) => a.rank - b.rank)
-    let pick = matching[0]
-    if (!pick) {
-      const fallback = allThirds
-        .filter((q) => !usedThirds.has(q.team))
-        .sort((a, b) => a.rank - b.rank)
-      pick = fallback[0]
-    }
-    if (pick) usedThirds.add(pick.team)
-    return pick ?? null
+    const g = b3Assignment.get(key)
+    return g ? (thirdByGroup.get(g) ?? null) : null
   }
 
   // R32 using FIFA's published 2026 mapping (M73-M88).
   const r32: BracketMatch[] = R32_STRUCTURE.map((m, i) => {
-    const home = resolveSlot(m.teamA)
-    const away = resolveSlot(m.teamB)
+    const home = resolveSlot(m.teamA, `${i}A`)
+    const away = resolveSlot(m.teamB, `${i}B`)
     const id = `r32-${i + 1}`
     const winner = home && away ? knockoutWinner(home.team, away.team, scores[id]) : null
     return { id, matchNumber: m.matchNumber, round: "Round of 32", home, away, winner }
