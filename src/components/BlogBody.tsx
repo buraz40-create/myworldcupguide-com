@@ -4,12 +4,14 @@ import BosniaUsaCalculator from "@/components/BosniaUsaCalculator"
 import USMNTStats from "@/components/USMNTStats"
 import ScotlandThirdPlace from "@/components/ScotlandThirdPlace"
 import GroupBDecider from "@/components/GroupBDecider"
+import MexicoStats from "@/components/MexicoStats"
 
 const EMBEDS: Record<string, React.ComponentType> = {
   BosniaUsaCalculator,
   USMNTStats,
   ScotlandThirdPlace,
   GroupBDecider,
+  MexicoStats,
 }
 
 function slugifyHeading(text: string): string {

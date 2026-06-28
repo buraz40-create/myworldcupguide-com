@@ -11,7 +11,7 @@ export type BlogBlock =
   | { type: "callout"; tone: "info" | "warning"; text: string }
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "video"; videoId: string; title?: string; channel?: string }
-  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" | "ScotlandThirdPlace" | "GroupBDecider" }
+  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" | "ScotlandThirdPlace" | "GroupBDecider" | "MexicoStats" }
 
 export type BlogPost = {
   slug: string
@@ -247,6 +247,66 @@ export const blogPosts: BlogPost[] = [
         ],
       },
       { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
+    slug: "mexico-round-of-32-path-azteca-2026",
+    title: "Mexico's Round of 32 Path: Back-to-Back Games at the Azteca, and Who They Could Face",
+    description: "Mexico have all but won Group A with two clean sheets and head to a Round of 32 at the Estadio Azteca on June 30, with the Round of 16 potentially at the Azteca too. Interactive opponent picker, win probability tree, head-to-head stats, and the projected bracket path.",
+    date: "2026-06-22",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Preview",
+    tags: ["Mexico", "El Tri", "round of 32", "estadio azteca", "mexico city", "world cup 2026", "stats", "predictions"],
+    readMinutes: 8,
+    body: [
+      { type: "p", text: "Mexico have done exactly what a host nation is supposed to do in the group stage: win, keep it tight, and set up the kindest possible knockout draw. Two games, two clean sheets, six points and a goal difference of plus four after beating South Africa 2-0 and South Korea 2-0. Group A is effectively won, with only a dead-rubber against the Czech Republic left to play on June 24." },
+      { type: "p", text: "That means Mexico's Round of 32 ticket is all but booked, and the location is the one every Mexican fan wanted: Match 79 at the Estadio Azteca in Mexico City on Tuesday June 30. Win that, and the Round of 16 is at the Azteca as well. Two knockout games at 7,200 feet of altitude, in front of 80,000 of their own, is about as big a home-field stack as this tournament can hand anyone." },
+      { type: "embed", component: "MexicoStats" },
+      { type: "h2", text: "Where Mexico stand in Group A" },
+      {
+        type: "table",
+        caption: "Group A after matchday 2.",
+        headers: ["Pos", "Team", "Pts", "GD", "GF", "Results"],
+        rows: [
+          ["1", "Mexico", "6", "+4", "4", "2-0 South Africa, 2-0 South Korea"],
+          ["2", "South Korea", "3", "-1", "2", "2-1 Czechia, 0-2 Mexico"],
+          ["3", "Czech Republic", "1", "-1", "2", "1-2 South Korea, 1-1 South Africa"],
+          ["4", "South Africa", "1", "-2", "1", "0-2 Mexico, 1-1 Czechia"],
+        ],
+      },
+      { type: "p", text: "Mexico close the group against the Czech Republic at the Azteca on June 24. Even a heavy loss would not realistically cost them top spot given the goal-difference cushion and South Korea's own deficit. For all practical purposes, Mexico are the Group A winner and slot into Match 79." },
+      { type: "h2", text: "The likely Round of 32 opponent" },
+      { type: "p", text: "FIFA's bracket sends the Group A winner into Match 79 against one of the best third-placed teams, drawn from Groups C, E, F, H or I. That is a wide and mostly favourable pool. None of the realistic candidates are heavyweights, and all of them would be arriving at altitude with little time to adjust." },
+      {
+        type: "table",
+        caption: "M79 opponent probabilities based on current group projections.",
+        headers: ["Opponent", "Probability", "Why"],
+        rows: [
+          ["Ecuador (3E)", "~30%", "Most likely qualifier from a tight Group E; the toughest, most altitude-ready draw"],
+          ["Sweden (3F)", "~25%", "Strong third-placer on goal threat, but vulnerable in transition"],
+          ["Scotland (3C)", "~20%", "Physical and direct, thin on top-end quality"],
+          ["Senegal (3I)", "~18%", "Highest-ranked candidate; pace and power that altitude could blunt"],
+          ["Saudi Arabia (3H)", "~7%", "The friendliest draw; outside the likely top-8 thirds in most simulations"],
+        ],
+      },
+      { type: "p", text: "Whoever arrives, Mexico will be heavy favourites at home. The interactive dashboard above lets you pick each opponent and see the full breakdown, but the short version is that Mexico's floor in this game is high and their ceiling is a comfortable win." },
+      { type: "h2", text: "The Azteca and altitude: what it really means" },
+      { type: "p", text: "The Estadio Azteca sits at roughly 2,240 metres, around 7,200 feet. For a visiting team flying in from a sea-level group venue with three or four days' turnaround, that altitude is a genuine physical tax: reduced aerobic capacity, faster fatigue in the final 20 minutes, and a ball that moves differently through thinner air. Mexico train in it year-round. It is the single biggest reason their home win probability gets an extra bump that the raw FIFA rankings do not capture." },
+      { type: "p", text: "Stack on a partisan 80,000 crowd and a familiar pitch, and the Round of 32 becomes a game Mexico should win even against the better candidates like Ecuador or Senegal. The danger is complacency and an early goal against, not the opponent's overall quality." },
+      { type: "h2", text: "Beyond the Round of 32: Mexico's bracket path" },
+      { type: "p", text: "Win Match 79 and Mexico stay home. The Round of 16, Match 92, is also scheduled for the Estadio Azteca, on Sunday July 5. The opponent there projects to be the Group L winner, most likely England or Croatia, the first genuine test of Mexico's tournament. Two straight knockout games at altitude in Mexico City is a remarkable luxury, and it is exactly where Mexico would want to ambush a fancied European side." },
+      { type: "p", text: "If Mexico clear that hurdle, the Quarter-final, Match 99, moves to Hard Rock Stadium in Miami on Saturday July 11, and the bracket on that side runs through the Brazil and Argentina region of the draw. That is where the altitude advantage disappears and Mexico would need to win on merit. A realistic ceiling for this team is a Quarter-final with a puncher's chance of more; the floor, given the home draw, is a Round of 16 exit that would still feel like underachievement." },
+      { type: "h2", text: "Players to watch" },
+      { type: "ul", items: [
+        "**Santiago Gimenez** - the focal point up top, sharp movement in the box and the man Mexico will look to for the goals that break down a low block.",
+        "**Edson Alvarez** - the defensive anchor who lets the full-backs push on; his screening has been central to the two clean sheets.",
+        "**Alexis Vega** - the creative spark from the left, key to unlocking the deep defences Mexico will face in the knockouts.",
+        "**Luis Malagon** - untested so far behind a back line that has not conceded; his first big knockout save could define Mexico's nerve.",
+      ] },
+      { type: "h2", text: "The bottom line" },
+      { type: "p", text: "Mexico could hardly have scripted a better route into the knockouts: top of the group, two clean sheets, and a Round of 32, possibly two rounds, at the Estadio Azteca. The opponent will be a best-third side arriving tired and breathless at altitude. If El Tri are going to make a deep run on home soil, this is the launchpad, and it starts on June 30." },
+      { type: "p", text: "Pick each opponent in the [dashboard above](#), follow the [live Group A standings](/groups/a/), and simulate the full bracket on the [predictor](/predictor/). For how the best-third opponents are shaping up, see the [best third-placed teams breakdown](/blog/world-cup-2026-best-third-placed-teams-explained/)." },
     ],
   },
   {
