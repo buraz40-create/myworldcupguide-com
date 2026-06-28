@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import RoundOf32Bracket, { type BracketData, type BracketTeam } from "@/components/RoundOf32Bracket"
+import KnockoutOdds, { type Tie } from "@/components/KnockoutOdds"
 import { matches } from "@/data/matches"
 import { iso2, slug as teamSlug, rank, R16_STRUCTURE, QF_STRUCTURE, SF_STRUCTURE } from "@/lib/predictorEngine"
 import { alternatesFor } from "@/lib/hreflang"
@@ -54,6 +55,10 @@ export default function RoundOf32Page() {
     .filter((m) => m.round === "Round of 32")
     .sort((a, b) => a.matchNumber - b.matchNumber)
 
+  const oddsTies: Tie[] = r32Matches
+    .filter((m) => m.homeTeam !== "TBD" && m.awayTeam !== "TBD")
+    .map((m) => ({ matchNumber: m.matchNumber, date: m.date, home: m.homeTeam, away: m.awayTeam }))
+
   const data: BracketData = {
     r32: r32Matches.map((m) => ({
       matchNumber: m.matchNumber,
@@ -90,6 +95,15 @@ export default function RoundOf32Page() {
       <div className="max-w-[1400px] mx-auto px-4 md:px-6">
         <RoundOf32Bracket data={data} />
       </div>
+
+      {/* Knockout odds simulator */}
+      <div className="max-w-3xl mx-auto px-6 text-center mt-16 mb-2">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-[#231645] mb-2">Knockout odds</h2>
+        <p className="text-[#615E6E] text-base">
+          Not sure who to pick? We simulated the whole bracket thousands of times. Re-run it, change the simulation count, and sort or filter the table to see every team&apos;s odds of reaching each round and winning it all.
+        </p>
+      </div>
+      <KnockoutOdds ties={oddsTies} />
 
       <div className="max-w-3xl mx-auto px-6 mt-12">
         <h2 className="text-2xl font-extrabold text-[#231645] mb-3">How the Round of 32 works</h2>

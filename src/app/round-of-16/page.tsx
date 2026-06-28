@@ -1,24 +1,23 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { matches } from "@/data/matches"
-import KnockoutOdds, { type Tie } from "@/components/KnockoutOdds"
+import ProjectedR16, { type Tie } from "@/components/ProjectedR16"
 import { alternatesFor } from "@/lib/hreflang"
 
 const SITE = "https://myworldcupguide.com"
 
 export const metadata: Metadata = {
-  title: "World Cup 2026 Knockout Odds: Round of 16 to the Final (Interactive)",
+  title: "World Cup 2026 Projected Round of 16: The 16 Teams Tipped to Advance",
   description:
-    "Interactive Monte Carlo for the 2026 World Cup knockouts. Re-run the simulation, change the sim count, sort and filter the survival table: each team's odds of reaching the Round of 16, quarter-finals, semis, final and winning the trophy, with title odds, a survival heatmap, per-tie expected goals and a confederation breakdown.",
+    "The 16 teams projected to win their Round of 32 ties and reach the 2026 World Cup Round of 16, with each team's advance probability. Flip any pick and the projected Round of 16 bracket updates live.",
   keywords: [
-    "World Cup 2026 odds", "World Cup 2026 title odds", "World Cup 2026 round of 16 odds",
-    "World Cup 2026 predictions", "who will win World Cup 2026", "World Cup 2026 simulation",
-    "World Cup 2026 bracket probabilities", "interactive World Cup odds",
+    "World Cup 2026 round of 16", "projected round of 16", "World Cup 2026 round of 16 teams",
+    "who will reach round of 16", "World Cup 2026 round of 16 bracket", "round of 16 predictions",
   ],
   alternates: alternatesFor(`${SITE}/round-of-16/`),
   openGraph: {
-    title: "World Cup 2026 Knockout Odds: Round of 16 to the Final",
-    description: "Interactive simulator: title odds, deep-run probabilities, per-tie expected goals.",
+    title: "World Cup 2026 Projected Round of 16",
+    description: "The 16 teams projected to advance, plus the projected Round of 16 matchups.",
     url: `${SITE}/round-of-16/`,
     type: "website",
   },
@@ -32,26 +31,20 @@ export default function RoundOf16Page() {
 
   return (
     <div className="min-h-screen bg-white pt-8 pb-20">
-      <div className="max-w-3xl mx-auto px-6 text-center mb-8">
-        <div className="pill inline-flex mb-5">Knockout Probabilities</div>
-        <h1 className="text-4xl md:text-5xl font-extrabold text-[#231645] mb-3">World Cup 2026 Knockout Odds</h1>
+      <div className="max-w-3xl mx-auto px-6 text-center mb-10">
+        <div className="pill inline-flex mb-5">Projected Round of 16</div>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-[#231645] mb-3">Who Reaches the Round of 16?</h1>
         <p className="text-[#615E6E] text-base">
-          An interactive simulator for the entire knockout bracket. Re-run it, dial the simulation count up or down, and sort or filter the table. Each number is a team&apos;s odds of reaching that round, from a Poisson scoring model with extra time and penalties.
+          The 16 teams our model projects to win their Round of 32 ties and advance. Each pick is the favourite from a Monte Carlo simulation, with its advance probability. Disagree with one? Flip it, and the projected Round of 16 bracket updates instantly.
         </p>
       </div>
 
-      <KnockoutOdds ties={ties} />
+      <ProjectedR16 ties={ties} />
 
-      {/* Method */}
       <div className="max-w-3xl mx-auto px-6 mt-12">
-        <h2 className="text-2xl font-extrabold text-[#231645] mb-3">How the model works</h2>
-        <ul className="space-y-2 text-sm text-[#231645]">
-          <li className="flex gap-3"><span className="text-[#7E43FF] mt-1">•</span><span><strong>Team strength</strong> comes from FIFA ranking on a smoothed curve, plus a confederation adjustment.</span></li>
-          <li className="flex gap-3"><span className="text-[#7E43FF] mt-1">•</span><span><strong>Each match</strong> draws goals from a Poisson distribution around the two sides&apos; expected goals, so an upset is always possible, just less likely.</span></li>
-          <li className="flex gap-3"><span className="text-[#7E43FF] mt-1">•</span><span><strong>Ties</strong> go to simulated extra time, then a penalty shootout with a slight edge to the stronger side.</span></li>
-          <li className="flex gap-3"><span className="text-[#7E43FF] mt-1">•</span><span><strong>Thousands of full brackets</strong> are simulated in your browser; raise the count for tighter estimates or Re-run for a fresh draw.</span></li>
-        </ul>
-        <p className="text-sm text-[#615E6E] mt-4">This is a model, not a crystal ball: no injuries, form, or tactics. Build your own bracket on the <Link href="/round-of-32/" className="text-[#7E43FF] font-semibold underline">Round of 32 page</Link> and compare your champion to the model&apos;s.</p>
+        <p className="text-sm text-[#615E6E]">
+          These projections are favourites only, so upsets will happen. For each team&apos;s full odds of reaching the quarter-finals, semis and final, the title-odds chart, and the survival heatmap, head to the <Link href="/round-of-32/" className="text-[#7E43FF] font-semibold underline">Round of 32 page</Link>.
+        </p>
       </div>
     </div>
   )
