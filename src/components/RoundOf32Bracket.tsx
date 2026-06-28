@@ -107,8 +107,11 @@ function Column({ title, sub, children }: { title: string; sub?: string; childre
   )
 }
 
+const SHARE_URL = "https://myworldcupguide.com/round-of-32/"
+
 export default function RoundOf32Bracket({ data }: { data: BracketData }) {
   const [picks, setPicks] = useState<Pick>({})
+  const [copied, setCopied] = useState(false)
   const setPick = (key: string, team: string) => setPicks((p) => ({ ...p, [key]: team }))
 
   const winnerOf = (key: string, a: BracketTeam | null, b: BracketTeam | null): BracketTeam | null => {
@@ -239,6 +242,43 @@ export default function RoundOf32Bracket({ data }: { data: BracketData }) {
         </div>
       </div>
       <p className="text-[11px] text-[#615E6E] mt-2">Click a team to pick the winner of each tie. Later rounds update from your picks. Round of 32 matchups follow FIFA&apos;s official bracket and the best-third placement table.</p>
+
+      {/* Share */}
+      {(() => {
+        const shareText = rounds.champion
+          ? `My 2026 World Cup bracket: ${rounds.champion.name} for the trophy 🏆 Build yours:`
+          : `Build your 2026 World Cup knockout bracket, pick every winner to the Final:`
+        const enc = encodeURIComponent(shareText)
+        const encUrl = encodeURIComponent(SHARE_URL)
+        const nativeShare = () => {
+          if (typeof navigator !== "undefined" && navigator.share) {
+            navigator.share({ title: "World Cup 2026 Bracket", text: shareText, url: SHARE_URL }).catch(() => {})
+          }
+        }
+        const copy = () => {
+          if (typeof navigator !== "undefined" && navigator.clipboard) {
+            navigator.clipboard.writeText(`${shareText} ${SHARE_URL}`).then(() => {
+              setCopied(true)
+              setTimeout(() => setCopied(false), 2000)
+            }).catch(() => {})
+          }
+        }
+        return (
+          <div className="mt-8 rounded-2xl border border-[#7E43FF]/20 bg-[#faf9fe] p-5 text-center">
+            <p className="text-sm font-extrabold text-[#231645] mb-1">
+              {rounds.champion ? <>Your champion: <span className="text-[#7E43FF]">{rounds.champion.name}</span> 🏆</> : "Make your picks, then share your bracket"}
+            </p>
+            <p className="text-xs text-[#615E6E] mb-4">Challenge your friends to beat your bracket.</p>
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <button onClick={nativeShare} className="btn-primary text-xs py-2 px-4 md:hidden">Share</button>
+              <a href={`https://twitter.com/intent/tweet?text=${enc}&url=${encUrl}`} target="_blank" rel="noopener" className="text-xs font-bold py-2 px-4 rounded-full bg-[#231645] text-white hover:opacity-90 transition">Share on X</a>
+              <a href={`https://wa.me/?text=${encodeURIComponent(`${shareText} ${SHARE_URL}`)}`} target="_blank" rel="noopener" className="text-xs font-bold py-2 px-4 rounded-full bg-[#25D366] text-white hover:opacity-90 transition">WhatsApp</a>
+              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encUrl}`} target="_blank" rel="noopener" className="text-xs font-bold py-2 px-4 rounded-full bg-[#1877F2] text-white hover:opacity-90 transition">Facebook</a>
+              <button onClick={copy} className="text-xs font-bold py-2 px-4 rounded-full border border-[#7E43FF]/30 text-[#231645] hover:bg-[#f1ecff] transition">{copied ? "Copied!" : "Copy link"}</button>
+            </div>
+          </div>
+        )
+      })()}
     </div>
   )
 }
