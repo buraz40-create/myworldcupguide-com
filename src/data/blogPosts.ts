@@ -29,6 +29,32 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-27",
+    title: "World Cup 2026 Recap: Saturday, June 27, 2026",
+    description: "Results from every World Cup 2026 match on Saturday, June 27, 2026: 2 matches, 5 goals.",
+    date: "2026-06-27",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-27"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "2 matches from the 2026 FIFA World Cup were played on Saturday, June 27, 2026, with 5 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Saturday, June 27, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Panama vs England](/matches/panama-vs-england-67/)","0-2","Group L"],
+          ["[Croatia vs Ghana](/matches/croatia-vs-ghana-68/)","2-1","Group L"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Panama 0-2 England was the day's biggest margin, a 2-goal win for England over Panama. See the [full match report](/matches/panama-vs-england-67/)." },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-26",
     title: "World Cup 2026 Recap: Friday, June 26, 2026",
     description: "Results from every World Cup 2026 match on Friday, June 26, 2026: 4 matches, 11 goals.",
