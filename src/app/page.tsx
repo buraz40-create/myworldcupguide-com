@@ -7,6 +7,8 @@ import HeroParticles from "@/components/HeroParticles"
 import BlocksGrid from "@/components/BlocksGrid"
 import AnimatedCounter from "@/components/AnimatedCounter"
 import CityMarquee from "@/components/CityMarquee"
+import RadialBracket, { type Tie as RadialTie } from "@/components/RadialBracket"
+import { matches } from "@/data/matches"
 
 const HOMEPAGE_FAQS = [
   {
@@ -33,6 +35,11 @@ export default function HomePage() {
   const canadaCities = cities.filter((c) => c.country === "Canada")
   const stadiumBySlug = new Map(stadiums.map((s) => [s.slug, s]))
   const recentPosts = getRecentBlogPosts(3)
+
+  const r32Ties: RadialTie[] = matches
+    .filter((m) => m.round === "Round of 32" && m.homeTeam !== "TBD" && m.awayTeam !== "TBD")
+    .sort((a, b) => a.matchNumber - b.matchNumber)
+    .map((m) => ({ matchNumber: m.matchNumber, home: m.homeTeam, away: m.awayTeam }))
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -110,6 +117,15 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* Radial knockout bracket */}
+        {r32Ties.length === 16 && (
+          <div className="relative z-10 mt-16 w-full max-w-2xl mx-auto pb-16">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#ffcf6b] mb-1 text-center">The road to the final</p>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-8 text-center drop-shadow">Tap a team to trace its path to the trophy</h2>
+            <RadialBracket ties={r32Ties} />
+          </div>
+        )}
       </section>
 
       {/* Smooth fade from hero photo into the white sections below */}
