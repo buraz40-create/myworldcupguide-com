@@ -29,6 +29,40 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-28",
+    title: "World Cup 2026 Recap: Sunday, June 28, 2026",
+    description: "Results from every World Cup 2026 match on Sunday, June 28, 2026: 1 match, 1 goals.",
+    date: "2026-06-28",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-28"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Sunday, June 28, 2026, with 1 total goal scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Sunday, June 28, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[South Africa vs Canada](/matches/south-africa-vs-canada-73/)","0-1","Round of 32"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "South Africa 0-1 Canada was the day's biggest margin, a 1-goal win for Canada over South Africa. See the [full match report](/matches/south-africa-vs-canada-73/)." },
+      { type: "h2", text: "Next up . Monday, June 29, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Germany vs Paraguay](/matches/germany-vs-paraguay-74/) . Round of 32 . 13:00 local",
+        "[Netherlands vs Morocco](/matches/netherlands-vs-morocco-75/) . Round of 32 . 16:30 local",
+        "[Brazil vs Japan](/matches/brazil-vs-japan-76/) . Round of 32 . 19:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-27",
     title: "World Cup 2026 Recap: Saturday, June 27, 2026",
     description: "Results from every World Cup 2026 match on Saturday, June 27, 2026: 2 matches, 5 goals.",
