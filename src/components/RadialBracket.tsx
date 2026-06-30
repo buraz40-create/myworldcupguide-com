@@ -8,6 +8,14 @@ import { iso2, R16_STRUCTURE, QF_STRUCTURE, SF_STRUCTURE } from "@/lib/predictor
 export type Tie = { matchNumber: number; home: string; away: string }
 type Team = { name: string; code: string }
 
+// Leaf order is fixed (depends only on the bracket structure), so compute once.
+const LEAF: number[] = (() => {
+  const sf = [0, 1]
+  const qf = sf.flatMap((i) => SF_STRUCTURE[i])
+  const r16 = qf.flatMap((i) => QF_STRUCTURE[i])
+  return r16.flatMap((i) => R16_STRUCTURE[i])
+})()
+
 const FLAG = (code: string) => `https://flagcdn.com/w80/${code}.png`
 const TAU = Math.PI * 2
 const CX = 500, CY = 500
@@ -24,16 +32,23 @@ function curve(c: { x: number; y: number }, p: { x: number; y: number }): string
   return `M ${c.x.toFixed(1)} ${c.y.toFixed(1)} Q ${cxp.toFixed(1)} ${cyp.toFixed(1)} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`
 }
 
-export default function RadialBracket({ ties }: { ties: Tie[] }) {
-  const [picks, setPicks] = useState<Record<string, string>>({})
+// r32Winners[i] = winner name of the i-th Round of 32 match (matchNumber order,
+// m73..m88) if that game has already been played, else null. These are
+// pre-filled and locked in the bracket.
+export default function RadialBracket({ ties, r32Winners = [] }: { ties: Tie[]; r32Winners?: (string | null)[] }) {
+  // Locked ring-1 picks from real results.
+  const lockedPicks = useMemo(() => {
+    const lp: Record<string, string> = {}
+    LEAF.forEach((mi, q) => { const w = r32Winners[mi]; if (w) lp[`1-${q}`] = w })
+    return lp
+  }, [r32Winners])
+  const locked = useMemo(() => new Set(Object.keys(lockedPicks)), [lockedPicks])
+
+  const [picks, setPicks] = useState<Record<string, string>>(lockedPicks)
 
   const base = useMemo(() => {
-    const sf = [0, 1]
-    const qf = sf.flatMap((i) => SF_STRUCTURE[i])
-    const r16 = qf.flatMap((i) => QF_STRUCTURE[i])
-    const leaf = r16.flatMap((i) => R16_STRUCTURE[i])
     const teams: Team[] = []
-    leaf.forEach((mi) => {
+    LEAF.forEach((mi) => {
       const t = ties[mi]
       teams.push({ name: t.home, code: iso2(t.home) })
       teams.push({ name: t.away, code: iso2(t.away) })
@@ -72,12 +87,15 @@ export default function RadialBracket({ ties }: { ties: Tie[] }) {
 
   const advance = (r: number, q: number, name: string) => {
     if (r >= 5) return
-    setPicks((p) => ({ ...p, [`${r + 1}-${q >> 1}`]: name }))
+    const key = `${r + 1}-${q >> 1}`
+    if (locked.has(key)) return // result already decided on the pitch
+    setPicks((p) => ({ ...p, [key]: name }))
   }
   const champion = nodes[5][0]
   const picksMade = Object.keys(picks).filter((k) => {
     const [r, q] = k.split("-").map(Number); return !!nodes[r]?.[q]
   }).length
+  const userPicks = Math.max(0, picksMade - locked.size)
 
   return (
     <div
@@ -86,9 +104,11 @@ export default function RadialBracket({ ties }: { ties: Tie[] }) {
     >
       {/* Top bar */}
       <div className="absolute top-3 left-0 right-0 flex items-center justify-between px-4 z-20">
-        <span className="text-[10px] font-bold uppercase tracking-widest text-white/70">{picksMade}/31 picked</span>
-        {picksMade > 0 && (
-          <button onClick={() => setPicks({})} className="text-[10px] font-bold uppercase tracking-widest text-[#ffd884]/90 hover:text-white transition">Reset</button>
+        <span className="text-[10px] font-bold uppercase tracking-widest text-white/70">
+          {locked.size > 0 ? `${locked.size} played · ${userPicks} picked` : `${picksMade}/31 picked`}
+        </span>
+        {userPicks > 0 && (
+          <button onClick={() => setPicks({ ...lockedPicks })} className="text-[10px] font-bold uppercase tracking-widest text-[#ffd884]/90 hover:text-white transition">Reset picks</button>
         )}
       </div>
 

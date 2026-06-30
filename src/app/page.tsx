@@ -9,6 +9,7 @@ import AnimatedCounter from "@/components/AnimatedCounter"
 import CityMarquee from "@/components/CityMarquee"
 import RadialBracket, { type Tie as RadialTie } from "@/components/RadialBracket"
 import { matches } from "@/data/matches"
+import matchResults from "@/data/matchResults.json"
 
 const HOMEPAGE_FAQS = [
   {
@@ -36,10 +37,19 @@ export default function HomePage() {
   const stadiumBySlug = new Map(stadiums.map((s) => [s.slug, s]))
   const recentPosts = getRecentBlogPosts(3)
 
-  const r32Ties: RadialTie[] = matches
+  const r32Sorted = matches
     .filter((m) => m.round === "Round of 32" && m.homeTeam !== "TBD" && m.awayTeam !== "TBD")
     .sort((a, b) => a.matchNumber - b.matchNumber)
-    .map((m) => ({ matchNumber: m.matchNumber, home: m.homeTeam, away: m.awayTeam }))
+  const r32Ties: RadialTie[] = r32Sorted.map((m) => ({ matchNumber: m.matchNumber, home: m.homeTeam, away: m.awayTeam }))
+  // Winner of each already-played R32 game (matchNumber order), else null.
+  const r32Results = matchResults as Record<string, { homeScore?: number; awayScore?: number; status?: string; penaltyHome?: number; penaltyAway?: number }>
+  const r32Winners: (string | null)[] = r32Sorted.map((m) => {
+    const r = r32Results[m.id]
+    if (!r || !["FT", "AET", "PEN"].includes(r.status ?? "") || r.homeScore == null || r.awayScore == null) return null
+    if (r.homeScore > r.awayScore) return m.homeTeam
+    if (r.awayScore > r.homeScore) return m.awayTeam
+    return (r.penaltyHome ?? 0) >= (r.penaltyAway ?? 0) ? m.homeTeam : m.awayTeam
+  })
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -123,7 +133,7 @@ export default function HomePage() {
           <div className="relative z-10 mt-16 w-full max-w-2xl mx-auto pb-16">
             <p className="text-xs font-bold uppercase tracking-widest text-[#ffcf6b] mb-1 text-center">The road to the final</p>
             <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-8 text-center drop-shadow">Tap a team to trace its path to the trophy</h2>
-            <RadialBracket ties={r32Ties} />
+            <RadialBracket ties={r32Ties} r32Winners={r32Winners} />
           </div>
         )}
       </section>
