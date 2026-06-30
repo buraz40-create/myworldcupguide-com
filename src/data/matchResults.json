@@ -414,5 +414,10 @@
     "status": "PEN",
     "penaltyHome": 2,
     "penaltyAway": 3
+  },
+  "m78": {
+    "homeScore": 1,
+    "awayScore": 2,
+    "status": "FT"
   }
 }
