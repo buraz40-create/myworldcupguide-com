@@ -108,6 +108,15 @@ export default function HomePage() {
           </div>
         </div>
 
+        {/* Radial knockout bracket */}
+        {r32Ties.length === 16 && (
+          <div className="relative z-10 mt-12 w-full max-w-2xl mx-auto">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#ffcf6b] mb-1 text-center">The road to the final</p>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-8 text-center drop-shadow">Tap a team to trace its path to the trophy</h2>
+            <RadialBracket ties={r32Ties} r32Winners={r32Winners} />
+          </div>
+        )}
+
         {/* All 18 host cities - auto-scrolling marquee inside browser frame */}
         <div className="relative z-10 mt-14 w-full max-w-5xl mx-auto">
           <div className="card shadow-[0_20px_80px_rgba(35,22,69,0.18)] overflow-hidden">
@@ -127,15 +136,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-
-        {/* Radial knockout bracket */}
-        {r32Ties.length === 16 && (
-          <div className="relative z-10 mt-16 w-full max-w-2xl mx-auto pb-16">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#ffcf6b] mb-1 text-center">The road to the final</p>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-8 text-center drop-shadow">Tap a team to trace its path to the trophy</h2>
-            <RadialBracket ties={r32Ties} r32Winners={r32Winners} />
-          </div>
-        )}
       </section>
 
       {/* Smooth fade from hero photo into the white sections below */}
