@@ -29,6 +29,41 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-29",
+    title: "World Cup 2026 Recap: Monday, June 29, 2026",
+    description: "Results from every World Cup 2026 match on Monday, June 29, 2026: 2 matches, 5 goals.",
+    date: "2026-06-29",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-29"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "2 matches from the 2026 FIFA World Cup were played on Monday, June 29, 2026, with 5 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Monday, June 29, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Germany vs Paraguay](/matches/germany-vs-paraguay-74/)","1-1 (3-4 pens)","Round of 32"],
+          ["[Brazil vs Japan](/matches/brazil-vs-japan-76/)","2-1","Round of 32"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Brazil 2-1 Japan was the day's biggest margin, a 1-goal win for Brazil over Japan. See the [full match report](/matches/brazil-vs-japan-76/)." },
+      { type: "h2", text: "Next up . Tuesday, June 30, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[France vs Sweden](/matches/france-vs-sweden-77/) . Round of 32 . 13:00 local",
+        "[Ivory Coast vs Norway](/matches/ivory-coast-vs-norway-78/) . Round of 32 . 17:00 local",
+        "[Mexico vs Ecuador](/matches/mexico-vs-ecuador-79/) . Round of 32 . 19:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-28",
     title: "World Cup 2026 Recap: Sunday, June 28, 2026",
     description: "Results from every World Cup 2026 match on Sunday, June 28, 2026: 1 match, 1 goals.",
