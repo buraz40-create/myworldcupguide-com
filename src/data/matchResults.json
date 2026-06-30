@@ -407,5 +407,12 @@
     "status": "PEN",
     "penaltyHome": 3,
     "penaltyAway": 4
+  },
+  "m75": {
+    "homeScore": 1,
+    "awayScore": 1,
+    "status": "PEN",
+    "penaltyHome": 2,
+    "penaltyAway": 3
   }
 }
