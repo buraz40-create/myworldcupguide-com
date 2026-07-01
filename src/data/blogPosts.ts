@@ -29,6 +29,41 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-06-30",
+    title: "World Cup 2026 Recap: Tuesday, June 30, 2026",
+    description: "Results from every World Cup 2026 match on Tuesday, June 30, 2026: 2 matches, 6 goals.",
+    date: "2026-06-30",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-06-30"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "2 matches from the 2026 FIFA World Cup were played on Tuesday, June 30, 2026, with 6 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Tuesday, June 30, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[France vs Sweden](/matches/france-vs-sweden-77/)","3-0","Round of 32"],
+          ["[Ivory Coast vs Norway](/matches/ivory-coast-vs-norway-78/)","1-2","Round of 32"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "France 3-0 Sweden was the day's biggest margin, a 3-goal win for France over Sweden. See the [full match report](/matches/france-vs-sweden-77/)." },
+      { type: "h2", text: "Next up . Wednesday, July 1, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[England vs DR Congo](/matches/england-vs-dr-congo-80/) . Round of 32 . 12:00 local",
+        "[United States vs Bosnia and Herzegovina](/matches/united-states-vs-bosnia-and-herzegovina-81/) . Round of 32 . 17:00 local",
+        "[Belgium vs Senegal](/matches/belgium-vs-senegal-82/) . Round of 32 . 13:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-29",
     title: "World Cup 2026 Recap: Monday, June 29, 2026",
     description: "Results from every World Cup 2026 match on Monday, June 29, 2026: 2 matches, 5 goals.",
