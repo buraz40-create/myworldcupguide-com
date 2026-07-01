@@ -109,10 +109,14 @@ function Column({ title, sub, children }: { title: string; sub?: string; childre
 
 const SHARE_URL = "https://myworldcupguide.com/round-of-32/"
 
-export default function RoundOf32Bracket({ data }: { data: BracketData }) {
-  const [picks, setPicks] = useState<Pick>({})
+export default function RoundOf32Bracket({ data, lockedPicks = {} }: { data: BracketData; lockedPicks?: Pick }) {
+  const locked = useMemo(() => new Set(Object.keys(lockedPicks)), [lockedPicks])
+  const [picks, setPicks] = useState<Pick>(lockedPicks)
   const [copied, setCopied] = useState(false)
-  const setPick = (key: string, team: string) => setPicks((p) => ({ ...p, [key]: team }))
+  const setPick = (key: string, team: string) => {
+    if (locked.has(key)) return // result already decided on the pitch
+    setPicks((p) => ({ ...p, [key]: team }))
+  }
 
   const winnerOf = (key: string, a: BracketTeam | null, b: BracketTeam | null): BracketTeam | null => {
     const w = picks[key]
@@ -187,8 +191,10 @@ export default function RoundOf32Bracket({ data }: { data: BracketData }) {
   return (
     <div>
       <div className="flex flex-wrap items-center gap-3 mb-4">
-        <button onClick={() => setPicks({})} className="text-xs font-semibold text-[#615E6E] hover:text-[#231645] underline">Clear picks</button>
-        <span className="text-xs font-bold text-[#231645] tabular-nums">{rounds.decided}/31 picks made</span>
+        <button onClick={() => setPicks({ ...lockedPicks })} className="text-xs font-semibold text-[#615E6E] hover:text-[#231645] underline">Clear picks</button>
+        <span className="text-xs font-bold text-[#231645] tabular-nums">
+          {locked.size > 0 ? `${locked.size} played · ${Math.max(0, rounds.decided - locked.size)} picked` : `${rounds.decided}/31 picks made`}
+        </span>
         {rounds.champion && (
           <span className="ml-auto inline-flex items-center gap-2 text-sm font-extrabold text-[#231645]">
             <span className="text-[10px] font-bold uppercase tracking-widest text-[#7E43FF]">Your champion</span>

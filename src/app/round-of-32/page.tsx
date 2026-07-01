@@ -3,6 +3,7 @@ import Link from "next/link"
 import RoundOf32Bracket, { type BracketData, type BracketTeam } from "@/components/RoundOf32Bracket"
 import KnockoutOdds, { type Tie } from "@/components/KnockoutOdds"
 import { matches } from "@/data/matches"
+import matchResults from "@/data/matchResults.json"
 import { iso2, slug as teamSlug, rank, R16_STRUCTURE, QF_STRUCTURE, SF_STRUCTURE } from "@/lib/predictorEngine"
 import { alternatesFor } from "@/lib/hreflang"
 
@@ -59,6 +60,21 @@ export default function RoundOf32Page() {
     .filter((m) => m.homeTeam !== "TBD" && m.awayTeam !== "TBD")
     .map((m) => ({ matchNumber: m.matchNumber, date: m.date, home: m.homeTeam, away: m.awayTeam }))
 
+  // Pre-check winners of R32 games already played, keyed by the bracket's
+  // r32 index (data.r32[i] == matchNumber 73+i). Auto-updates as the bot
+  // stamps new results into matchResults.json and the site rebuilds.
+  const kres = matchResults as Record<string, { homeScore?: number; awayScore?: number; status?: string; penaltyHome?: number; penaltyAway?: number }>
+  const lockedPicks: Record<string, string> = {}
+  r32Matches.forEach((m, i) => {
+    const r = kres[m.id]
+    if (!r || !["FT", "AET", "PEN"].includes(r.status ?? "") || r.homeScore == null || r.awayScore == null) return
+    if (m.homeTeam === "TBD" || m.awayTeam === "TBD") return
+    const winner = r.homeScore > r.awayScore ? m.homeTeam
+      : r.awayScore > r.homeScore ? m.awayTeam
+      : (r.penaltyHome ?? 0) >= (r.penaltyAway ?? 0) ? m.homeTeam : m.awayTeam
+    lockedPicks[`r32-${i}`] = winner
+  })
+
   const data: BracketData = {
     r32: r32Matches.map((m) => ({
       matchNumber: m.matchNumber,
@@ -93,7 +109,7 @@ export default function RoundOf32Page() {
       </div>
 
       <div className="max-w-[1400px] mx-auto px-4 md:px-6">
-        <RoundOf32Bracket data={data} />
+        <RoundOf32Bracket data={data} lockedPicks={lockedPicks} />
       </div>
 
       {/* Knockout odds simulator */}
