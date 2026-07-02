@@ -29,6 +29,40 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-07-01",
+    title: "World Cup 2026 Recap: Wednesday, July 1, 2026",
+    description: "Results from every World Cup 2026 match on Wednesday, July 1, 2026: 1 match, 3 goals.",
+    date: "2026-07-01",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-07-01"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Wednesday, July 1, 2026, with 3 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Wednesday, July 1, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[England vs DR Congo](/matches/england-vs-dr-congo-80/)","2-1","Round of 32"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "England 2-1 DR Congo was the day's biggest margin, a 1-goal win for England over DR Congo. See the [full match report](/matches/england-vs-dr-congo-80/)." },
+      { type: "h2", text: "Next up . Thursday, July 2, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Portugal vs Croatia](/matches/portugal-vs-croatia-83/) . Round of 32 . 15:00 local",
+        "[Spain vs Austria](/matches/spain-vs-austria-84/) . Round of 32 . 19:00 local",
+        "[Switzerland vs Algeria](/matches/switzerland-vs-algeria-85/) . Round of 32 . 20:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-06-30",
     title: "World Cup 2026 Recap: Tuesday, June 30, 2026",
     description: "Results from every World Cup 2026 match on Tuesday, June 30, 2026: 2 matches, 6 goals.",
