@@ -29,6 +29,40 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-07-02",
+    title: "World Cup 2026 Recap: Thursday, July 2, 2026",
+    description: "Results from every World Cup 2026 match on Thursday, July 2, 2026: 1 match, 3 goals.",
+    date: "2026-07-02",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-07-02"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Thursday, July 2, 2026, with 3 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Thursday, July 2, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Spain vs Austria](/matches/spain-vs-austria-84/)","3-0","Round of 32"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Spain 3-0 Austria was the day's biggest margin, a 3-goal win for Spain over Austria. See the [full match report](/matches/spain-vs-austria-84/)." },
+      { type: "h2", text: "Next up . Friday, July 3, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Argentina vs Cape Verde](/matches/argentina-vs-cape-verde-86/) . Round of 32 . 14:00 local",
+        "[Colombia vs Ghana](/matches/colombia-vs-ghana-87/) . Round of 32 . 18:00 local",
+        "[Australia vs Egypt](/matches/australia-vs-egypt-88/) . Round of 32 . 21:30 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-07-01",
     title: "World Cup 2026 Recap: Wednesday, July 1, 2026",
     description: "Results from every World Cup 2026 match on Wednesday, July 1, 2026: 1 match, 3 goals.",
