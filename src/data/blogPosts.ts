@@ -29,6 +29,29 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-07-03",
+    title: "World Cup 2026 Recap: Friday, July 3, 2026",
+    description: "Results from every World Cup 2026 match on Friday, July 3, 2026: 1 match, 2 goals.",
+    date: "2026-07-03",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-07-03"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Friday, July 3, 2026, with 2 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Friday, July 3, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Australia vs Egypt](/matches/australia-vs-egypt-88/)","1-1 (2-4 pens)","Round of 32"],
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-07-02",
     title: "World Cup 2026 Recap: Thursday, July 2, 2026",
     description: "Results from every World Cup 2026 match on Thursday, July 2, 2026: 1 match, 3 goals.",
