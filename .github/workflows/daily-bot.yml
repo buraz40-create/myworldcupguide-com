@@ -39,6 +39,7 @@ jobs:
           node scripts/fetch-match-scores.mjs
           node scripts/resolve-knockout.mjs
           node scripts/fetch-match-scores.mjs
+          node scripts/sync-match-times.mjs
 
       - name: Fetch YouTube highlights
         env:
