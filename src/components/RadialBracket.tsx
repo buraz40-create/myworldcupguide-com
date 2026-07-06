@@ -8,13 +8,16 @@ import { iso2, R16_STRUCTURE, QF_STRUCTURE, SF_STRUCTURE } from "@/lib/predictor
 export type Tie = { matchNumber: number; home: string; away: string }
 type Team = { name: string; code: string }
 
-// Leaf order is fixed (depends only on the bracket structure), so compute once.
-const LEAF: number[] = (() => {
-  const sf = [0, 1]
-  const qf = sf.flatMap((i) => SF_STRUCTURE[i])
-  const r16 = qf.flatMap((i) => QF_STRUCTURE[i])
-  return r16.flatMap((i) => R16_STRUCTURE[i])
-})()
+// Traversal orders are fixed (depend only on the bracket structure). They map a
+// radial ring node (in draw order) back to the real match index in each round.
+const QF_TRAVERSAL: number[] = [0, 1].flatMap((i) => SF_STRUCTURE[i])          // ring3 node q -> QF match
+const R16_TRAVERSAL: number[] = QF_TRAVERSAL.flatMap((i) => QF_STRUCTURE[i])   // ring2 node q -> R16 match
+const LEAF: number[] = R16_TRAVERSAL.flatMap((i) => R16_STRUCTURE[i])          // ring1 node q -> R32 match
+
+export type WinnersByRound = {
+  r32?: (string | null)[]; r16?: (string | null)[]; qf?: (string | null)[]
+  sf?: (string | null)[]; final?: string | null
+}
 
 const FLAG = (code: string) => `https://flagcdn.com/w80/${code}.png`
 const TAU = Math.PI * 2
@@ -35,13 +38,17 @@ function curve(c: { x: number; y: number }, p: { x: number; y: number }): string
 // r32Winners[i] = winner name of the i-th Round of 32 match (matchNumber order,
 // m73..m88) if that game has already been played, else null. These are
 // pre-filled and locked in the bracket.
-export default function RadialBracket({ ties, r32Winners = [] }: { ties: Tie[]; r32Winners?: (string | null)[] }) {
-  // Locked ring-1 picks from real results.
+export default function RadialBracket({ ties, winners = {} }: { ties: Tie[]; winners?: WinnersByRound }) {
+  // Locked picks for every completed round, mapped to radial ring nodes.
   const lockedPicks = useMemo(() => {
     const lp: Record<string, string> = {}
-    LEAF.forEach((mi, q) => { const w = r32Winners[mi]; if (w) lp[`1-${q}`] = w })
+    LEAF.forEach((mi, q) => { const w = winners.r32?.[mi]; if (w) lp[`1-${q}`] = w })
+    R16_TRAVERSAL.forEach((mi, q) => { const w = winners.r16?.[mi]; if (w) lp[`2-${q}`] = w })
+    QF_TRAVERSAL.forEach((mi, q) => { const w = winners.qf?.[mi]; if (w) lp[`3-${q}`] = w })
+    ;[0, 1].forEach((q) => { const w = winners.sf?.[q]; if (w) lp[`4-${q}`] = w })
+    if (winners.final) lp["5-0"] = winners.final
     return lp
-  }, [r32Winners])
+  }, [winners])
   const locked = useMemo(() => new Set(Object.keys(lockedPicks)), [lockedPicks])
 
   const [picks, setPicks] = useState<Record<string, string>>(lockedPicks)

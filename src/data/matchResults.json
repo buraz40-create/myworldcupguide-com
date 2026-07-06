@@ -435,11 +435,6 @@
     "awayScore": 1,
     "status": "FT"
   },
-  "m82": {
-    "homeScore": 0,
-    "awayScore": 1,
-    "status": "live"
-  },
   "m81": {
     "homeScore": 2,
     "awayScore": 0,
@@ -467,14 +462,39 @@
     "penaltyHome": 2,
     "penaltyAway": 4
   },
-  "m86": {
-    "homeScore": 0,
-    "awayScore": 0,
-    "status": "live"
-  },
   "m87": {
     "homeScore": 1,
     "awayScore": 0,
+    "status": "FT"
+  },
+  "m82": {
+    "homeScore": 3,
+    "awayScore": 2,
+    "status": "AET"
+  },
+  "m86": {
+    "homeScore": 3,
+    "awayScore": 2,
+    "status": "AET"
+  },
+  "m90": {
+    "homeScore": 0,
+    "awayScore": 3,
+    "status": "FT"
+  },
+  "m89": {
+    "homeScore": 0,
+    "awayScore": 1,
+    "status": "FT"
+  },
+  "m91": {
+    "homeScore": 1,
+    "awayScore": 2,
+    "status": "FT"
+  },
+  "m92": {
+    "homeScore": 2,
+    "awayScore": 3,
     "status": "FT"
   }
 }

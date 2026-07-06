@@ -92,7 +92,7 @@ function extractFromEvent(ev) {
   const statusType = comp.status?.type?.name ?? ev.status?.type?.name ?? ""
   let status = "scheduled"
   if (statusType === "STATUS_FULL_TIME" || statusType === "STATUS_FINAL") status = "FT"
-  else if (statusType === "STATUS_END_EXTRA_TIME") status = "AET"
+  else if (statusType === "STATUS_END_EXTRA_TIME" || statusType === "STATUS_FINAL_AET") status = "AET"
   else if (statusType === "STATUS_END_PENALTY_SHOOTOUT" || statusType === "STATUS_FINAL_PEN") status = "PEN"
   else if (statusType === "STATUS_IN_PROGRESS" || statusType === "STATUS_HALFTIME") status = "live"
   const homeName = canon(home.team?.displayName ?? home.team?.name)

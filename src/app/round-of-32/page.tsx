@@ -60,20 +60,25 @@ export default function RoundOf32Page() {
     .filter((m) => m.homeTeam !== "TBD" && m.awayTeam !== "TBD")
     .map((m) => ({ matchNumber: m.matchNumber, date: m.date, home: m.homeTeam, away: m.awayTeam }))
 
-  // Pre-check winners of R32 games already played, keyed by the bracket's
-  // r32 index (data.r32[i] == matchNumber 73+i). Auto-updates as the bot
-  // stamps new results into matchResults.json and the site rebuilds.
+  // Pre-check the winner of every completed knockout game (R32 -> Final),
+  // keyed by the bracket's pick key. Auto-updates as the bot stamps new
+  // results into matchResults.json and the site rebuilds.
   const kres = matchResults as Record<string, { homeScore?: number; awayScore?: number; status?: string; penaltyHome?: number; penaltyAway?: number }>
+  const keyByNumber: Record<number, string> = { 104: "final" }
+  for (let i = 0; i < 16; i++) keyByNumber[73 + i] = `r32-${i}`
+  for (let i = 0; i < 8; i++) keyByNumber[89 + i] = `r16-${i}`
+  for (let i = 0; i < 4; i++) keyByNumber[97 + i] = `qf-${i}`
+  for (let i = 0; i < 2; i++) keyByNumber[101 + i] = `sf-${i}`
   const lockedPicks: Record<string, string> = {}
-  r32Matches.forEach((m, i) => {
+  for (const m of matches) {
+    const key = keyByNumber[m.matchNumber]
+    if (!key || m.homeTeam === "TBD" || m.awayTeam === "TBD") continue
     const r = kres[m.id]
-    if (!r || !["FT", "AET", "PEN"].includes(r.status ?? "") || r.homeScore == null || r.awayScore == null) return
-    if (m.homeTeam === "TBD" || m.awayTeam === "TBD") return
-    const winner = r.homeScore > r.awayScore ? m.homeTeam
+    if (!r || !["FT", "AET", "PEN"].includes(r.status ?? "") || r.homeScore == null || r.awayScore == null) continue
+    lockedPicks[key] = r.homeScore > r.awayScore ? m.homeTeam
       : r.awayScore > r.homeScore ? m.awayTeam
       : (r.penaltyHome ?? 0) >= (r.penaltyAway ?? 0) ? m.homeTeam : m.awayTeam
-    lockedPicks[`r32-${i}`] = winner
-  })
+  }
 
   const data: BracketData = {
     r32: r32Matches.map((m) => ({

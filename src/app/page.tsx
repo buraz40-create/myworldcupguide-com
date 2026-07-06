@@ -41,15 +41,26 @@ export default function HomePage() {
     .filter((m) => m.round === "Round of 32" && m.homeTeam !== "TBD" && m.awayTeam !== "TBD")
     .sort((a, b) => a.matchNumber - b.matchNumber)
   const r32Ties: RadialTie[] = r32Sorted.map((m) => ({ matchNumber: m.matchNumber, home: m.homeTeam, away: m.awayTeam }))
-  // Winner of each already-played R32 game (matchNumber order), else null.
-  const r32Results = matchResults as Record<string, { homeScore?: number; awayScore?: number; status?: string; penaltyHome?: number; penaltyAway?: number }>
-  const r32Winners: (string | null)[] = r32Sorted.map((m) => {
-    const r = r32Results[m.id]
+
+  // Winner (by name) of a completed knockout game, else null.
+  const kres = matchResults as Record<string, { homeScore?: number; awayScore?: number; status?: string; penaltyHome?: number; penaltyAway?: number }>
+  const byNum = new Map(matches.map((m) => [m.matchNumber, m]))
+  const winnerAt = (n: number): string | null => {
+    const m = byNum.get(n)
+    if (!m || m.homeTeam === "TBD" || m.awayTeam === "TBD") return null
+    const r = kres[m.id]
     if (!r || !["FT", "AET", "PEN"].includes(r.status ?? "") || r.homeScore == null || r.awayScore == null) return null
-    if (r.homeScore > r.awayScore) return m.homeTeam
-    if (r.awayScore > r.homeScore) return m.awayTeam
-    return (r.penaltyHome ?? 0) >= (r.penaltyAway ?? 0) ? m.homeTeam : m.awayTeam
-  })
+    return r.homeScore > r.awayScore ? m.homeTeam
+      : r.awayScore > r.homeScore ? m.awayTeam
+      : (r.penaltyHome ?? 0) >= (r.penaltyAway ?? 0) ? m.homeTeam : m.awayTeam
+  }
+  const winnersByRound = {
+    r32: Array.from({ length: 16 }, (_, i) => winnerAt(73 + i)),
+    r16: Array.from({ length: 8 }, (_, i) => winnerAt(89 + i)),
+    qf: Array.from({ length: 4 }, (_, i) => winnerAt(97 + i)),
+    sf: Array.from({ length: 2 }, (_, i) => winnerAt(101 + i)),
+    final: winnerAt(104),
+  }
 
   const faqJsonLd = {
     "@context": "https://schema.org",
@@ -113,7 +124,7 @@ export default function HomePage() {
           <div className="relative z-10 mt-12 w-full max-w-2xl mx-auto">
             <p className="text-xs font-bold uppercase tracking-widest text-[#ffcf6b] mb-1 text-center">The road to the final</p>
             <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-8 text-center drop-shadow">Tap a team to trace its path to the trophy</h2>
-            <RadialBracket ties={r32Ties} r32Winners={r32Winners} />
+            <RadialBracket ties={r32Ties} winners={winnersByRound} />
           </div>
         )}
 
