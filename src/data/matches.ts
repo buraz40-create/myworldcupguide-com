@@ -112,7 +112,7 @@ export const matches: Match[] = [
   { id:"m95", matchNumber:95, round:"Round of 16", date:"2026-07-07", time:"12:00", homeTeam:"Argentina", awayTeam:"Egypt", stadiumSlug:"mercedes-benz-stadium", citySlug:"atlanta" },
   { id:"m96", matchNumber:96, round:"Round of 16", date:"2026-07-07", time:"13:00", homeTeam:"Switzerland", awayTeam:"Colombia", stadiumSlug:"bc-place", citySlug:"vancouver" },
   { id:"m97", matchNumber:97, round:"Quarterfinal", date:"2026-07-09", time:"16:00", homeTeam:"France", awayTeam:"Morocco", stadiumSlug:"gillette-stadium", citySlug:"boston" },
-  { id:"m98", matchNumber:98, round:"Quarterfinal", date:"2026-07-10", time:"15:00", homeTeam:"TBD", awayTeam:"TBD", stadiumSlug:"sofi-stadium", citySlug:"los-angeles" },
+  { id:"m98", matchNumber:98, round:"Quarterfinal", date:"2026-07-10", time:"12:00", homeTeam:"Spain", awayTeam:"Belgium", stadiumSlug:"sofi-stadium", citySlug:"los-angeles" },
   { id:"m99", matchNumber:99, round:"Quarterfinal", date:"2026-07-11", time:"17:00", homeTeam:"Norway", awayTeam:"England", stadiumSlug:"hard-rock-stadium", citySlug:"miami" },
   { id:"m100", matchNumber:100, round:"Quarterfinal", date:"2026-07-11", time:"21:00", homeTeam:"TBD", awayTeam:"TBD", stadiumSlug:"arrowhead-stadium", citySlug:"kansas-city" },
   { id:"m101", matchNumber:101, round:"Semi-final", date:"2026-07-14", time:"15:00", homeTeam:"TBD", awayTeam:"TBD", stadiumSlug:"att-stadium", citySlug:"dallas" },
