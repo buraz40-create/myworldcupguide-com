@@ -29,6 +29,39 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-07-06",
+    title: "World Cup 2026 Recap: Monday, July 6, 2026",
+    description: "Results from every World Cup 2026 match on Monday, July 6, 2026: 1 match, 1 goals.",
+    date: "2026-07-06",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-07-06"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Monday, July 6, 2026, with 1 total goal scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Monday, July 6, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Portugal vs Spain](/matches/portugal-vs-spain-93/)","0-1","Round of 16"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Portugal 0-1 Spain was the day's biggest margin, a 1-goal win for Spain over Portugal. See the [full match report](/matches/portugal-vs-spain-93/)." },
+      { type: "h2", text: "Next up . Tuesday, July 7, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Argentina vs Egypt](/matches/argentina-vs-egypt-95/) . Round of 16 . 12:00 local",
+        "[Switzerland vs Colombia](/matches/switzerland-vs-colombia-96/) . Round of 16 . 13:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-07-05",
     title: "World Cup 2026 Recap: Sunday, July 5, 2026",
     description: "Results from every World Cup 2026 match on Sunday, July 5, 2026: 2 matches, 8 goals.",
