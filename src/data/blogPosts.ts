@@ -11,7 +11,7 @@ export type BlogBlock =
   | { type: "callout"; tone: "info" | "warning"; text: string }
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "video"; videoId: string; title?: string; channel?: string }
-  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" | "ScotlandThirdPlace" | "GroupBDecider" | "MexicoStats" }
+  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" | "ScotlandThirdPlace" | "GroupBDecider" | "MexicoStats" | "HostExits" | "USMNTReview" }
 
 export type BlogPost = {
   slug: string
@@ -93,6 +93,61 @@ export const blogPosts: BlogPost[] = [
         ],
       },
       { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
+    slug: "all-three-hosts-eliminated-round-of-16-2026",
+    title: "All Three Hosts Are Out: USA, Mexico and Canada Crash Out in the Round of 16",
+    description: "For the first time at a World Cup, all of the host nations were eliminated in the same round. USA fell 4-1 to Belgium, Mexico 3-2 to England, and Canada 3-0 to Morocco. The full story of how the 2026 hosts bowed out, with an interactive tracker of each team's run.",
+    date: "2026-07-07",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Analysis",
+    tags: ["USA", "Mexico", "Canada", "host nations", "round of 16", "USMNT", "world cup 2026", "knockout stage"],
+    readMinutes: 7,
+    body: [
+      { type: "p", text: "The 2026 World Cup was supposed to be a home party for three nations. Instead, by the end of the Round of 16, all three hosts had gone home. The United States, Mexico and Canada were each knocked out in the same round, on their own continent, in front of their own fans. It is the emptiest a co-hosted World Cup has ever felt heading into the quarter-finals." },
+      { type: "p", text: "None of the three even reached the last eight. The tournament rolls on without a host nation for the first time this deep into a World Cup that any of them helped stage, and the quarter-final bracket is now an all-European and rest-of-world affair." },
+      { type: "callout", tone: "warning", text: "Round of 16 exits: United States 1-4 Belgium, Mexico 2-3 England, Canada 0-3 Morocco. Three hosts, three defeats, one round." },
+      { type: "embed", component: "HostExits" },
+      { type: "h2", text: "Mexico: the best of the hosts, undone by England" },
+      { type: "p", text: "Mexico were, statistically, the strongest of the three. They won all four of their games before the knockout exit: 2-0 over South Africa, 1-0 over South Korea, 3-0 over the Czech Republic, then 2-0 over Ecuador in the Round of 32. Two rounds at altitude in the Estadio Azteca were supposed to be a fortress. Then England came to Mexico City and won 3-2, ending the host's cleanest run of the three. For a side that had not conceded until the knockouts, shipping three in one night was a brutal way to bow out." },
+      { type: "h2", text: "USA: from a flying start to a 4-1 collapse" },
+      { type: "p", text: "The United States looked the part early, hammering Paraguay 4-1 and grinding out a 2-0 win over Australia to take control of Group D. A dead-rubber 2-3 loss to Turkey once qualification was secured looked harmless at the time. It was not. After a routine 2-0 win over Bosnia in the Round of 32, the USA ran into a Belgium side that exposed every defensive crack the Turkey game had hinted at, winning 4-1. The heaviest host defeat of the round, and a sobering end to a summer that had promised more." },
+      { type: "h2", text: "Canada: the wildest ride, ended by Morocco" },
+      { type: "p", text: "Canada gave their fans the most drama. A 1-1 draw with Bosnia, a stunning 6-0 demolition of Qatar, then a 1-2 loss to Switzerland that nearly cost them. They survived, edged South Africa 1-0 in the Round of 32, and reached the last 16 for a golden generation's biggest moment. Morocco had other ideas, winning 3-0 to send Canada out and continue their own march into the quarter-finals." },
+      { type: "h2", text: "Why did all three go out?" },
+      { type: "p", text: "There is no single villain. Mexico met an England side hitting form at the right time. The USA were physically and tactically overrun by a Belgium team that punished their transitions. Canada ran into the tournament's form horse in Morocco. But a common thread runs through it: none of the three hosts had the defensive ceiling to live with a genuine heavyweight once the knockouts turned serious. Home advantage carried them into the Round of 16; it could not carry them through it." },
+      { type: "h2", text: "What's left" },
+      { type: "p", text: "The quarter-finals are set without a host: France vs Morocco, Spain vs Belgium, Norway vs England, and the winners of the remaining ties. Morocco and Belgium are the two teams that eliminated hosts and are still standing, and both now look like serious contenders. Track the run-in on the interactive bracket and see who the model favours from here on the odds page." },
+      { type: "p", text: "Follow the rest of the tournament on the [Round of 32 bracket](/round-of-32/), the live [knockout odds](/round-of-16/), and the full [match schedule](/schedule/). For a deeper look at the USMNT's summer specifically, read [our USMNT tournament review](/blog/usmnt-world-cup-2026-review/)." },
+    ],
+  },
+  {
+    slug: "usmnt-world-cup-2026-review",
+    title: "USMNT World Cup Review: A Bright Start, a Belgium Reality Check",
+    description: "The USMNT's 2026 World Cup ended 4-1 to Belgium in the Round of 16. From the 4-1 win over Paraguay to the collapse in the last 16, here is the full review, plus an interactive tool to grade every game of their tournament yourself.",
+    date: "2026-07-07",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Analysis",
+    tags: ["USMNT", "USA", "round of 16", "Belgium", "world cup 2026", "review", "Pulisic"],
+    readMinutes: 6,
+    body: [
+      { type: "p", text: "It started with a roar and ended with a shrug. The USMNT's home World Cup opened with a 4-1 demolition of Paraguay that had the country dreaming, and closed with a 4-1 defeat to Belgium that felt like a splash of cold water. Same scoreline, opposite feeling. In between was a tournament that promised a breakthrough and delivered, in the end, the same Round of 16 ceiling this program keeps bumping into." },
+      { type: "p", text: "Five games, three wins, two losses, one knockout round reached. On paper, respectable. In the context of a home tournament with a favourable group and a kind Round of 32 draw, it lands as a missed opportunity. Grade it for yourself below, then read on for how it unravelled." },
+      { type: "embed", component: "USMNTReview" },
+      { type: "h2", text: "The high: a statement start" },
+      { type: "p", text: "The 4-1 win over Paraguay was everything the USMNT hoped this summer would be. The front line clicked, the press worked, and the goals flowed. A controlled 2-0 win over Australia followed, and Group D was effectively won with a game to spare. Through two matches, the USA looked like a team that belonged in the second week." },
+      { type: "h2", text: "The warning: the Turkey game" },
+      { type: "p", text: "With qualification secured, the USA lost the dead rubber to Turkey 2-3. Easy to dismiss at the time, a rotated side, nothing on the line. In hindsight it was the tell. The defensive shape that had looked solid against lesser attacks wobbled the moment it was tested, and no one fixed it before the knockouts." },
+      { type: "h2", text: "The routine: Bosnia handled" },
+      { type: "p", text: "The Round of 32 went to script. A 2-0 win over Bosnia at Levi's Stadium, exactly the kind of tie the USA were supposed to win, exactly the way they were supposed to win it. Two rounds in, no alarms. The draw had been kind and the USA had taken advantage." },
+      { type: "h2", text: "The reckoning: Belgium 4-1" },
+      { type: "p", text: "Then came the wall. Belgium did to the USMNT what good teams do to flawed ones: they moved the ball faster than the American press could react, found the space behind the full-backs, and turned every USA mistake into a chance. 4-1 flattered nobody. The defensive frailty the Turkey game had exposed was laid bare on the biggest night of the summer, and the home World Cup was over in the Round of 16." },
+      { type: "h2", text: "The verdict" },
+      { type: "p", text: "This was not a disaster, and it was not the leap forward the moment demanded. The USMNT reached the same stage as fellow hosts Mexico and Canada and no further, beaten by the first genuine heavyweight they faced. The talent is real, the ceiling this tournament was still a step too high, and the questions about defending against elite opposition remain unanswered heading into the next cycle." },
+      { type: "p", text: "For the wider picture of the hosts' exits, read [all three hosts are out](/blog/all-three-hosts-eliminated-round-of-16-2026/), and follow the rest of the knockouts on the [bracket](/round-of-32/) and [odds page](/round-of-16/)." },
     ],
   },
   {

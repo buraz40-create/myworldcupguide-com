@@ -5,6 +5,8 @@ import USMNTStats from "@/components/USMNTStats"
 import ScotlandThirdPlace from "@/components/ScotlandThirdPlace"
 import GroupBDecider from "@/components/GroupBDecider"
 import MexicoStats from "@/components/MexicoStats"
+import HostExits from "@/components/HostExits"
+import USMNTReview from "@/components/USMNTReview"
 
 const EMBEDS: Record<string, React.ComponentType> = {
   BosniaUsaCalculator,
@@ -12,6 +14,8 @@ const EMBEDS: Record<string, React.ComponentType> = {
   ScotlandThirdPlace,
   GroupBDecider,
   MexicoStats,
+  HostExits,
+  USMNTReview,
 }
 
 function slugifyHeading(text: string): string {
