@@ -515,6 +515,8 @@
   "m96": {
     "homeScore": 0,
     "awayScore": 0,
-    "status": "live"
+    "status": "PEN",
+    "penaltyHome": 4,
+    "penaltyAway": 3
   }
 }

@@ -29,6 +29,32 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-07-07",
+    title: "World Cup 2026 Recap: Tuesday, July 7, 2026",
+    description: "Results from every World Cup 2026 match on Tuesday, July 7, 2026: 2 matches, 5 goals.",
+    date: "2026-07-07",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-07-07"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "2 matches from the 2026 FIFA World Cup were played on Tuesday, July 7, 2026, with 5 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Tuesday, July 7, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Argentina vs Egypt](/matches/argentina-vs-egypt-95/)","3-2","Round of 16"],
+          ["[Switzerland vs Colombia](/matches/switzerland-vs-colombia-96/)","0-0 (4-3 pens)","Round of 16"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Argentina 3-2 Egypt was the day's biggest margin, a 1-goal win for Argentina over Egypt. See the [full match report](/matches/argentina-vs-egypt-95/)." },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-07-06",
     title: "World Cup 2026 Recap: Monday, July 6, 2026",
     description: "Results from every World Cup 2026 match on Monday, July 6, 2026: 1 match, 1 goals.",
