@@ -115,7 +115,7 @@ export const matches: Match[] = [
   { id:"m98", matchNumber:98, round:"Quarterfinal", date:"2026-07-10", time:"12:00", homeTeam:"Spain", awayTeam:"Belgium", stadiumSlug:"sofi-stadium", citySlug:"los-angeles" },
   { id:"m99", matchNumber:99, round:"Quarterfinal", date:"2026-07-11", time:"17:00", homeTeam:"Norway", awayTeam:"England", stadiumSlug:"hard-rock-stadium", citySlug:"miami" },
   { id:"m100", matchNumber:100, round:"Quarterfinal", date:"2026-07-11", time:"20:00", homeTeam:"Argentina", awayTeam:"Switzerland", stadiumSlug:"arrowhead-stadium", citySlug:"kansas-city" },
-  { id:"m101", matchNumber:101, round:"Semi-final", date:"2026-07-14", time:"15:00", homeTeam:"TBD", awayTeam:"TBD", stadiumSlug:"att-stadium", citySlug:"dallas" },
+  { id:"m101", matchNumber:101, round:"Semi-final", date:"2026-07-14", time:"14:00", homeTeam:"France", awayTeam:"Spain", stadiumSlug:"att-stadium", citySlug:"dallas" },
   { id:"m102", matchNumber:102, round:"Semi-final", date:"2026-07-15", time:"15:00", homeTeam:"TBD", awayTeam:"TBD", stadiumSlug:"mercedes-benz-stadium", citySlug:"atlanta" },
   { id:"m103", matchNumber:103, round:"3rd Place", date:"2026-07-18", time:"17:00", homeTeam:"TBD", awayTeam:"TBD", stadiumSlug:"hard-rock-stadium", citySlug:"miami" },
   { id:"m104", matchNumber:104, round:"Final", date:"2026-07-19", time:"15:00", homeTeam:"TBD", awayTeam:"TBD", stadiumSlug:"metlife-stadium", citySlug:"new-york-new-jersey" },
