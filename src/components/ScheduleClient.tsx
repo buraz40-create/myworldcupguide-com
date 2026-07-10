@@ -311,7 +311,7 @@ export default function ScheduleClient({ quickAnswers }: ScheduleClientProps = {
 
                       {/* MIDDLE - teams */}
                       <div className="min-w-0">
-                        {isKnockout ? (
+                        {m.homeTeam === "TBD" || m.awayTeam === "TBD" ? (
                           <div className="flex items-center justify-center gap-4 py-2">
                             <span className="flex-1 text-right text-sm font-semibold text-[#615E6E]/70 italic truncate">
                               Winner advances
@@ -345,7 +345,7 @@ export default function ScheduleClient({ quickAnswers }: ScheduleClientProps = {
                                     className="text-base font-extrabold text-white bg-[#231645] rounded-full px-3 py-1 tabular-nums flex-shrink-0"
                                     title={`${r.status === "PEN" ? `${r.penaltyHome}-${r.penaltyAway} pens` : r.status}`}
                                   >
-                                    {r.homeScore}-{r.awayScore}{r.status === "AET" ? " AET" : ""}
+                                    {r.homeScore}-{r.awayScore}{r.status === "AET" ? " AET" : r.status === "PEN" ? ` (${r.penaltyHome}-${r.penaltyAway}p)` : ""}
                                   </span>
                                 ) : (
                                   <span className="text-[0.65rem] font-extrabold text-[#615E6E] bg-[#f5f4fa] rounded-full px-2.5 py-1 uppercase tracking-widest flex-shrink-0">
@@ -413,9 +413,9 @@ export default function ScheduleClient({ quickAnswers }: ScheduleClientProps = {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
             <div><span className="font-bold text-[#231645]">June 11</span> - Opening Match (Mexico City)</div>
             <div><span className="font-bold text-[#231645]">June 27</span> - Group Stage Ends</div>
-            <div><span className="font-bold text-[#231645]">July 2–5</span> - Round of 32</div>
-            <div><span className="font-bold text-[#231645]">July 8–11</span> - Round of 16</div>
-            <div><span className="font-bold text-[#231645]">July 12–13</span> - Quarterfinals</div>
+            <div><span className="font-bold text-[#231645]">June 28 – July 3</span> - Round of 32</div>
+            <div><span className="font-bold text-[#231645]">July 4–7</span> - Round of 16</div>
+            <div><span className="font-bold text-[#231645]">July 9–11</span> - Quarterfinals</div>
             <div><span className="font-bold text-[#231645]">July 14–15</span> - Semi-finals</div>
             <div><span className="font-bold text-[#231645]">July 18</span> - 3rd Place (Miami)</div>
             <div><span className="font-bold text-[#231645]">July 19</span> - THE FINAL (MetLife)</div>

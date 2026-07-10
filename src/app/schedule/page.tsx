@@ -10,7 +10,7 @@ const SITE = "https://myworldcupguide.com"
 const SCHEDULE_QA: QA[] = [
   { question: "When does the 2026 World Cup start and end?", answer: "The 2026 FIFA World Cup runs from June 11 to July 19, 2026 - 39 days. The Opening Match is June 11 at Estadio Azteca (Mexico City) and the Final is July 19 at MetLife Stadium (New York / New Jersey)." },
   { question: "How many matches are at the 2026 World Cup?", answer: "104 matches in total - up from 64 at the 2022 World Cup. 72 group-stage matches, 16 in the new Round of 32, 8 Round of 16, 4 Quarterfinals, 2 Semi-finals, the 3rd Place playoff, and the Final." },
-  { question: "When are the World Cup 2026 knockout rounds?", answer: "Round of 32: July 2-5. Round of 16: July 8-11. Quarterfinals: July 12-13. Semi-finals: July 14-15. 3rd Place playoff: July 18 (Hard Rock Stadium, Miami). Final: July 19 (MetLife Stadium, NY/NJ)." },
+  { question: "When are the World Cup 2026 knockout rounds?", answer: "Round of 32: June 28-July 3. Round of 16: July 4-7. Quarterfinals: July 9-11. Semi-finals: July 14-15. 3rd Place playoff: July 18 (Hard Rock Stadium, Miami). Final: July 19 (MetLife Stadium, NY/NJ)." },
   { question: "When does the 2026 World Cup group stage end?", answer: "The group stage runs June 11-27, 2026. Top two teams from each of the 12 groups plus the 8 best third-placed teams advance to the new Round of 32." },
 ]
 

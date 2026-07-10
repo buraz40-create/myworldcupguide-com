@@ -518,10 +518,5 @@
     "status": "PEN",
     "penaltyHome": 4,
     "penaltyAway": 3
-  },
-  "m97": {
-    "homeScore": 2,
-    "awayScore": 0,
-    "status": "FT"
   }
 }
