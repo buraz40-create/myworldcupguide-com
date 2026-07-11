@@ -29,6 +29,39 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-07-10",
+    title: "World Cup 2026 Recap: Friday, July 10, 2026",
+    description: "Results from every World Cup 2026 match on Friday, July 10, 2026: 1 match, 3 goals.",
+    date: "2026-07-10",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-07-10"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Friday, July 10, 2026, with 3 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Friday, July 10, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Spain vs Belgium](/matches/spain-vs-belgium-98/)","2-1","Quarterfinal"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Spain 2-1 Belgium was the day's biggest margin, a 1-goal win for Spain over Belgium. See the [full match report](/matches/spain-vs-belgium-98/)." },
+      { type: "h2", text: "Next up . Saturday, July 11, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[Norway vs England](/matches/norway-vs-england-99/) . Quarterfinal . 17:00 local",
+        "[Argentina vs Switzerland](/matches/argentina-vs-switzerland-100/) . Quarterfinal . 20:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-07-09",
     title: "World Cup 2026 Recap: Thursday, July 9, 2026",
     description: "Results from every World Cup 2026 match on Thursday, July 9, 2026: 1 match, 2 goals.",
