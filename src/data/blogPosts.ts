@@ -29,6 +29,31 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-07-11",
+    title: "World Cup 2026 Recap: Saturday, July 11, 2026",
+    description: "Results from every World Cup 2026 match on Saturday, July 11, 2026: 1 match, 3 goals.",
+    date: "2026-07-11",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-07-11"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Saturday, July 11, 2026, with 3 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Saturday, July 11, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Norway vs England](/matches/norway-vs-england-99/)","1-2 (AET)","Quarterfinal"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Norway 1-2 England was the day's biggest margin, a 1-goal win for England over Norway. See the [full match report](/matches/norway-vs-england-99/)." },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-07-10",
     title: "World Cup 2026 Recap: Friday, July 10, 2026",
     description: "Results from every World Cup 2026 match on Friday, July 10, 2026: 1 match, 3 goals.",
