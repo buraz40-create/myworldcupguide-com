@@ -11,7 +11,7 @@ export type BlogBlock =
   | { type: "callout"; tone: "info" | "warning"; text: string }
   | { type: "table"; caption?: string; headers: string[]; rows: string[][] }
   | { type: "video"; videoId: string; title?: string; channel?: string }
-  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" | "ScotlandThirdPlace" | "GroupBDecider" | "MexicoStats" | "HostExits" | "USMNTReview" }
+  | { type: "embed"; component: "BosniaUsaCalculator" | "USMNTStats" | "ScotlandThirdPlace" | "GroupBDecider" | "MexicoStats" | "HostExits" | "USMNTReview" | "SemifinalCentre" }
 
 export type BlogPost = {
   slug: string
@@ -116,6 +116,54 @@ export const blogPosts: BlogPost[] = [
         ],
       },
       { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
+    slug: "spain-reach-world-cup-2026-final",
+    title: "Spain Are in the Final: 2-0 Over France Sends La Roja to the Showpiece",
+    description: "Spain beat France 2-0 in the semi-final to reach the 2026 World Cup final. A run of clinical knockout wins - Austria, Portugal, Belgium and now France - has La Roja one game from the trophy. Recap, the road they took, and an interactive final-four tracker.",
+    date: "2026-07-15",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Analysis",
+    tags: ["Spain", "France", "semi-final", "final", "world cup 2026", "knockout stage"],
+    readMinutes: 5,
+    body: [
+      { type: "p", text: "Spain are through to the World Cup final. A composed 2-0 win over France in the semi-final booked La Roja's place in the July 19 showpiece at MetLife Stadium, and on the evidence of this knockout run, they will be nobody's idea of an easy final opponent." },
+      { type: "p", text: "France, one of the pre-tournament favourites, could not find a way through. Spain controlled the game the way they have controlled most of their knockout ties: patient in possession, ruthless when the chance came, and untroubled at the back. Two goals were enough, and it rarely looked like being any different." },
+      { type: "callout", tone: "info", text: "Spain's knockout run: 3-0 Austria (R32), 1-0 Portugal (R16), 2-1 Belgium (QF), 2-0 France (SF). Four wins, nine goals scored, two conceded, and a place in the final." },
+      { type: "embed", component: "SemifinalCentre" },
+      { type: "h2", text: "How Spain got here" },
+      { type: "p", text: "This has been a march built on control rather than fireworks. A 3-0 win over Austria in the Round of 32 set the tone. The Round of 16 delivered the tie of the round, an Iberian derby against Portugal settled 1-0. Then Belgium, the team that had thrashed the USA, were beaten 2-1 in the quarter-final. And now France, dispatched 2-0. No penalty shootouts, no extra time, no scares that lingered. Spain have simply been the better team in every knockout game they have played." },
+      { type: "h2", text: "France's tournament ends in the semis" },
+      { type: "p", text: "For France it is a familiar, bitter stage to bow out. They had cruised past Paraguay and Morocco in the earlier rounds, but ran into a Spain side operating at a level nobody else in the tournament has matched. They will play in the third-place game on July 18 against the loser of England vs Argentina, a consolation that will feel like little comfort." },
+      { type: "h2", text: "One game to go" },
+      { type: "p", text: "Spain now wait to learn their final opponent: the winner of England vs Argentina. Whoever it is, Spain will start as favourites on current form. Use the tracker above to pick the other semi-final and the final yourself, and see who you think lifts the trophy on July 19." },
+      { type: "p", text: "Follow the run-in on the [knockout bracket](/round-of-32/), the [live odds](/round-of-16/), and read the [England vs Argentina semi-final preview](/blog/england-vs-argentina-semifinal-2026/)." },
+    ],
+  },
+  {
+    slug: "england-vs-argentina-semifinal-2026",
+    title: "England vs Argentina: The Semi-Final to Decide Who Faces Spain",
+    description: "England and Argentina meet in the 2026 World Cup semi-final, with the winner facing Spain in the final and the loser dropping into the third-place game. Both survived extra-time quarter-finals. The preview, the stakes, and an interactive tracker to pick the final yourself.",
+    date: "2026-07-15",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Preview",
+    tags: ["England", "Argentina", "semi-final", "final", "world cup 2026", "knockout stage"],
+    readMinutes: 5,
+    body: [
+      { type: "p", text: "One place in the World Cup final is left, and two heavyweights are fighting for it. England and Argentina meet in the second semi-final, with the winner earning a date with Spain on July 19 and the loser dropping into the third-place game against France. There is no bigger stage left before the final itself." },
+      { type: "p", text: "Both teams arrive having done it the hard way. England needed extra time to see off a stubborn Norway side 2-1 in the quarter-final, ending Haaland's fairy-tale run. Argentina also went the distance, beating Switzerland 3-1 after extra time. Two tired, battle-tested squads, one final ticket." },
+      { type: "callout", tone: "info", text: "The stakes: winner plays Spain in the final (July 19, MetLife). Loser plays France in the third-place game (July 18, Miami). Spain are already through after beating France 2-0." },
+      { type: "embed", component: "SemifinalCentre" },
+      { type: "h2", text: "England: knocking out the story of the tournament" },
+      { type: "p", text: "England have quietly built a serious run. They knocked out hosts Mexico 3-2 in the Round of 16, a result that ended one of the tournament's feel-good stories, then edged Norway in extra time to reach the semis. They have not always been pretty, but they have found ways to win the tight games that decide tournaments, and they will fancy their chances against anyone." },
+      { type: "h2", text: "Argentina: grinding through the knockouts" },
+      { type: "p", text: "Argentina have leaned on their experience and their ability to win ugly. A 3-2 win over Egypt in the Round of 16, then a 3-1 extra-time win over Switzerland in the quarters. They have not faced a Spain-level side yet, but they have the pedigree and the streetwise edge that has carried them through knockout football before." },
+      { type: "h2", text: "The winner meets Spain" },
+      { type: "p", text: "Whoever comes through will face a Spain team that has looked the best in the tournament, unbeaten in the knockouts and yet to be truly tested. It is a daunting final assignment, but reaching it at all would cap a huge summer for either side. Pick the semi-final and the final in the tracker above and see who you have lifting the trophy." },
+      { type: "p", text: "See how Spain got to the final in [Spain are in the final](/blog/spain-reach-world-cup-2026-final/), and track the rest on the [bracket](/round-of-32/) and [odds page](/round-of-16/)." },
     ],
   },
   {
