@@ -29,6 +29,38 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-07-14",
+    title: "World Cup 2026 Recap: Tuesday, July 14, 2026",
+    description: "Results from every World Cup 2026 match on Tuesday, July 14, 2026: 1 match, 2 goals.",
+    date: "2026-07-14",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-07-14"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Tuesday, July 14, 2026, with 2 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Tuesday, July 14, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[France vs Spain](/matches/france-vs-spain-101/)","0-2","Semi-final"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "France 0-2 Spain was the day's biggest margin, a 2-goal win for Spain over France. See the [full match report](/matches/france-vs-spain-101/)." },
+      { type: "h2", text: "Next up . Wednesday, July 15, 2026" },
+      {
+        type: "ul",
+        items: [
+        "[England vs Argentina](/matches/england-vs-argentina-102/) . Semi-final . 15:00 local",
+        ],
+      },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-07-11",
     title: "World Cup 2026 Recap: Saturday, July 11, 2026",
     description: "Results from every World Cup 2026 match on Saturday, July 11, 2026: 1 match, 3 goals.",
