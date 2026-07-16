@@ -29,6 +29,31 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-07-15",
+    title: "World Cup 2026 Recap: Wednesday, July 15, 2026",
+    description: "Results from every World Cup 2026 match on Wednesday, July 15, 2026: 1 match, 3 goals.",
+    date: "2026-07-15",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-07-15"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Wednesday, July 15, 2026, with 3 total goals scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Wednesday, July 15, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[England vs Argentina](/matches/england-vs-argentina-102/)","1-2","Semi-final"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "England 1-2 Argentina was the day's biggest margin, a 1-goal win for Argentina over England. See the [full match report](/matches/england-vs-argentina-102/)." },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-07-14",
     title: "World Cup 2026 Recap: Tuesday, July 14, 2026",
     description: "Results from every World Cup 2026 match on Tuesday, July 14, 2026: 1 match, 2 goals.",
