@@ -8,6 +8,8 @@ import MexicoStats from "@/components/MexicoStats"
 import HostExits from "@/components/HostExits"
 import USMNTReview from "@/components/USMNTReview"
 import SemifinalCentre from "@/components/SemifinalCentre"
+import FinalStandings from "@/components/FinalStandings"
+import TournamentRecap from "@/components/TournamentRecap"
 
 const EMBEDS: Record<string, React.ComponentType> = {
   BosniaUsaCalculator,
@@ -18,6 +20,8 @@ const EMBEDS: Record<string, React.ComponentType> = {
   HostExits,
   USMNTReview,
   SemifinalCentre,
+  FinalStandings,
+  TournamentRecap,
 }
 
 function slugifyHeading(text: string): string {
