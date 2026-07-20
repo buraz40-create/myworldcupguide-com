@@ -125,6 +125,14 @@ export default function HomePage() {
             <p className="text-xs font-bold uppercase tracking-widest text-[#ffcf6b] mb-1 text-center">The road to the final</p>
             <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-8 text-center drop-shadow">Tap a team to trace its path to the trophy</h2>
             <RadialBracket ties={r32Ties} winners={winnersByRound} />
+            <div className="mt-6 text-center">
+              <Link
+                href="/world-cup-2030"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold text-[#231645] bg-white/95 hover:bg-white transition-colors shadow-lg"
+              >
+                <span className="text-[#7E43FF]">Next up:</span> The 2030 World Cup <span aria-hidden>→</span>
+              </Link>
+            </div>
           </div>
         )}
 
