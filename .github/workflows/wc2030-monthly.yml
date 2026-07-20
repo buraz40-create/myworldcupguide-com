@@ -1,0 +1,66 @@
+name: Monthly 2030 Refresh
+
+# The 2026 tournament is over. This runs monthly to keep the site fresh for the
+# 2030 cycle: it rebuilds and redeploys (so the /world-cup-2030 countdown and any
+# time-relative content stay current) and pings IndexNow. It does NOT invent
+# news; update src/data/wc2030.ts when real 2030 news lands (draw date, format
+# decision, schedule) and this job will publish it on the next run, or trigger
+# it manually via "Run workflow".
+on:
+  schedule:
+    - cron: "0 9 1 * *" # 09:00 UTC on the 1st of each month
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build site (clean)
+        run: |
+          rm -rf .next out node_modules/.cache
+          npm run build
+
+      - name: Package out/ directory
+        run: |
+          rm -f out/api/votes.json
+          cd out && zip -r ../site.zip . -x ".*"
+
+      - name: Upload to HostGator via FTPS
+        env:
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASS: ${{ secrets.FTP_PASS }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+        run: |
+          curl --ssl-reqd -k --user "$FTP_USER:$FTP_PASS" -T site.zip "ftp://$FTP_HOST/public_html/"
+          curl --ssl-reqd -k --user "$FTP_USER:$FTP_PASS" -T extract.php "ftp://$FTP_HOST/public_html/"
+
+      - name: Trigger server-side extract
+        env:
+          EXTRACT_TOKEN: ${{ secrets.EXTRACT_TOKEN }}
+        run: |
+          response=$(curl -sk \
+            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" \
+            -b "humans_21909=1" \
+            "https://myworldcupguide.com/extract.php?t=$EXTRACT_TOKEN")
+          echo "extract response: $response"
+          if ! echo "$response" | grep -q "extracted"; then
+            echo "FAIL: extract.php did not report success"
+            exit 1
+          fi
+
+      - name: Ping IndexNow
+        run: node scripts/submit-indexnow.mjs || true

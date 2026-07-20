@@ -1,12 +1,10 @@
 name: Daily World Cup Bot
 
-# Runs every hour at :05 (offset to avoid the cron rush at :00). With the
-# skip-on-no-change guard later in the workflow, runs that find no new FT
-# matches exit early without deploying the 56 MB site.zip, so 24 runs/day
-# costs only ~5-8 actual deploys during typical group-stage days.
+# DISABLED after the 2026 tournament finished (no more matches to fetch). The
+# hourly schedule is turned off; kept as manual-only (workflow_dispatch) in case
+# it is ever needed to force a rebuild. The 2030 cycle is handled by the
+# Monthly 2030 Refresh workflow instead.
 on:
-  schedule:
-    - cron: "5 * * * *"
   workflow_dispatch:
 
 permissions:

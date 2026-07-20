@@ -18,6 +18,7 @@ export default function NavBar() {
     { href: "/predictor", label: "Predictor" },
     { href: "/tickets", label: "Tickets" },
     { href: "/how-to-watch", label: "Watch" },
+    { href: "/world-cup-2030", label: "2030" },
     { href: "/blog", label: "Blog" },
   ]
 
