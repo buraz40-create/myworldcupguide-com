@@ -29,6 +29,31 @@ export type BlogPost = {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "world-cup-2026-recap-2026-07-19",
+    title: "World Cup 2026 Recap: Sunday, July 19, 2026",
+    description: "Results from every World Cup 2026 match on Sunday, July 19, 2026: 1 match, 1 goals.",
+    date: "2026-07-19",
+    author: "My World Cup Guide editorial",
+    authorBio: "We track FIFA's official schedule, results and visitor info for the 2026 World Cup across the USA, Canada, and Mexico.",
+    category: "Results",
+    tags: ["recap","results","world cup 2026","2026-07-19"],
+    readMinutes: 3,
+    body: [
+      { type: "p", text: "1 match from the 2026 FIFA World Cup was played on Sunday, July 19, 2026, with 1 total goal scored." },
+      {
+        type: "table",
+        caption: "All World Cup 2026 results from Sunday, July 19, 2026.",
+        headers: ["Match","Score","Round"],
+        rows: [
+          ["[Spain vs Argentina](/matches/spain-vs-argentina-104/)","1-0 (AET)","Final"],
+        ],
+      },
+      { type: "h2", text: "Standout result" },
+      { type: "p", text: "Spain 1-0 Argentina was the day's biggest margin, a 1-goal win for Spain over Argentina. See the [full match report](/matches/spain-vs-argentina-104/)." },
+      { type: "p", text: "Browse the [full World Cup 2026 schedule](/schedule/) or use the [predictor bracket](/predictor/) to lock in your knockout picks." },
+    ],
+  },
+  {
     slug: "world-cup-2026-recap-2026-07-18",
     title: "World Cup 2026 Recap: Saturday, July 18, 2026",
     description: "Results from every World Cup 2026 match on Saturday, July 18, 2026: 1 match, 10 goals.",
